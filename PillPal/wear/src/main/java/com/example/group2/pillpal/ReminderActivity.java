@@ -7,14 +7,14 @@ import android.support.wearable.view.WatchViewStub;
 import android.view.View;
 import android.widget.TextView;
 
-public class MainActivity extends Activity {
+public class ReminderActivity extends Activity {
 
     private TextView mTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_reminder);
         final WatchViewStub stub = (WatchViewStub) findViewById(R.id.watch_view_stub);
         stub.setOnLayoutInflatedListener(new WatchViewStub.OnLayoutInflatedListener() {
             @Override
@@ -23,8 +23,8 @@ public class MainActivity extends Activity {
             }
         });
     }
-    public void main(final View view) {
-        Intent i = new Intent(MainActivity.this, StatsDetailActivity.class);
+    public void reminder(final View view) {
+        Intent i = new Intent(ReminderActivity.this, SnoozeActivity.class);
         startActivity(i);
     }
 }

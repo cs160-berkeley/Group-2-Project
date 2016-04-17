@@ -3,14 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.group2.pillpal.MainActivity"
+    tools:context="com.example.group2.pillpal.RefillActivity"
     tools:deviceIds="wear_round">
 
     <Button
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:id="@+id/main"
-        android:text="Stats Main View"
-        android:onClick="main"/>
+        android:id="@+id/refill"
+        android:text="Refill Main View"
+        android:onClick="refill"/>
 
 </RelativeLayout>

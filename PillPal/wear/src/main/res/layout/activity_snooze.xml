@@ -5,7 +5,7 @@
     android:id="@+id/watch_view_stub"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:rectLayout="@layout/rect_activity_main"
-    app:roundLayout="@layout/round_activity_main"
-    tools:context="com.example.group2.pillpal.MainActivity"
+    app:rectLayout="@layout/rect_activity_snooze"
+    app:roundLayout="@layout/round_activity_snooze"
+    tools:context="com.example.group2.pillpal.SnoozeActivity"
     tools:deviceIds="wear"></android.support.wearable.view.WatchViewStub>
