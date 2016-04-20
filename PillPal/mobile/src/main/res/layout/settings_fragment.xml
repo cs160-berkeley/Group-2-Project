@@ -4,9 +4,17 @@
     android:layout_height="match_parent"
     tools:context="com.example.group2.pillpal.SettingsFragment">
 
-    <ImageButton
-        android:id="@+id/settings_button"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="wrap_content">
+
+        <ImageButton
+            android:id="@+id/settings_button"
+            android:src="@drawable/settings_page"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </ScrollView>
+
 
 </FrameLayout>

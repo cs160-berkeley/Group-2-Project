@@ -5,7 +5,7 @@
         <item
             android:id="@+id/nav_stats"
             android:icon="@drawable/ic_menu_gallery"
-            android:title="Stats" />
+            android:title="Statistics" />
         <item
             android:id="@+id/nav_reminders"
             android:icon="@drawable/ic_menu_share"

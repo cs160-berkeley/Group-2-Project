@@ -12,14 +12,13 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import layout.RefillsFragment;
-
 public class NavigationDrawer extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
         StatsFragment.OnFragmentInteractionListener,
         SetRemindersFragment.OnFragmentInteractionListener,
         ReminderSettingsFragment.OnFragmentInteractionListener,
         RefillsFragment.OnFragmentInteractionListener,
+        RefillStatusFragment.OnFragmentInteractionListener,
         SettingsFragment.OnFragmentInteractionListener {
 
     @Override

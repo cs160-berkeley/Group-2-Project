@@ -1,14 +1,14 @@
-package layout;
+package com.example.group2.pillpal;
 
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import com.example.group2.pillpal.R;
+import android.widget.ImageButton;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -18,7 +18,7 @@ import com.example.group2.pillpal.R;
  * Use the {@link RefillsFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class RefillsFragment extends Fragment {
+public class RefillsFragment extends Fragment implements View.OnClickListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -65,7 +65,21 @@ public class RefillsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.refills_fragment, container, false);
+        View v = inflater.inflate(R.layout.refills_fragment, container, false);
+        ImageButton setupButton = (ImageButton) v.findViewById(R.id.refills_button);
+        setupButton.setOnClickListener(this);
+        return v;
+    }
+
+    @Override
+    public void onClick(View v) {
+        // implements your things
+        FragmentTransaction tx = getFragmentManager().beginTransaction();
+        RefillStatusFragment refillStatusFragment = new RefillStatusFragment();
+        tx.replace(R.id.main, refillStatusFragment);
+        tx.addToBackStack(null);
+        tx.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+        tx.commit();
     }
 
     // TODO: Rename method, update argument and hook method into UI event
