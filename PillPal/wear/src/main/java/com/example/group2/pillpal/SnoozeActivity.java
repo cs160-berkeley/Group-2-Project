@@ -1,8 +1,10 @@
 package com.example.group2.pillpal;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.wearable.view.WatchViewStub;
+import android.view.View;
 import android.widget.TextView;
 
 public class SnoozeActivity extends Activity {
@@ -20,5 +22,10 @@ public class SnoozeActivity extends Activity {
                 mTextView = (TextView) stub.findViewById(R.id.text);
             }
         });
+    }
+
+    public void snooze(final View view) {
+        Intent i = new Intent(SnoozeActivity.this, StatsDetailActivity.class);
+        startActivity(i);
     }
 }

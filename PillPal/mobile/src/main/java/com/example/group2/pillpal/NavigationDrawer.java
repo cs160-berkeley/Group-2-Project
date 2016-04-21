@@ -1,5 +1,6 @@
 package com.example.group2.pillpal;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -95,6 +96,9 @@ public class NavigationDrawer extends AppCompatActivity
             tx.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
             tx.commit();
             setTitle("Statistics");
+            Intent sendintent = new Intent(NavigationDrawer.this, PhoneToWatchService.class);
+            sendintent.putExtra("DATA", "stats");
+            startService(sendintent);
         } else if (id == R.id.nav_reminders) {
             FragmentTransaction tx = getSupportFragmentManager().beginTransaction();
             SetRemindersFragment remindersFragment = new SetRemindersFragment();
