@@ -16,3 +16,4 @@ Albert Jo
 <img src="screenshots/add_reminder.png" height="400" alt="Screenshot"/>
 
 ## Wear Screenshots
+
