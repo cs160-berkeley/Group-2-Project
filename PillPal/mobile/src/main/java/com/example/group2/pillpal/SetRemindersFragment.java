@@ -82,6 +82,10 @@ public class SetRemindersFragment extends Fragment implements View.OnClickListen
         tx.addToBackStack(null);
         tx.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
         tx.commit();
+        
+        Intent sendIntent = new Intent(v.getContext(), PhoneToWatchService.class);
+        sendIntent.putExtra("DATA", "reminder");
+        v.getContext().startService(sendIntent);
     }
 
     // TODO: Rename method, update argument and hook method into UI event
