@@ -52,7 +52,13 @@ public class PhoneToWatchService extends Service {
                 //first, connect to the apiclient
                 mApiClient.connect();
                 //now that you're connected, send a massage with the cat name
-                sendMessage("/Main", data);
+                if (data.equals("reminder")) {
+                    sendMessage("/Reminder", data);
+                } else if (data.equals("refill")) {
+                    sendMessage("/Refill", data);
+                } else if (data.equals("stats")) {
+                    sendMessage("/Stats", data);
+                }
             }
         }).start();
 

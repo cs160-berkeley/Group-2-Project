@@ -102,6 +102,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             public void onClick(View view) {
                 Intent detailedStats = new Intent(view.getContext(), NavigationDrawer.class);
                 startActivity(detailedStats);
+                Intent sendintent = new Intent(LoginActivity.this, PhoneToWatchService.class);
+                sendintent.putExtra("DATA", "stats");
+                startService(sendintent);
             }
         });
 
