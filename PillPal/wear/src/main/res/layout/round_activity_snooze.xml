@@ -10,7 +10,6 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:id="@+id/snooze"
-        android:background="@drawable/watch_alarm_close"
-        android:onClick="snooze"/>
+        android:background="@drawable/watch_alarm_close" />
 
 </RelativeLayout>
