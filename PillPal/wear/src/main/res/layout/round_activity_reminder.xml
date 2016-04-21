@@ -10,7 +10,7 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:id="@+id/reminder"
-        android:text="Reminder Main View"
+        android:background="@drawable/watch_reminder_1"
         android:onClick="reminder"/>
 
 </RelativeLayout>

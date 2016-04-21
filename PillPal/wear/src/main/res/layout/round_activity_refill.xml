@@ -10,7 +10,6 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:id="@+id/refill"
-        android:text="Refill Main View"
-        android:onClick="refill"/>
+        android:background="@drawable/watch_refill_1" />
 
 </RelativeLayout>

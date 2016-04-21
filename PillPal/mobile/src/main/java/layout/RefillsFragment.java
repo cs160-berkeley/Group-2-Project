@@ -1,15 +1,14 @@
-package com.example.group2.pillpal;
+package layout;
 
 import android.content.Context;
-import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
+
+import com.example.group2.pillpal.R;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -19,7 +18,7 @@ import android.widget.ImageButton;
  * Use the {@link RefillsFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class RefillsFragment extends Fragment implements View.OnClickListener {
+public class RefillsFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -66,25 +65,7 @@ public class RefillsFragment extends Fragment implements View.OnClickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v = inflater.inflate(R.layout.refills_fragment, container, false);
-        ImageButton setupButton = (ImageButton) v.findViewById(R.id.refills_button);
-        setupButton.setOnClickListener(this);
-        return v;
-    }
-
-    @Override
-    public void onClick(View v) {
-        // implements your things
-        FragmentTransaction tx = getFragmentManager().beginTransaction();
-        RefillStatusFragment refillStatusFragment = new RefillStatusFragment();
-        tx.replace(R.id.main, refillStatusFragment);
-        tx.addToBackStack(null);
-        tx.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-        tx.commit();
-
-        Intent sendintent = new Intent(v.getContext(), PhoneToWatchService.class);
-        sendintent.putExtra("DATA", "refill");
-        v.getContext().startService(sendintent);
+        return inflater.inflate(R.layout.refills_fragment, container, false);
     }
 
     // TODO: Rename method, update argument and hook method into UI event
