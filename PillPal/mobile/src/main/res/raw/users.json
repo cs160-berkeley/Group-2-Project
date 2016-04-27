@@ -1,0 +1,1399 @@
+[
+  {
+    "id": "000",
+    "index": 0,
+    "age": 25,
+    "height”: 60,
+    “weight”: 143,
+    "name": "Angelina Jolie",
+    "gender": "female",
+    "phone": "+1 (946) 568-3066",
+    "bill_address": "528 Stuart Street, Lindisfarne, Rhode Island, 5663",
+    "ship_address": "528 Stuart Street, Lindisfarne, Rhode Island, 5663",
+    “prescription”: Lutera,
+
+    "stats": [
+            {
+              "day": 1,
+              "month": "April",
+            "estrogen": 45,
+            "progestin": 35,
+            "testosterone": 20
+          },
+          {
+            "day": 2,
+            "month": "April",
+            "estrogen": 30,
+            "progestin": 40,
+            "testosterone": 20
+          },
+          {
+            "day": 3,
+            "month": "April",
+            "estrogen": 45,
+            "progestin": 35,
+            "testosterone": 30
+          },
+          {
+            "day": 4,
+            "month": "April",
+            "estrogen": 30,
+            "progestin": 35,
+            "testosterone": 20
+          },
+          {
+            "day": 5,
+            "month": "April",
+            "estrogen": 45,
+            "progestin": 20,
+            "testosterone": 20
+          },
+          {
+            "day": 6,
+            "month": "April",
+            "estrogen": 30,
+            "progestin": 20,
+            "testosterone": 35
+          },
+          {
+            "day": 7,
+            "month": "April",
+            "estrogen": 20,
+            "progestin": 30,
+            "testosterone": 30
+          },
+          {
+            "day": 8,
+            "month": "April",
+            "estrogen": 20,
+            "progestin": 20,
+            "testosterone": 25
+          },
+          {
+            "day": 9,
+            "month": "April",
+            "estrogen": 45,
+            "progestin": 35,
+            "testosterone": 20
+          },
+          {
+            "day": 10,
+            "month": "April",
+            "estrogen": 30,
+            "progestin": 40,
+            "testosterone": 30
+          },
+          {
+            "day": 11,
+            "month": "April",
+            "estrogen": 45,
+            "progestin": 35,
+            "testosterone": 20
+          },
+          {
+            "day": 12,
+            "month": "April",
+            "estrogen": 30,
+            "progestin": 35,
+            "testosterone": 20
+          },
+          {
+            "day": 13,
+            "month": "April",
+            "estrogen": 45,
+            "progestin": 40,
+            "testosterone": 30
+          },
+          {
+            "day": 14,
+            "month": "April",
+            "estrogen": 30,
+            "progestin": 30,
+            "testosterone": 20
+          },
+          {
+            "day": 15,
+            "month": "April",
+            "estrogen": 20,
+            "progestin": 40,
+            "testosterone": 25
+          },
+          {
+            "day": 16,
+            "month": "April",
+            "estrogen": 25,
+            "progestin": 35,
+            "testosterone": 20
+          },
+          {
+            "day": 17,
+            "month": "April",
+            "estrogen": 30,
+            "progestin": 40,
+            "testosterone": 25
+          },
+          {
+            "day": 18,
+            "month": "April",
+            "estrogen": 45,
+            "progestin": 45,
+            "testosterone": 35
+          },
+          {
+            "day": 19,
+            "month": "April",
+            "estrogen": 43,
+            "progestin": 35,
+            "testosterone": 20
+          },
+          {
+            "day": 20,
+            "month": "April",
+            "estrogen": 30,
+            "progestin": 40,
+            "testosterone": 15
+          },
+          {
+            "day": 21,
+            "month": "April",
+            "estrogen": 40,
+            "progestin": 35,
+            "testosterone": 20
+          },
+          {
+            "day": 22,
+            "month": "April",
+            "estrogen": 30,
+            "progestin": 20,
+            "testosterone": 15
+          },
+          {
+            "day": 23,
+            "month": "April",
+            "estrogen": 35,
+            "progestin": 40,
+            "testosterone": 40
+          },
+          {
+            "day": 24,
+            "month": "April",
+            "estrogen": 20,
+            "progestin": 30,
+            "testosterone": 25
+          },
+          {
+            "day": 25,
+            "month": "April",
+            "estrogen": 30,
+            "progestin": 35,
+            "testosterone": 35
+          },
+          {
+            "day": 26,
+            "month": "April",
+            "estrogen": 45,
+            "progestin": 35,
+            "testosterone": 20
+          },
+          {
+            "day": 27,
+            "month": "April",
+            "estrogen": 45,
+            "progestin": 35,
+            "testosterone": 25
+          },
+          {
+            "day": 28,
+            "month": "April",
+            "estrogen": 45,
+            "progestin": 35,
+            "testosterone": 15
+          },
+          {
+            "day": 29,
+            "month": "April",
+            "estrogen": 30,
+            "progestin": 40,
+            "testosterone": 25
+          },
+          {
+            "day": 30,
+            "month": "April",
+            "estrogen": 45,
+            "progestin": 20,
+            "testosterone": 30
+          },
+          {
+            "day": 31,
+            "month": "April",
+            "estrogen": 30,
+            "progestin": 35,
+            "testosterone": 20
+          }
+        ],
+  },
+
+  {
+    "id": "001",
+    "index": 1,
+    "age": 18,
+    "height”: 64,
+    “weight”: 133,
+    "name": "Jane Doe",
+    "gender": "female",
+    "phone": "+1 (946) 568-3066",
+    “prescription”: Aranelle,
+    "phone": "+1 (889) 455-3043",
+    "bill_address": "779 Joralemon Street, Groton, Arizona, 1790",
+    "ship_address": "779 Joralemon Street, Groton, Arizona, 1790",
+
+    "stats": [
+            {
+              "day": 1,
+              "month": "April",
+            "estrogen": 45,
+            "progestin": 35,
+            "testosterone": 20
+          },
+          {
+            "day": 2,
+            "month": "April",
+            "estrogen": 30,
+            "progestin": 40,
+            "testosterone": 20
+          },
+          {
+            "day": 3,
+            "month": "April",
+            "estrogen": 45,
+            "progestin": 35,
+            "testosterone": 30
+          },
+          {
+            "day": 4,
+            "month": "April",
+            "estrogen": 30,
+            "progestin": 35,
+            "testosterone": 20
+          },
+          {
+            "day": 5,
+            "month": "April",
+            "estrogen": 45,
+            "progestin": 20,
+            "testosterone": 20
+          },
+          {
+            "day": 6,
+            "month": "April",
+            "estrogen": 30,
+            "progestin": 20,
+            "testosterone": 35
+          },
+          {
+            "day": 7,
+            "month": "April",
+            "estrogen": 20,
+            "progestin": 30,
+            "testosterone": 30
+          },
+          {
+            "day": 8,
+            "month": "April",
+            "estrogen": 20,
+            "progestin": 20,
+            "testosterone": 25
+          },
+          {
+            "day": 9,
+            "month": "April",
+            "estrogen": 45,
+            "progestin": 35,
+            "testosterone": 20
+          },
+          {
+            "day": 10,
+            "month": "April",
+            "estrogen": 30,
+            "progestin": 40,
+            "testosterone": 30
+          },
+          {
+            "day": 11,
+            "month": "April",
+            "estrogen": 45,
+            "progestin": 35,
+            "testosterone": 20
+          },
+          {
+            "day": 12,
+            "month": "April",
+            "estrogen": 30,
+            "progestin": 35,
+            "testosterone": 20
+          },
+          {
+            "day": 13,
+            "month": "April",
+            "estrogen": 45,
+            "progestin": 40,
+            "testosterone": 30
+          },
+          {
+            "day": 14,
+            "month": "April",
+            "estrogen": 30,
+            "progestin": 30,
+            "testosterone": 20
+          },
+          {
+            "day": 15,
+            "month": "April",
+            "estrogen": 20,
+            "progestin": 40,
+            "testosterone": 25
+          },
+          {
+            "day": 16,
+            "month": "April",
+            "estrogen": 25,
+            "progestin": 35,
+            "testosterone": 20
+          },
+          {
+            "day": 17,
+            "month": "April",
+            "estrogen": 30,
+            "progestin": 40,
+            "testosterone": 25
+          },
+          {
+            "day": 18,
+            "month": "April",
+            "estrogen": 45,
+            "progestin": 45,
+            "testosterone": 35
+          },
+          {
+            "day": 19,
+            "month": "April",
+            "estrogen": 43,
+            "progestin": 35,
+            "testosterone": 20
+          },
+          {
+            "day": 20,
+            "month": "April",
+            "estrogen": 30,
+            "progestin": 40,
+            "testosterone": 15
+          },
+          {
+            "day": 21,
+            "month": "April",
+            "estrogen": 40,
+            "progestin": 35,
+            "testosterone": 20
+          },
+          {
+            "day": 22,
+            "month": "April",
+            "estrogen": 30,
+            "progestin": 20,
+            "testosterone": 15
+          },
+          {
+            "day": 23,
+            "month": "April",
+            "estrogen": 35,
+            "progestin": 40,
+            "testosterone": 40
+          },
+          {
+            "day": 24,
+            "month": "April",
+            "estrogen": 20,
+            "progestin": 30,
+            "testosterone": 25
+          },
+          {
+            "day": 25,
+            "month": "April",
+            "estrogen": 30,
+            "progestin": 35,
+            "testosterone": 35
+          },
+          {
+            "day": 26,
+            "month": "April",
+            "estrogen": 45,
+            "progestin": 35,
+            "testosterone": 20
+          },
+          {
+            "day": 27,
+            "month": "April",
+            "estrogen": 45,
+            "progestin": 35,
+            "testosterone": 25
+          },
+          {
+            "day": 28,
+            "month": "April",
+            "estrogen": 45,
+            "progestin": 35,
+            "testosterone": 15
+          },
+          {
+            "day": 29,
+            "month": "April",
+            "estrogen": 30,
+            "progestin": 40,
+            "testosterone": 25
+          },
+          {
+            "day": 30,
+            "month": "April",
+            "estrogen": 45,
+            "progestin": 20,
+            "testosterone": 30
+          },
+          {
+            "day": 31,
+            "month": "April",
+            "estrogen": 30,
+            "progestin": 35,
+            "testosterone": 20
+          }
+        ],
+},
+
+
+
+
+  {
+    "id": "010",
+    "index": 2,
+    "age": 20,
+    “height”: 63,
+    “weight”: 152,
+    
+    "name": "Megan Fox",
+    "phone": "+1 (888) 491-2120",
+    "bill_address": "389 Centre Street, Watchtower, Oklahoma, 7344",
+    "ship_address": "389 Centre Street, Watchtower, Oklahoma, 7344",
+    "stats": [
+            {
+              "day": 1,
+              "month": "April",
+            "estrogen": 45,
+            "progestin": 35,
+            "testosterone": 20
+          },
+          {
+            "day": 2,
+            "month": "April",
+            "estrogen": 30,
+            "progestin": 40,
+            "testosterone": 20
+          },
+          {
+            "day": 3,
+            "month": "April",
+            "estrogen": 45,
+            "progestin": 35,
+            "testosterone": 30
+          },
+          {
+            "day": 4,
+            "month": "April",
+            "estrogen": 30,
+            "progestin": 35,
+            "testosterone": 20
+          },
+          {
+            "day": 5,
+            "month": "April",
+            "estrogen": 45,
+            "progestin": 20,
+            "testosterone": 20
+          },
+          {
+            "day": 6,
+            "month": "April",
+            "estrogen": 30,
+            "progestin": 20,
+            "testosterone": 35
+          },
+          {
+            "day": 7,
+            "month": "April",
+            "estrogen": 20,
+            "progestin": 30,
+            "testosterone": 30
+          },
+          {
+            "day": 8,
+            "month": "April",
+            "estrogen": 20,
+            "progestin": 20,
+            "testosterone": 25
+          },
+          {
+            "day": 9,
+            "month": "April",
+            "estrogen": 45,
+            "progestin": 35,
+            "testosterone": 20
+          },
+          {
+            "day": 10,
+            "month": "April",
+            "estrogen": 30,
+            "progestin": 40,
+            "testosterone": 30
+          },
+          {
+            "day": 11,
+            "month": "April",
+            "estrogen": 45,
+            "progestin": 35,
+            "testosterone": 20
+          },
+          {
+            "day": 12,
+            "month": "April",
+            "estrogen": 30,
+            "progestin": 35,
+            "testosterone": 20
+          },
+          {
+            "day": 13,
+            "month": "April",
+            "estrogen": 45,
+            "progestin": 40,
+            "testosterone": 30
+          },
+          {
+            "day": 14,
+            "month": "April",
+            "estrogen": 30,
+            "progestin": 30,
+            "testosterone": 20
+          },
+          {
+            "day": 15,
+            "month": "April",
+            "estrogen": 20,
+            "progestin": 40,
+            "testosterone": 25
+          },
+          {
+            "day": 16,
+            "month": "April",
+            "estrogen": 25,
+            "progestin": 35,
+            "testosterone": 20
+          },
+          {
+            "day": 17,
+            "month": "April",
+            "estrogen": 30,
+            "progestin": 40,
+            "testosterone": 25
+          },
+          {
+            "day": 18,
+            "month": "April",
+            "estrogen": 45,
+            "progestin": 45,
+            "testosterone": 35
+          },
+          {
+            "day": 19,
+            "month": "April",
+            "estrogen": 43,
+            "progestin": 35,
+            "testosterone": 20
+          },
+          {
+            "day": 20,
+            "month": "April",
+            "estrogen": 30,
+            "progestin": 40,
+            "testosterone": 15
+          },
+          {
+            "day": 21,
+            "month": "April",
+            "estrogen": 40,
+            "progestin": 35,
+            "testosterone": 20
+          },
+          {
+            "day": 22,
+            "month": "April",
+            "estrogen": 30,
+            "progestin": 20,
+            "testosterone": 15
+          },
+          {
+            "day": 23,
+            "month": "April",
+            "estrogen": 35,
+            "progestin": 40,
+            "testosterone": 40
+          },
+          {
+            "day": 24,
+            "month": "April",
+            "estrogen": 20,
+            "progestin": 30,
+            "testosterone": 25
+          },
+          {
+            "day": 25,
+            "month": "April",
+            "estrogen": 30,
+            "progestin": 35,
+            "testosterone": 35
+          },
+          {
+            "day": 26,
+            "month": "April",
+            "estrogen": 45,
+            "progestin": 35,
+            "testosterone": 20
+          },
+          {
+            "day": 27,
+            "month": "April",
+            "estrogen": 45,
+            "progestin": 35,
+            "testosterone": 25
+          },
+          {
+            "day": 28,
+            "month": "April",
+            "estrogen": 45,
+            "progestin": 35,
+            "testosterone": 15
+          },
+          {
+            "day": 29,
+            "month": "April",
+            "estrogen": 30,
+            "progestin": 40,
+            "testosterone": 25
+          },
+          {
+            "day": 30,
+            "month": "April",
+            "estrogen": 45,
+            "progestin": 20,
+            "testosterone": 30
+          },
+          {
+            "day": 31,
+            "month": "April",
+            "estrogen": 30,
+            "progestin": 35,
+            "testosterone": 20
+          }
+        ],
+},
+
+  {
+    "id": "011",
+    "index": 3,
+    "age": 21,
+    "height”: 63,
+    “weight”:  137,
+    "name": "Ashley Olsen",
+    "phone": "+1 (902) 511-3315",
+    "bill_address": "201 Carroll Street, Orviston, Wisconsin, 6855",
+    "ship_address": "201 Carroll Street, Orviston, Wisconsin, 6855",
+    "stats": [
+            {
+              "day": 1,
+              "month": "April",
+            "estrogen": 45,
+            "progestin": 35,
+            "testosterone": 20
+          },
+          {
+            "day": 2,
+            "month": "April",
+            "estrogen": 30,
+            "progestin": 40,
+            "testosterone": 20
+          },
+          {
+            "day": 3,
+            "month": "April",
+            "estrogen": 45,
+            "progestin": 35,
+            "testosterone": 30
+          },
+          {
+            "day": 4,
+            "month": "April",
+            "estrogen": 30,
+            "progestin": 35,
+            "testosterone": 20
+          },
+          {
+            "day": 5,
+            "month": "April",
+            "estrogen": 45,
+            "progestin": 20,
+            "testosterone": 20
+          },
+          {
+            "day": 6,
+            "month": "April",
+            "estrogen": 30,
+            "progestin": 20,
+            "testosterone": 35
+          },
+          {
+            "day": 7,
+            "month": "April",
+            "estrogen": 20,
+            "progestin": 30,
+            "testosterone": 30
+          },
+          {
+            "day": 8,
+            "month": "April",
+            "estrogen": 20,
+            "progestin": 20,
+            "testosterone": 25
+          },
+          {
+            "day": 9,
+            "month": "April",
+            "estrogen": 45,
+            "progestin": 35,
+            "testosterone": 20
+          },
+          {
+            "day": 10,
+            "month": "April",
+            "estrogen": 30,
+            "progestin": 40,
+            "testosterone": 30
+          },
+          {
+            "day": 11,
+            "month": "April",
+            "estrogen": 45,
+            "progestin": 35,
+            "testosterone": 20
+          },
+          {
+            "day": 12,
+            "month": "April",
+            "estrogen": 30,
+            "progestin": 35,
+            "testosterone": 20
+          },
+          {
+            "day": 13,
+            "month": "April",
+            "estrogen": 45,
+            "progestin": 40,
+            "testosterone": 30
+          },
+          {
+            "day": 14,
+            "month": "April",
+            "estrogen": 30,
+            "progestin": 30,
+            "testosterone": 20
+          },
+          {
+            "day": 15,
+            "month": "April",
+            "estrogen": 20,
+            "progestin": 40,
+            "testosterone": 25
+          },
+          {
+            "day": 16,
+            "month": "April",
+            "estrogen": 25,
+            "progestin": 35,
+            "testosterone": 20
+          },
+          {
+            "day": 17,
+            "month": "April",
+            "estrogen": 30,
+            "progestin": 40,
+            "testosterone": 25
+          },
+          {
+            "day": 18,
+            "month": "April",
+            "estrogen": 45,
+            "progestin": 45,
+            "testosterone": 35
+          },
+          {
+            "day": 19,
+            "month": "April",
+            "estrogen": 43,
+            "progestin": 35,
+            "testosterone": 20
+          },
+          {
+            "day": 20,
+            "month": "April",
+            "estrogen": 30,
+            "progestin": 40,
+            "testosterone": 15
+          },
+          {
+            "day": 21,
+            "month": "April",
+            "estrogen": 40,
+            "progestin": 35,
+            "testosterone": 20
+          },
+          {
+            "day": 22,
+            "month": "April",
+            "estrogen": 30,
+            "progestin": 20,
+            "testosterone": 15
+          },
+          {
+            "day": 23,
+            "month": "April",
+            "estrogen": 35,
+            "progestin": 40,
+            "testosterone": 40
+          },
+          {
+            "day": 24,
+            "month": "April",
+            "estrogen": 20,
+            "progestin": 30,
+            "testosterone": 25
+          },
+          {
+            "day": 25,
+            "month": "April",
+            "estrogen": 30,
+            "progestin": 35,
+            "testosterone": 35
+          },
+          {
+            "day": 26,
+            "month": "April",
+            "estrogen": 45,
+            "progestin": 35,
+            "testosterone": 20
+          },
+          {
+            "day": 27,
+            "month": "April",
+            "estrogen": 45,
+            "progestin": 35,
+            "testosterone": 25
+          },
+          {
+            "day": 28,
+            "month": "April",
+            "estrogen": 45,
+            "progestin": 35,
+            "testosterone": 15
+          },
+          {
+            "day": 29,
+            "month": "April",
+            "estrogen": 30,
+            "progestin": 40,
+            "testosterone": 25
+          },
+          {
+            "day": 30,
+            "month": "April",
+            "estrogen": 45,
+            "progestin": 20,
+            "testosterone": 30
+          },
+          {
+            "day": 31,
+            "month": "April",
+            "estrogen": 30,
+            "progestin": 35,
+            "testosterone": 20
+          }
+        ],
+},
+  {
+    "id": "100",
+    "index": 4,
+    "age": 19,
+    “height”: 59,
+    "name": "Christina Hendricks",
+    "email": "bethaguilar@splinx.com",
+    "phone": "+1 (801) 517-2073",
+    "bill_address": "442 Hewes Street, Gibbsville, Montana, 3799",
+    "ship_address": "442 Hewes Street, Gibbsville, Montana, 3799",
+    "stats": [
+            {
+              "day": 1,
+              "month": "April",
+            "estrogen": 45,
+            "progestin": 35,
+            "testosterone": 20
+          },
+          {
+            "day": 2,
+            "month": "April",
+            "estrogen": 30,
+            "progestin": 40,
+            "testosterone": 20
+          },
+          {
+            "day": 3,
+            "month": "April",
+            "estrogen": 45,
+            "progestin": 35,
+            "testosterone": 30
+          },
+          {
+            "day": 4,
+            "month": "April",
+            "estrogen": 30,
+            "progestin": 35,
+            "testosterone": 20
+          },
+          {
+            "day": 5,
+            "month": "April",
+            "estrogen": 45,
+            "progestin": 20,
+            "testosterone": 20
+          },
+          {
+            "day": 6,
+            "month": "April",
+            "estrogen": 30,
+            "progestin": 20,
+            "testosterone": 35
+          },
+          {
+            "day": 7,
+            "month": "April",
+            "estrogen": 20,
+            "progestin": 30,
+            "testosterone": 30
+          },
+          {
+            "day": 8,
+            "month": "April",
+            "estrogen": 20,
+            "progestin": 20,
+            "testosterone": 25
+          },
+          {
+            "day": 9,
+            "month": "April",
+            "estrogen": 45,
+            "progestin": 35,
+            "testosterone": 20
+          },
+          {
+            "day": 10,
+            "month": "April",
+            "estrogen": 30,
+            "progestin": 40,
+            "testosterone": 30
+          },
+          {
+            "day": 11,
+            "month": "April",
+            "estrogen": 45,
+            "progestin": 35,
+            "testosterone": 20
+          },
+          {
+            "day": 12,
+            "month": "April",
+            "estrogen": 30,
+            "progestin": 35,
+            "testosterone": 20
+          },
+          {
+            "day": 13,
+            "month": "April",
+            "estrogen": 45,
+            "progestin": 40,
+            "testosterone": 30
+          },
+          {
+            "day": 14,
+            "month": "April",
+            "estrogen": 30,
+            "progestin": 30,
+            "testosterone": 20
+          },
+          {
+            "day": 15,
+            "month": "April",
+            "estrogen": 20,
+            "progestin": 40,
+            "testosterone": 25
+          },
+          {
+            "day": 16,
+            "month": "April",
+            "estrogen": 25,
+            "progestin": 35,
+            "testosterone": 20
+          },
+          {
+            "day": 17,
+            "month": "April",
+            "estrogen": 30,
+            "progestin": 40,
+            "testosterone": 25
+          },
+          {
+            "day": 18,
+            "month": "April",
+            "estrogen": 45,
+            "progestin": 45,
+            "testosterone": 35
+          },
+          {
+            "day": 19,
+            "month": "April",
+            "estrogen": 43,
+            "progestin": 35,
+            "testosterone": 20
+          },
+          {
+            "day": 20,
+            "month": "April",
+            "estrogen": 30,
+            "progestin": 40,
+            "testosterone": 15
+          },
+          {
+            "day": 21,
+            "month": "April",
+            "estrogen": 40,
+            "progestin": 35,
+            "testosterone": 20
+          },
+          {
+            "day": 22,
+            "month": "April",
+            "estrogen": 30,
+            "progestin": 20,
+            "testosterone": 15
+          },
+          {
+            "day": 23,
+            "month": "April",
+            "estrogen": 35,
+            "progestin": 40,
+            "testosterone": 40
+          },
+          {
+            "day": 24,
+            "month": "April",
+            "estrogen": 20,
+            "progestin": 30,
+            "testosterone": 25
+          },
+          {
+            "day": 25,
+            "month": "April",
+            "estrogen": 30,
+            "progestin": 35,
+            "testosterone": 35
+          },
+          {
+            "day": 26,
+            "month": "April",
+            "estrogen": 45,
+            "progestin": 35,
+            "testosterone": 20
+          },
+          {
+            "day": 27,
+            "month": "April",
+            "estrogen": 45,
+            "progestin": 35,
+            "testosterone": 25
+          },
+          {
+            "day": 28,
+            "month": "April",
+            "estrogen": 45,
+            "progestin": 35,
+            "testosterone": 15
+          },
+          {
+            "day": 29,
+            "month": "April",
+            "estrogen": 30,
+            "progestin": 40,
+            "testosterone": 25
+          },
+          {
+            "day": 30,
+            "month": "April",
+            "estrogen": 45,
+            "progestin": 20,
+            "testosterone": 30
+          },
+          {
+            "day": 31,
+            "month": "April",
+            "estrogen": 30,
+            "progestin": 35,
+            "testosterone": 20
+          }
+        ],
+},
+  {
+    "id": "101",
+    "index": 5,
+    "height”: 64,  
+    “weight”: 124, 
+    "age": 26,
+    "name": "Kylie Jenner",
+    "email": "kyliejenner@gonkle.com",
+    "phone": "+1 (875) 426-3268",
+    "bill_address": "793 Pineapple Street, Salvo, Mississippi, 306",
+    "ship_address": "793 Pineapple Street, Salvo, Mississippi, 306",
+
+    "stats": [
+          {
+            "day": 1,
+            "month": "April",
+            "estrogen": 45,
+            "progestin": 35,
+            "testosterone": 20
+          },
+          {
+            "day": 2,
+            "month": "April",
+            "estrogen": 30,
+            "progestin": 40,
+            "testosterone": 20
+          },
+          {
+            "day": 3,
+            "month": "April",
+            "estrogen": 45,
+            "progestin": 35,
+            "testosterone": 30
+          },
+          {
+            "day": 4,
+            "month": "April",
+            "estrogen": 30,
+            "progestin": 35,
+            "testosterone": 20
+          },
+          {
+            "day": 5,
+            "month": "April",
+            "estrogen": 45,
+            "progestin": 20,
+            "testosterone": 20
+          },
+          {
+            "day": 6,
+            "month": "April",
+            "estrogen": 30,
+            "progestin": 20,
+            "testosterone": 35
+          },
+          {
+            "day": 7,
+            "month": "April",
+            "estrogen": 20,
+            "progestin": 30,
+            "testosterone": 30
+          },
+          {
+            "day": 8,
+            "month": "April",
+            "estrogen": 20,
+            "progestin": 20,
+            "testosterone": 25
+          },
+          {
+            "day": 9,
+            "month": "April",
+            "estrogen": 45,
+            "progestin": 35,
+            "testosterone": 20
+          },
+          {
+            "day": 10,
+            "month": "April",
+            "estrogen": 30,
+            "progestin": 40,
+            "testosterone": 30
+          },
+          {
+            "day": 11,
+            "month": "April",
+            "estrogen": 45,
+            "progestin": 35,
+            "testosterone": 20
+          },
+          {
+            "day": 12,
+            "month": "April",
+            "estrogen": 30,
+            "progestin": 35,
+            "testosterone": 20
+          },
+          {
+            "day": 13,
+            "month": "April",
+            "estrogen": 45,
+            "progestin": 40,
+            "testosterone": 30
+          },
+          {
+            "day": 14,
+            "month": "April",
+            "estrogen": 30,
+            "progestin": 30,
+            "testosterone": 20
+          },
+          {
+            "day": 15,
+            "month": "April",
+            "estrogen": 20,
+            "progestin": 40,
+            "testosterone": 25
+          },
+          {
+            "day": 16,
+            "month": "April",
+            "estrogen": 25,
+            "progestin": 35,
+            "testosterone": 20
+          },
+          {
+            "day": 17,
+            "month": "April",
+            "estrogen": 30,
+            "progestin": 40,
+            "testosterone": 25
+          },
+          {
+            "day": 18,
+            "month": "April",
+            "estrogen": 45,
+            "progestin": 45,
+            "testosterone": 35
+          },
+          {
+            "day": 19,
+            "month": "April",
+            "estrogen": 43,
+            "progestin": 35,
+            "testosterone": 20
+          },
+          {
+            "day": 20,
+            "month": "April",
+            "estrogen": 30,
+            "progestin": 40,
+            "testosterone": 15
+          },
+          {
+            "day": 21,
+            "month": "April",
+            "estrogen": 40,
+            "progestin": 35,
+            "testosterone": 20
+          },
+          {
+            "day": 22,
+            "month": "April",
+            "estrogen": 30,
+            "progestin": 20,
+            "testosterone": 15
+          },
+          {
+            "day": 23,
+            "month": "April",
+            "estrogen": 35,
+            "progestin": 40,
+            "testosterone": 40
+          },
+          {
+            "day": 24,
+            "month": "April",
+            "estrogen": 20,
+            "progestin": 30,
+            "testosterone": 25
+          },
+          {
+            "day": 25,
+            "month": "April",
+            "estrogen": 30,
+            "progestin": 35,
+            "testosterone": 35
+          },
+          {
+            "day": 26,
+            "month": "April",
+            "estrogen": 45,
+            "progestin": 35,
+            "testosterone": 20
+          },
+          {
+            "day": 27,
+            "month": "April",
+            "estrogen": 45,
+            "progestin": 35,
+            "testosterone": 25
+          },
+          {
+            "day": 28,
+            "month": "April",
+            "estrogen": 45,
+            "progestin": 35,
+            "testosterone": 15
+          },
+          {
+            "day": 29,
+            "month": "April",
+            "estrogen": 30,
+            "progestin": 40,
+            "testosterone": 25
+          },
+          {
+            "day": 30,
+            "month": "April",
+            "estrogen": 45,
+            "progestin": 20,
+            "testosterone": 30
+          },
+          {
+            "day": 31,
+            "month": "April",
+            "estrogen": 30,
+            "progestin": 35,
+            "testosterone": 20
+          }
+        ],
+  }
+
+]
