@@ -67,8 +67,8 @@ public class RefillsFragment extends Fragment implements View.OnClickListener {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.refills_fragment, container, false);
-        ImageButton setupButton = (ImageButton) v.findViewById(R.id.refills_button);
-        setupButton.setOnClickListener(this);
+//        ImageButton setupButton = (ImageButton) v.findViewById(R.id.refills_button);
+//        setupButton.setOnClickListener(this);
         return v;
     }
 

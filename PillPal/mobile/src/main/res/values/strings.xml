@@ -81,4 +81,18 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- Strings related to Refills Page -->
+    <string name="button_refill_request">Request Refill</string>
+    <string name="content_address_one">2000 Bancroft Way</string>
+    <string name="content_address_two">Berkeley, CA 94720</string>
+    <string name="content_pill">Aranelle</string>
+    <string name="content_dosage">Once everyday at noon.</string>
+    <string name="content_last_refill">April 10, 2016</string>
+
+    <string name="heading_address">Address</string>
+    <string name="heading_pill">Pill</string>
+    <string name="heading_dosage">Dosage</string>
+    <string name="heading_last_refill">Last Refill</string>
+
 </resources>
