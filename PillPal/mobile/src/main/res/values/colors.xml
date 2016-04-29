@@ -4,8 +4,8 @@
     <color name="colorPrimaryDark">#FF5722</color>
     <color name="colorAccent">#448AFF</color>
 
-    <color name="backgroundColor">#FFFFFF</color>
-
+    <color name="white">#FFFFFF</color>
+    <color name="overlay">#E6FFFFFF</color>
     <color name="textPrimary">#CC000000</color>
     <color name="textSecondary">#8C000000</color>
 </resources>

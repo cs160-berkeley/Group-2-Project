@@ -83,13 +83,12 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <!-- Strings related to Refills Page -->
-    <string name="button_refill_request">Request Refill</string>
-    <string name="content_address_one">2000 Bancroft Way</string>
-    <string name="content_address_two">Berkeley, CA 94720</string>
-    <string name="content_pill">Aranelle</string>
-    <string name="content_dosage">Once everyday at noon.</string>
-    <string name="content_last_refill">April 10, 2016</string>
-
+    <string name="button_request_refill">Request Refill</string>
+    <string name="button_refill_status">Refill Status</string>
+    <string name="request_successful">Request Successful!</string>
+    <string name="refill_confirmation_1">Package will be delivered in 2 days.</string>
+    <string name="refill_confirmation_2">Look out for alerts on your watch!</string>
+    <string name="refill_status">Your package has been shipped!</string>
     <string name="heading_address">Address</string>
     <string name="heading_pill">Pill</string>
     <string name="heading_dosage">Dosage</string>

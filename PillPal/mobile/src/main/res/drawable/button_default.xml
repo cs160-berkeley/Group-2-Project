@@ -9,5 +9,5 @@
         android:width="2dip"
         android:color="@color/colorAccent" />
     <solid
-        android:color="@color/backgroundColor" />
+        android:color="@color/white" />
 </shape>

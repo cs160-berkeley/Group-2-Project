@@ -2,6 +2,7 @@ package com.example.group2.pillpal;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -9,7 +10,15 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewOverlay;
+import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -22,6 +31,39 @@ import android.widget.ImageButton;
 public class RefillsFragment extends Fragment implements View.OnClickListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+
+    private static Map<String, String> address;
+    static
+    {
+        address = new HashMap<String, String>();
+        address.put("street_name", "2000 Bancroft Way");
+        address.put("city", "Berkeley");
+        address.put("state", "California");
+        address.put("zip", "94704");
+    }
+    private static Map<String, String> current_pill;
+    static
+    {
+        current_pill = new HashMap<String, String>();
+        current_pill.put("name", "Aranelle");
+        current_pill.put("dosage", "Once every day at noon.");
+    }
+    private static ArrayList<HashMap<String, String>> refill_history;
+    static
+    {
+        refill_history = new ArrayList<HashMap<String, String>>();
+        HashMap<String, String> first_refill = new HashMap<String, String>();
+        HashMap<String, String> second_refill = new HashMap<String, String>();
+        first_refill.put("name", "Aranelle");
+        first_refill.put("date", "March 10, 2016");
+        second_refill.put("name", "Aranelle");
+        second_refill.put("date", "April 8, 2016");
+        refill_history.add(first_refill);
+        refill_history.add(second_refill);
+    }
+
+    private static Boolean refill_requested = false;
+
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
@@ -60,6 +102,7 @@ public class RefillsFragment extends Fragment implements View.OnClickListener {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
     }
 
     @Override
@@ -67,24 +110,62 @@ public class RefillsFragment extends Fragment implements View.OnClickListener {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.refills_fragment, container, false);
-//        ImageButton setupButton = (ImageButton) v.findViewById(R.id.refills_button);
-//        setupButton.setOnClickListener(this);
+
+        TextView address_line_one = (TextView) v.findViewById(R.id.addressLineOne);
+        TextView address_line_two = (TextView) v.findViewById(R.id.addressLineTwo);
+        TextView pill_name = (TextView) v.findViewById(R.id.pillName);
+        TextView pill_dosage = (TextView) v.findViewById(R.id.pillDosage);
+        TextView last_refill = (TextView) v.findViewById(R.id.lastRefillInfo);
+
+        address_line_one.setText(address.get("street_name"));
+        address_line_two.setText(address.get("city_name") + " " + address.get("state") + ", " + address.get("zip"));
+
+        pill_name.setText(current_pill.get("name"));
+        pill_dosage.setText(current_pill.get("dosage"));
+
+        HashMap<String, String> lastRefill = refill_history.get(refill_history.size() - 1);
+        last_refill.setText(lastRefill.get("name") + " - " + lastRefill.get("date"));
+
+        Button refillsButton = (Button) v.findViewById(R.id.refills_button);
+        refillsButton.setOnClickListener(this);
+
+        LinearLayout refill_confirmation = (LinearLayout) v.findViewById(R.id.refill_confirmation);
+        LinearLayout refill_status = (LinearLayout) v.findViewById(R.id.refill_status);
+        refill_confirmation.setVisibility(View.GONE);
+        refill_status.setVisibility(View.GONE);
+
+        if (!refill_requested) {
+            refillsButton.setText("Request Refills");
+        } else {
+            refillsButton.setText("View Refill Status");
+        }
         return v;
     }
 
     @Override
     public void onClick(View v) {
         // implements your things
-        FragmentTransaction tx = getFragmentManager().beginTransaction();
-        RefillStatusFragment refillStatusFragment = new RefillStatusFragment();
-        tx.replace(R.id.main, refillStatusFragment);
-        tx.addToBackStack(null);
-        tx.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-        tx.commit();
-
-        Intent sendintent = new Intent(v.getContext(), PhoneToWatchService.class);
-        sendintent.putExtra("DATA", "refill");
-        v.getContext().startService(sendintent);
+        if (refill_requested) {
+            LinearLayout refill_status = (LinearLayout) v.findViewById(R.id.refill_status);
+            refill_status.setVisibility(View.VISIBLE);
+        } else {
+            refill_requested = true;
+            LinearLayout refill_confirmation = (LinearLayout) v.findViewById(R.id.refill_confirmation);
+            refill_confirmation.setVisibility(View.VISIBLE);
+        }
+//        FragmentTransaction tx = getFragmentManager().beginTransaction();
+//        RefillStatusFragment refillStatusFragment = new RefillStatusFragment();
+//        Bundle args = new Bundle();
+//        args.putBoolean("refill_requested", refill_requested);
+//        refillStatusFragment.setArguments(args);
+//        tx.replace(R.id.main, refillStatusFragment);
+//        tx.addToBackStack(null);
+//        tx.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+//        tx.commit();
+//
+//        Intent sendintent = new Intent(v.getContext(), PhoneToWatchService.class);
+//        sendintent.putExtra("DATA", "refill");
+//        v.getContext().startService(sendintent);
     }
 
     // TODO: Rename method, update argument and hook method into UI event
