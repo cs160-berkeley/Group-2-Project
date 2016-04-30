@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.view.ViewOverlay;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -127,12 +128,21 @@ public class RefillsFragment extends Fragment implements View.OnClickListener {
         last_refill.setText(lastRefill.get("name") + " - " + lastRefill.get("date"));
 
         Button refillsButton = (Button) v.findViewById(R.id.refills_button);
+        Button confirmationButton = (Button) v.findViewById(R.id.confirmation_button);
+        Button statusButton = (Button) v.findViewById(R.id.status_button);
+
         refillsButton.setOnClickListener(this);
+        confirmationButton.setOnClickListener(this);
+        statusButton.setOnClickListener(this);
 
         LinearLayout refill_confirmation = (LinearLayout) v.findViewById(R.id.refill_confirmation);
         LinearLayout refill_status = (LinearLayout) v.findViewById(R.id.refill_status);
+
+
         refill_confirmation.setVisibility(View.GONE);
         refill_status.setVisibility(View.GONE);
+
+
 
         if (!refill_requested) {
             refillsButton.setText("Request Refills");
@@ -145,14 +155,28 @@ public class RefillsFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         // implements your things
-        if (refill_requested) {
-            LinearLayout refill_status = (LinearLayout) v.findViewById(R.id.refill_status);
-            refill_status.setVisibility(View.VISIBLE);
-        } else {
-            refill_requested = true;
-            LinearLayout refill_confirmation = (LinearLayout) v.findViewById(R.id.refill_confirmation);
-            refill_confirmation.setVisibility(View.VISIBLE);
+//        ImageView imageView = (ImageView) getView().findViewById(R.id.foo);
+//        View v = inflater.inflate(R.layout.refills_fragment, container, false);
+        LinearLayout refill_status = (LinearLayout) getView().findViewById(R.id.refill_status);
+        LinearLayout refill_confirmation = (LinearLayout) getView().findViewById(R.id.refill_confirmation);
+        int button_id = v.getId();
+        switch (button_id) {
+            case R.id.refills_button:
+                if (refill_requested) {
+                    refill_status.setVisibility(View.VISIBLE);
+                } else {
+                    refill_confirmation.setVisibility(View.VISIBLE);
+                    refill_requested = true;
+                }
+                break;
+            case R.id.confirmation_button:
+                refill_confirmation.setVisibility(View.INVISIBLE);
+                break;
+            case R.id.status_button:
+                refill_status.setVisibility(View.INVISIBLE);
+                break;
         }
+
 //        FragmentTransaction tx = getFragmentManager().beginTransaction();
 //        RefillStatusFragment refillStatusFragment = new RefillStatusFragment();
 //        Bundle args = new Bundle();

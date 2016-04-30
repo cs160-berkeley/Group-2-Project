@@ -36,12 +36,13 @@
             android:textColor="@color/textPrimary"/>
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="18dp"
+            android:layout_height="20dp"
             android:gravity="center"
             android:text="@string/refill_confirmation_2"
             android:textSize="15dp"
             android:textColor="@color/textPrimary"/>
         <Button
+            android:id="@+id/confirmation_button"
             android:background="@drawable/button_style"
             android:layout_width="152dp"
             android:layout_height="32dp"
