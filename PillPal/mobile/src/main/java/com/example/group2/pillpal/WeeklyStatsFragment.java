@@ -6,11 +6,6 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -30,8 +25,7 @@ import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
-import com.
-        github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
@@ -54,7 +48,7 @@ import java.util.ArrayList;
  * Use the {@link StatsFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class StatsFragment extends Fragment {
+public class WeeklyStatsFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -64,14 +58,15 @@ public class StatsFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
+
     private OnFragmentInteractionListener mListener;
 
-    public StatsFragment() {
+    public WeeklyStatsFragment() {
         // Required empty public constructor
     }
 
-    public static StatsFragment newInstance(String param1, String param2) {
-        StatsFragment fragment = new StatsFragment();
+    public static WeeklyStatsFragment newInstance(String param1, String param2) {
+        WeeklyStatsFragment fragment = new WeeklyStatsFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -105,11 +100,13 @@ public class StatsFragment extends Fragment {
         }
     }
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.stats_fragment, container, false);
+
         TextView changesTitle = (TextView) v.findViewById(R.id.changesTitle);
         TextView estrogenLabel = (TextView) v.findViewById(R.id.estrogenValue);
         TextView progestinLabel = (TextView) v.findViewById(R.id.progestinValue);
@@ -118,7 +115,8 @@ public class StatsFragment extends Fragment {
         final LinearLayout progestinButton = (LinearLayout) v.findViewById(R.id.progestinButton);
         final LinearLayout testosteroneButton = (LinearLayout) v.findViewById(R.id.testosteroneButon);
         final TextView status = (TextView) v.findViewById(R.id.status);
-        changesTitle.setText("Monthly Changes");
+        changesTitle.setText("Weekly Changes");
+
         try {
             StringBuilder response = readJSON();
             JSONArray hormones = new JSONArray(response.toString());
@@ -134,7 +132,7 @@ public class StatsFragment extends Fragment {
             int t1 = 0;
             int t2 = 0;
 
-            for (int i = 0; i < hormones.length(); i++) {
+            for (int i = 0; i < 7; i++) {
                 JSONObject object = hormones.getJSONObject(i);
                 String day = object.getString("day");
                 String month = object.getString("month");
@@ -147,16 +145,16 @@ public class StatsFragment extends Fragment {
                 e1 += estrogenValue;
                 p1 += progestinValue;
                 t1 += testosteroneValue;
-                if (i == hormones.length() - 1) {
+                if (i == 6) {
                     e2 = estrogenValue;
                     p2 = progestinValue;
                     t2 = testosteroneValue;
                 }
                 labels.add(month + " " + day);
             }
-            e1 = e1/hormones.length();
-            p1 = p1/hormones.length();
-            t1 = t1/hormones.length();
+            e1 = e1/7;
+            p1 = p1/7;
+            t1 = t1/7;
             final int estrogenDiff = e2 - e1;
             final int progestinDiff = p2 - p1;
             final int testosteroneDiff = t2 - t1;
@@ -168,7 +166,6 @@ public class StatsFragment extends Fragment {
             } else {
                 status.setText("Your estrogen levels are normal.");
             }
-
             estrogenButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -253,8 +250,8 @@ public class StatsFragment extends Fragment {
             LineData data = new LineData(labels, dataSets);
             LineChart lineChart = (LineChart) v.findViewById(R.id.chart);
             lineChart.setData(data);
-            lineChart.animateY(1000);
             lineChart.setDescription("");
+            lineChart.animateY(1000);
             lineChart.getAxisRight().setEnabled(false);
 
             XAxis xAxis = lineChart.getXAxis();
