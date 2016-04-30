@@ -400,6 +400,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             Random rand = new Random();
             int value = rand.nextInt(6);
             User u1 = new User(value, jUsers);
+            System.out.println(u1.email);
             // ** First, serialize the user.
             try {
                 ByteArrayOutputStream use = new ByteArrayOutputStream();

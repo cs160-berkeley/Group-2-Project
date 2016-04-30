@@ -437,6 +437,7 @@
     "email": "megan@firefox.com",
     "password": "password",
     "refill_requested" : false,
+    "prescription" : "Lutera",
     "card": 7145,
     "bill_address": "389 Centre Street, Watchtower, Oklahoma, 7344",
     "ship_address": "389 Centre Street, Watchtower, Oklahoma, 7344",
@@ -1054,8 +1055,9 @@
     "email": "kyliejenner@gonkle.com",
     "password": "password",
     "card": 9856,
+    "prescription": "Lutera",
     "refill_requested" : false,
-    "phone": "+875-426-3268",
+    "phone": "875-426-3268",
     "bill_address": "793 Pineapple Street, Salvo, Mississippi, 306",
     "ship_address": "793 Pineapple Street, Salvo, Mississippi, 306",
 

@@ -54,6 +54,14 @@ public class User implements java.io.Serializable {
         return stats;
     }
 
+    public ArrayList<alarmHolder> getAlarms() {
+        return alarms;
+    }
+
+    public ArrayList<historyHolder> getHistory() {
+        return refHistory;
+    }
+
 
     public void setupUser(JSONArray arr) {
         /** get the id-th user from the entire JSON array, then uses info from the id-th user in the methods below to set up

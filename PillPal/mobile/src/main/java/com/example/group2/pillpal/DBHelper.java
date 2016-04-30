@@ -5,7 +5,7 @@
 //import android.database.sqlite.SQLiteOpenHelper;
 //
 ///**
-// * Created by Jessica on 4/29/16.
+// * Created by Jessica.
 // */
 //public class DbHelper extends SQLiteOpenHelper {
 //    // If you change the database schema, you must increment the database version.
