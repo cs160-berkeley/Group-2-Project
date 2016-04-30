@@ -18,15 +18,13 @@ public class DataBaseAdapter {
 
     static final String USERNAME_COLUMN = "UserName";
     static final String PASSWORD_COLUMN = "Password";
-    static final String QUALIFICATION_COLUMN = "Qualification";
-    static final String SPECIALIZATION_COLUMN = "Specialization";
+    static final String NAME_COLUMN = "Name";
+    static final String INDEX_COLUMN = "index";
     static final String COLUMN_ID = "id";
-    static final String REGISTRATIONNUMBER_COLUMN = "RegistrationNumber";
-    static final String CELLNUMBER_COLUMN = "CellNumber";
     // TODO: Create public field for each column in your table.
     // SQL Statement to create a new database.
     static final String DATABASE_CREATE = "create table " + "LOGIN" +
-            "( " + "ID" + " integer primary key autoincrement," + "USERNAME  text,PASSWORD String,QUALIFICATION String,SPECIALIZATION text,REGISTRATIONNUMBER String,CELLNUMBER integer,MAIL String); ";
+            "( " + "ID" + " integer primary key autoincrement," + "USERNAME  text,PASSWORD String, NAME text, INDEX string); ";
 
     // Variable to hold the database instance
     public SQLiteDatabase db;
@@ -38,6 +36,7 @@ public class DataBaseAdapter {
     public DataBaseAdapter(Context _context) {
         context = _context;
         dbHelper = new DataBaseHelper(context, DATABASE_NAME, null, DATABASE_VERSION);
+        open();
     }
 
     public DataBaseAdapter open() throws SQLException {
@@ -53,16 +52,13 @@ public class DataBaseAdapter {
         return db;
     }
 
-    public void insertEntry(String userName, String password, String qualification, String specialization, String registrationNumber, String cellNumber, String mailId) {
+    public void insertEntry(String userName, String password, String name, Integer index) {
         ContentValues newValues = new ContentValues();
         // Assign values for each row.
         newValues.put("USERNAME", userName);
         newValues.put("PASSWORD", password);
-        newValues.put("QUALIFICATION", qualification);
-        newValues.put("SPECIALIZATION", specialization);
-        newValues.put("REGISTRATIONNUMBER", registrationNumber);
-        newValues.put("CONTACTNUMBER", cellNumber);
-        newValues.put("EMAIL", mailId);
+        newValues.put("NAME", name);
+        newValues.put("INDEX", index);
 
         // Insert the row into your table
         db.insert("LOGIN", null, newValues);
@@ -94,17 +90,15 @@ public class DataBaseAdapter {
         return password;
     }
 
-    public void updateEntry(String userName, String password, String qualification, String specialization, String registrationNumber, String cellNumber, String mailId) {
+    public void updateEntry(String userName, String password, String name, String index) {
         // Define the updated row content.
         ContentValues updatedValues = new ContentValues();
         // Assign values for each row.
         updatedValues.put("USERNAME", userName);
         updatedValues.put("PASSWORD", password);
-        updatedValues.put("QUALIFICATION", qualification);
-        updatedValues.put("SPECIALIZATION", specialization);
-        updatedValues.put("REGISTRATIONNUMBER", registrationNumber);
-        updatedValues.put("CONTACTNUMBER", cellNumber);
-        updatedValues.put("EMAIL", mailId);
+        updatedValues.put("NAME", name);
+        updatedValues.put("INDEX", index);
+
 
         String where = "USERNAME = ?";
         db.update("LOGIN", updatedValues, where, new String[]{userName});

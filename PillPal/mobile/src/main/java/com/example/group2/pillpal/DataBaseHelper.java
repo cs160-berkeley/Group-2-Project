@@ -42,5 +42,14 @@ public class DataBaseHelper extends SQLiteOpenHelper
         // Create a new one.
         onCreate(_db);
     }
+//
+//    public void onUpgrade(SQLiteDatabase _db, int _oldVersion, int _newVersion)
+//    {
+//        Log.w("TaskDBAdapter", "Upgrading from version " +_oldVersion + " to " +_newVersion + ", which will destroy all old data");
+//
+//        _db.execSQL("ALTER TABLE login ADD COLUMN EMAIL varchar(16)");
+//
+//        onCreate(_db);
+//    }
 
 }

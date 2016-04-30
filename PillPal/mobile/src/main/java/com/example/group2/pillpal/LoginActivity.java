@@ -3,6 +3,7 @@ package com.example.group2.pillpal;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
@@ -21,6 +22,7 @@ import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -31,9 +33,23 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+
+import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
@@ -95,6 +111,15 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
+        createUsers();
+
+//        new Thread(new Runnable() {
+//            public void run() {
+//
+////                DataBaseAdapter db = new DataBaseAdapter(getApplicationContext());
+////                db.insertEntry("gooby","123456","Angelina", "3");
+//            }
+//        }).start();
 
 
         ImageButton setupButton = (ImageButton) findViewById(R.id.login_button);
@@ -367,5 +392,60 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             showProgress(false);
         }
     }
+
+    public void createUsers() {
+        String sUsers = loadJSONFromAsset("users");
+        try {
+            JSONArray jUsers = new JSONArray(sUsers);
+            Random rand = new Random();
+            int value = rand.nextInt(6);
+            User u1 = new User(value, jUsers);
+            // ** First, serialize the user.
+            try {
+                ByteArrayOutputStream use = new ByteArrayOutputStream();
+                ObjectOutputStream conv = new ObjectOutputStream(use);
+                conv.writeObject(u1);
+
+                InputStream is = new ByteArrayInputStream(use.toByteArray());
+
+                //This might not be right, output or input to turn into a byte array?
+                ObjectInputStream serialObj = new ObjectInputStream(is);
+                //** Insert the user into our database as a serialized string, with id (i.e. random)? then give command to
+                //* unserialize and how to access user data.
+
+                if (conv != null) {
+                    conv.flush();
+                    conv.close();
+                }
+            } catch (IOException ex) {
+                Log.d("Error", ex.toString());
+            }
+
+
+
+        } catch (JSONException e) {
+            Log.d("Error", e.toString());
+
+        }
+    }
+
+    public String loadJSONFromAsset(String fileName) {
+        StringBuilder response = null;
+        try {
+            BufferedReader r1 = new BufferedReader(new InputStreamReader(getResources().openRawResource(getResources().getIdentifier(fileName, "raw", getPackageName()))));
+            response = new StringBuilder();
+            String line;
+            while ((line = r1.readLine()) != null) {
+                response.append(line);
+            }
+            return response.toString();
+        } catch (IOException e) {
+            Log.d("Error", e.toString());
+            return response.toString();
+        }
+    }
+
+
+
 }
 
