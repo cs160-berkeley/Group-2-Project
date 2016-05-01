@@ -5,7 +5,7 @@
     android:id="@+id/watch_view_stub"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:rectLayout="@layout/rect_activity_refill"
-    app:roundLayout="@layout/round_activity_refill"
-    tools:context="com.example.group2.pillpal.RefillActivity"
+    app:rectLayout="@layout/rect_activity_refill_confirmation"
+    app:roundLayout="@layout/round_activity_refill_confirmation"
+    tools:context="com.example.group2.pillpal.RefillConfirmationActivity"
     tools:deviceIds="wear"></android.support.wearable.view.WatchViewStub>

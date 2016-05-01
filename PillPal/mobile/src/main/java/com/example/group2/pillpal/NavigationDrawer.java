@@ -19,7 +19,7 @@ public class NavigationDrawer extends AppCompatActivity
         SetRemindersFragment.OnFragmentInteractionListener,
         ReminderSettingsFragment.OnFragmentInteractionListener,
         RefillsFragment.OnFragmentInteractionListener,
-        RefillStatusFragment.OnFragmentInteractionListener,
+//        RefillStatusFragment.OnFragmentInteractionListener,
         SettingsFragment.OnFragmentInteractionListener {
 
     @Override
