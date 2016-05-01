@@ -148,22 +148,24 @@ public class DailyStatsFragment extends Fragment {
             final int estrogenDiff = e2 - e1;
             final int progestinDiff = p2 - p1;
             final int testosteroneDiff = t2 - t1;
-            estrogenLabel.setText(estrogenDiff+ "%");
-            progestinLabel.setText(p2 - p1 + "%");
-            testosteroneLabel.setText(t2 - t1 + "%");
-            if (estrogenDiff > 20) {
+            String estrogenText = estrogenDiff > 0 ? "+" + estrogenDiff + "%" : estrogenDiff+ "%";
+            String progestinText = progestinDiff > 0 ? "+" + progestinDiff + "%" : progestinDiff+ "%";
+            String testosteroneText = testosteroneDiff > 0 ? "+" + testosteroneDiff + "%" : testosteroneDiff+ "%";
+            estrogenLabel.setText(estrogenText);
+            progestinLabel.setText(progestinText);
+            testosteroneLabel.setText(testosteroneText);
+            if (Math.abs(estrogenDiff) > 20) {
                 status.setText("Your estrogen levels are abnormal. Consider visiting a doctor or changing your pill.");
             } else {
                 status.setText("Your estrogen levels are normal.");
             }
-
             estrogenButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     estrogenButton.setBackgroundColor(Color.WHITE);
                     progestinButton.setBackgroundColor(Color.TRANSPARENT);
                     testosteroneButton.setBackgroundColor(Color.TRANSPARENT);
-                    if (estrogenDiff > 20) {
+                    if (Math.abs(estrogenDiff) > 20) {
                         status.setText("Your estrogen levels are abnormal. Consider visiting a doctor or changing your pill.");
                     } else {
                         status.setText("Your estrogen levels are normal.");
@@ -177,7 +179,7 @@ public class DailyStatsFragment extends Fragment {
                     progestinButton.setBackgroundColor(Color.WHITE);
                     estrogenButton.setBackgroundColor(Color.TRANSPARENT);
                     testosteroneButton.setBackgroundColor(Color.TRANSPARENT);
-                    if (progestinDiff > 20) {
+                    if (Math.abs(progestinDiff) > 20) {
                         status.setText("Your progestin levels are abnormal. Consider visiting a doctor or changing your pill.");
                     } else {
                         status.setText("Your progestin levels are normal.");
@@ -191,7 +193,7 @@ public class DailyStatsFragment extends Fragment {
                     testosteroneButton.setBackgroundColor(Color.WHITE);
                     progestinButton.setBackgroundColor(Color.TRANSPARENT);
                     estrogenButton.setBackgroundColor(Color.TRANSPARENT);
-                    if (testosteroneDiff > 20) {
+                    if (Math.abs(testosteroneDiff) > 20) {
                         status.setText("Your testosterone levels are abnormal. Consider visiting a doctor or changing your pill.");
                     } else {
                         status.setText("Your testosterone levels are normal.");
