@@ -18,13 +18,13 @@ public class DBContract extends SQLiteOpenHelper {
 
         // If you change the database schema, you must increment the database version.
         private static final String TEXT_TYPE = " TEXT";
-        private static final String BLOB_TYPE = " BLOB ";
+//        private static final String BLOB_TYPE = " BLOB ";
         private static final String COMMA_SEP = ",";
         private static final String SQL_CREATE_ENTRIES =
                     "CREATE TABLE " + FeedEntry.TABLE_NAME + " (" +
                     FeedEntry._ID + " INTEGER PRIMARY KEY," +
                     FeedEntry.COLUMN_NAME_ID + TEXT_TYPE + COMMA_SEP +
-                    FeedEntry.COLUMN_NAME_OBJ + BLOB_TYPE + COMMA_SEP + " )";
+                    FeedEntry.COLUMN_NAME_OBJ + TEXT_TYPE + " )";
 
         private static final String SQL_DELETE_ENTRIES =
             "DROP TABLE IF EXISTS " + FeedEntry.TABLE_NAME;

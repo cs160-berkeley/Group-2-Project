@@ -3,10 +3,8 @@ package com.example.group2.pillpal;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.database.sqlite.SQLiteDatabase;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -34,20 +32,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 
 import java.io.BufferedReader;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -85,6 +76,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private View mProgressView;
     private View mLoginFormView;
 
+    private EditText usernameView;
+    private EditText passwordView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -93,7 +87,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
         populateAutoComplete();
 
-        mPasswordView = (EditText) findViewById(R.id.password);
+        mPasswordView = (EditText) findViewById(R.id.password1);
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
@@ -105,26 +99,18 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             }
         });
 
-        Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
-        mEmailSignInButton.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                attemptLogin();
-            }
-        });
-
-        mLoginFormView = findViewById(R.id.login_form);
-        mProgressView = findViewById(R.id.login_progress);
         createUsers();
 
-//        new Thread(new Runnable() {
-//            public void run() {
-//
-////                DataBaseAdapter db = new DataBaseAdapter(getApplicationContext());
-////                db.insertEntry("gooby","123456","Angelina", "3");
+//        Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
+//        mEmailSignInButton.setOnClickListener(new OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                attemptLogin();
 //            }
-//        }).start();
-
+//        });
+//
+//        mLoginFormView = findViewById(R.id.login_form);
+//        mProgressView = findViewById(R.id.login_progress);
 
         ImageButton setupButton = (ImageButton) findViewById(R.id.login_button);
         setupButton.setOnClickListener(new View.OnClickListener() {
@@ -409,9 +395,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             // ** First, serialize the user.
             serialController controller = new serialController(u1);
             String serialized = controller.serialize(u1);
-            System.out.println(serialized);
-            User deserial = controller.deserialize(serialized);
+//            User deserial = controller.deserialize(serialized);
 
+            new addUser().execute(Integer.toString(value), serialized, false);
 
 //            try {
 //
@@ -462,30 +448,29 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     }
 
 
-//    private class addUser extends AsyncTask<Object, Object, Cursor> {
-//        DatabaseConnector dbConnector = new DatabaseConnector(getBaseContext());
+    private class addUser extends AsyncTask<Object, Object, Boolean> {
+        DatabaseConnector dbConnector = new DatabaseConnector(getBaseContext());
 //        SQLiteDatabase dBH;
-//
-//        @Override
-//        protected Cursor doInBackground(Object... params) {
-//            // Open the database
-//            try {
-//                dbConnector.open();
-//                return dbConnector.ListAllObjects();
-//            }catch (SQLException e) {
-//                Log.d("Error", e.toString());
-//            }
-//
-//        }
-//
-//        @Override
-//        protected void onPostExecute(Cursor result) {
-//            noteAdapter.changeCursor(result);
-//
-//            // Close Database
-//            dbConnector.close();
-//        }
-//    }
+
+        @Override
+        protected Boolean doInBackground(Object... params) {
+            // Open the database
+            try {
+                dbConnector.open();
+                dbConnector.InsertObject(params[0].toString(), params[1].toString());
+                return true;
+            }catch (SQLException e) {
+                Log.d("Error", e.toString());
+            } return false;
+
+        }
+
+        @Override
+        protected void onPostExecute(Boolean result) {
+            // Close Database
+            dbConnector.close();
+        }
+    }
 
 
 

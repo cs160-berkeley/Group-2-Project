@@ -1,5 +1,7 @@
 package com.example.group2.pillpal;
 
+import android.util.Base64;
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
@@ -29,7 +31,10 @@ public class serialController {
             ByteArrayOutputStream bo = new ByteArrayOutputStream();
             ObjectOutputStream so = new ObjectOutputStream(bo);
             so.writeObject(obj);
-            so.flush();
+
+            StringBuilder sb = new StringBuilder();
+//            sb.append(StringUtils.newStringUtf8(Base64.encodeBase64(imageByteArray, false)));
+            so.reset();
             serializedObject = bo.toString();
 
 //            ByteArrayOutputStream use = new ByteArrayOutputStream();
@@ -45,7 +50,6 @@ public class serialController {
 
             return serializedObject;
         } catch (Exception e) {
-            System.out.println(e);
         }
         return serializedObject;
     }
@@ -57,10 +61,11 @@ public class serialController {
                 byte b[] = serialObj.getBytes();
                 ByteArrayInputStream bi = new ByteArrayInputStream(b);
                 ObjectInputStream si = new ObjectInputStream(bi);
+                System.out.println(si.toString());
                 User u = (User) si.readObject();
                 return u;
             } catch (Exception e) {
-                System.out.println(e);
+                System.out.println("deserialproblem:" + e);
             }
             return obj;
         }

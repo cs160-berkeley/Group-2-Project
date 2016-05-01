@@ -53,7 +53,6 @@ public class DatabaseConnector {
         try {
             open();
             database.insert(TABLE_NAME, null, newCon);
-            close();
         } catch (SQLException e) {
             Log.d("Error", e.toString());
         }
@@ -96,5 +95,6 @@ public class DatabaseConnector {
         return database.query(TABLE_NAME, null, ID + "=" + id, null, null,
                 null, null);
     }
+
 
 }
