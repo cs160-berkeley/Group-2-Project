@@ -79,11 +79,11 @@ public class PagerAdapter extends FragmentGridPagerAdapter {
 
         for (int i = 0; i < 9; i ++) {
             if (i < 3) {
-                StatsPages.add(new StatsItem(hormones[i % 3], "Daily", results.get(i), Math.abs(Integer.parseInt(results.get(i))) > 20 ? "abnormal" : "normal"));
+                StatsPages.add(new StatsItem(hormones[i % 3], "Daily", results.get(i), Math.abs(Integer.parseInt(results.get(i))) > 20 ? "Abnormal" : "Normal"));
             } else if (i < 6) {
-                StatsPages.add(new StatsItem(hormones[i % 3], "Weekly", results.get(i), Math.abs(Integer.parseInt(results.get(i))) > 20 ? "abnormal" : "normal"));
+                StatsPages.add(new StatsItem(hormones[i % 3], "Weekly", results.get(i), Math.abs(Integer.parseInt(results.get(i))) > 20 ? "Abnormal" : "Normal"));
             } else if (i < 9) {
-                StatsPages.add(new StatsItem(hormones[i % 3], "Monthly", results.get(i), Math.abs(Integer.parseInt(results.get(i))) > 20 ? "abnormal" : "normal"));
+                StatsPages.add(new StatsItem(hormones[i % 3], "Monthly", results.get(i), Math.abs(Integer.parseInt(results.get(i))) > 20 ? "Abnormal" : "Normal"));
             }
         }
     }
