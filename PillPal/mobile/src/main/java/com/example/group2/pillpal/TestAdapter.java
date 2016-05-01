@@ -1,10 +1,7 @@
 package com.example.group2.pillpal;
-import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentStatePagerAdapter;
-import android.util.Log;
 
 public class TestAdapter extends FragmentStatePagerAdapter {
 
@@ -30,7 +27,7 @@ public class TestAdapter extends FragmentStatePagerAdapter {
         Fragment[] myLovelyFragments = new Fragment[3];
         myLovelyFragments[0] = new DailyStatsFragment();
         myLovelyFragments[1] = new WeeklyStatsFragment();
-        myLovelyFragments[2] = new StatsFragment();
+        myLovelyFragments[2] = new MonthlyStatsFragment();
 
         return myLovelyFragments[position];
     }

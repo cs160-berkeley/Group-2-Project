@@ -5,7 +5,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,12 +15,12 @@ import com.astuetz.PagerSlidingTabStrip;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link StatsTempFragment.OnFragmentInteractionListener} interface
+ * {@link StatsLaunchFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link StatsTempFragment#newInstance} factory method to
+ * Use the {@link StatsLaunchFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class StatsTempFragment extends Fragment {
+public class StatsLaunchFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -33,7 +32,7 @@ public class StatsTempFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    public StatsTempFragment() {
+    public StatsLaunchFragment() {
         // Required empty public constructor
     }
 
@@ -43,11 +42,11 @@ public class StatsTempFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment StatsTempFragment.
+     * @return A new instance of fragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static StatsTempFragment newInstance(String param1, String param2) {
-        StatsTempFragment fragment = new StatsTempFragment();
+    public static StatsLaunchFragment newInstance(String param1, String param2) {
+        StatsLaunchFragment fragment = new StatsLaunchFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);

@@ -15,8 +15,8 @@ import android.view.MenuItem;
 
 public class NavigationDrawer extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
-        StatsFragment.OnFragmentInteractionListener,
-        StatsTempFragment.OnFragmentInteractionListener,
+        MonthlyStatsFragment.OnFragmentInteractionListener,
+        StatsLaunchFragment.OnFragmentInteractionListener,
         SetRemindersFragment.OnFragmentInteractionListener,
         ReminderSettingsFragment.OnFragmentInteractionListener,
         RefillsFragment.OnFragmentInteractionListener,
@@ -25,7 +25,7 @@ public class NavigationDrawer extends AppCompatActivity
         DailyStatsFragment.OnFragmentInteractionListener,
         WeeklyStatsFragment.OnFragmentInteractionListener {
 
-    StatsTempFragment statsFragment;
+    StatsLaunchFragment statsFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +33,7 @@ public class NavigationDrawer extends AppCompatActivity
         setContentView(R.layout.nav_drawer);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        statsFragment = new StatsTempFragment();
+        statsFragment = new StatsLaunchFragment();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -45,7 +45,7 @@ public class NavigationDrawer extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         FragmentTransaction tx = getSupportFragmentManager().beginTransaction();
-        StatsTempFragment frag = new StatsTempFragment();
+        StatsLaunchFragment frag = new StatsLaunchFragment();
         tx.replace(R.id.main, frag);
         tx.addToBackStack(null);
         tx.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
