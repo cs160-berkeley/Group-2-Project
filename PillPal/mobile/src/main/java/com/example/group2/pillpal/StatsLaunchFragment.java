@@ -2,6 +2,7 @@ package com.example.group2.pillpal;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -85,6 +86,7 @@ public class StatsLaunchFragment extends Fragment {
 
         // Bind the tabs to the ViewPager
         PagerSlidingTabStrip tabs = (PagerSlidingTabStrip) v.findViewById(R.id.tabs);
+        tabs.setBackgroundColor(Color.WHITE);
         pager.setCurrentItem(0);
         tabs.setViewPager(pager);
 

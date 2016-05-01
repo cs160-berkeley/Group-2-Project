@@ -62,11 +62,11 @@ public class StatFragment extends Fragment {
         Log.d("T", "MADE: " + hormoneString + periodString + differenceString + statusString);
 
         if (hormoneString.equalsIgnoreCase("Estrogen")) {
-            v.setBackgroundColor(Color.rgb(68, 138, 255));
+            difference.setTextColor(Color.rgb(68, 138, 255));
         } else if (hormoneString.equalsIgnoreCase("Progestin")) {
-            v.setBackgroundColor(Color.rgb(255,87,34));
+            difference.setTextColor(Color.rgb(255, 87, 34));
         } else if (hormoneString.equalsIgnoreCase("Testosterone")) {
-            v.setBackgroundColor(Color.rgb(0,230,118));
+            difference.setTextColor(Color.rgb(0,230,118));
         }
 
         hormone.setText(hormoneString);

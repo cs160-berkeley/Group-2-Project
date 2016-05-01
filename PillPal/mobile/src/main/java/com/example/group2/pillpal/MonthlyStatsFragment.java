@@ -154,52 +154,12 @@ public class MonthlyStatsFragment extends Fragment {
             estrogenLabel.setText(estrogenText);
             progestinLabel.setText(progestinText);
             testosteroneLabel.setText(testosteroneText);
-            if (Math.abs(estrogenDiff) > 20) {
-                status.setText("Your estrogen levels are abnormal. Consider visiting a doctor or changing your pill.");
+            if (Math.abs(estrogenDiff) > 20 || Math.abs(progestinDiff) > 20 || Math.abs(testosteroneDiff) > 20) {
+                status.setText("Your hormone levels are abnormal. Consider visiting a doctor or changing your pill.");
             } else {
-                status.setText("Your estrogen levels are normal.");
+                status.setText("Your hormone levels are normal.");
             }
-            estrogenButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    estrogenButton.setBackgroundColor(Color.WHITE);
-                    progestinButton.setBackgroundColor(Color.TRANSPARENT);
-                    testosteroneButton.setBackgroundColor(Color.TRANSPARENT);
-                    if (Math.abs(estrogenDiff) > 20) {
-                        status.setText("Your estrogen levels are abnormal. Consider visiting a doctor or changing your pill.");
-                    } else {
-                        status.setText("Your estrogen levels are normal.");
-                    }
-                }
-            });
 
-            progestinButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    progestinButton.setBackgroundColor(Color.WHITE);
-                    estrogenButton.setBackgroundColor(Color.TRANSPARENT);
-                    testosteroneButton.setBackgroundColor(Color.TRANSPARENT);
-                    if (Math.abs(progestinDiff) > 20) {
-                        status.setText("Your progestin levels are abnormal. Consider visiting a doctor or changing your pill.");
-                    } else {
-                        status.setText("Your progestin levels are normal.");
-                    }
-                }
-            });
-
-            testosteroneButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    testosteroneButton.setBackgroundColor(Color.WHITE);
-                    progestinButton.setBackgroundColor(Color.TRANSPARENT);
-                    estrogenButton.setBackgroundColor(Color.TRANSPARENT);
-                    if (Math.abs(testosteroneDiff) > 20) {
-                        status.setText("Your testosterone levels are abnormal. Consider visiting a doctor or changing your pill.");
-                    } else {
-                        status.setText("Your testosterone levels are normal.");
-                    }
-                }
-            });
             int[] mColors = new int[] {
                     Color.rgb(68,138,255), Color.rgb(255, 112, 67), Color.rgb(0, 230, 118)
             };
