@@ -47,6 +47,7 @@ public class PhoneToWatchService extends Service {
         Bundle extras = intent.getExtras();
         final String data = extras.getString("DATA");
         final String statsValues = extras.getString("StatsValues");
+        final String arrival_date = extras.getString("REFILL_ARRIVAL_DATE");
         // Send the message with the cat name
         new Thread(new Runnable() {
             @Override
@@ -54,20 +55,20 @@ public class PhoneToWatchService extends Service {
                 //first, connect to the apiclient
                 mApiClient.connect();
                 if (statsValues != null) {
-                    Log.d("T", "SENDING STATS: " + statsValues);
                     sendMessage("/Stats", statsValues);
                 }
                 //now that you're connected, send a massage with the cat name
-                if (data != null) {
-                    if (data.equals("reminder")) {
-                        sendMessage("/Reminder", data);
-                    } else if (data.equals("refill")) {
-                        sendMessage("/Refill", data);
-                    }
-                }
+                 if (data != null) {
+                     if (data.equals("reminder")) {
+                         sendMessage("/Reminder", data);
+                     } else if (data.equals("refill/status")) {
+                         sendMessage("/Refill/status", arrival_date);
+                     } else if (data.equals("refill/arrival")) {
+                         sendMessage("/Refill/arrival", data);
+                     }
+                 }
             }
         }).start();
-
         return START_STICKY;
     }
 

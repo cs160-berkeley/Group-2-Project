@@ -11,6 +11,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.ImageButton;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
 
 
 /**
@@ -44,6 +55,23 @@ public class StatFragment extends Fragment {
         super.onCreate(savedInstanceState);
     }
 
+    public StringBuilder readJSON() {
+        StringBuilder response = null;
+        try {
+            BufferedReader r = new BufferedReader(new InputStreamReader(getResources().openRawResource(getResources().getIdentifier("hormones", "raw", getActivity().getPackageName()))));
+            response = new StringBuilder();
+            String line;
+            while ((line = r.readLine()) != null) {
+                response.append(line);
+            }
+            return response;
+        } catch (IOException e) {
+            Log.d("Error", e.toString());
+            return response;
+        }
+    }
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -75,6 +103,7 @@ public class StatFragment extends Fragment {
         status.setText(statusString);
         return v;
     }
+
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
