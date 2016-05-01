@@ -97,7 +97,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 //        mLoginFormView = findViewById(R.id.login_form);
 //        mProgressView = findViewById(R.id.login_progress);
 
-        ImageButton setupButton = (ImageButton) findViewById(R.id.login_button);
+        Button setupButton = (Button) findViewById(R.id.login_button);
         setupButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
