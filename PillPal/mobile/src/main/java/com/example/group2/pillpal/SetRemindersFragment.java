@@ -1,5 +1,7 @@
 package com.example.group2.pillpal;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -10,6 +12,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+
+import java.util.Calendar;
 
 
 /**
@@ -82,6 +86,20 @@ public class SetRemindersFragment extends Fragment implements View.OnClickListen
         tx.addToBackStack(null);
         tx.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
         tx.commit();
+
+        Intent sendIntent = new Intent(v.getContext(), PhoneToWatchService.class);
+        sendIntent.putExtra("DATA", "reminder");
+        PendingIntent alarmIntent = PendingIntent.getActivity(v.getContext(), 1, sendIntent, PendingIntent.FLAG_ONE_SHOT);
+
+        AlarmManager alarmMgr = (AlarmManager)v.getContext().getSystemService(Context.ALARM_SERVICE);
+        // Set the alarm to start at approximately 2:00 p.m.
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(System.currentTimeMillis() + 10000);
+
+        // With setInexactRepeating(), you have to use one of the AlarmManager interval
+        // constants--in this case, AlarmManager.INTERVAL_DAY.
+        alarmMgr.setInexactRepeating(AlarmManager.RTC, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, alarmIntent);
+
     }
 
     // TODO: Rename method, update argument and hook method into UI event

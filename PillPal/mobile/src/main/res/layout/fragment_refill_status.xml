@@ -1,13 +1,50 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/refill_status"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.group2.pillpal.RefillStatusFragment">
-
-    <ImageButton
-        android:id="@+id/refills_status_button"
-        android:src="@drawable/refill_success"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
-
-</FrameLayout>
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="@color/overlay">
+    <LinearLayout
+        android:layout_width="328dp"
+        android:layout_height="194dp"
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        android:background="@drawable/alerts_background">
+        <ImageView
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="16dp"
+            android:src="@drawable/ic_local_shipping_24dp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="22dp"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:text="@string/refill_status"
+            android:textSize="18dp"
+            android:textColor="@color/textPrimary"/>
+        <TextView
+            android:id="@+id/delivery_date"
+            android:layout_width="match_parent"
+            android:layout_height="16dp"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:text="Package expected to arrive on: 4/22/16"
+            android:textSize="15dp"
+            android:textColor="@color/textPrimary"/>
+        <Button
+            android:id="@+id/status_button"
+            android:background="@drawable/button_style"
+            android:layout_width="152dp"
+            android:layout_height="32dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:text="Okay"
+            android:textColor="@drawable/button_text_style"
+            android:textAllCaps="false" />
+    </LinearLayout>
+</LinearLayout>
