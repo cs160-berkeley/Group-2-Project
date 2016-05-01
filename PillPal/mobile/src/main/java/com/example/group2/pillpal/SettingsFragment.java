@@ -7,7 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
+import android.widget.TextView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -22,11 +22,6 @@ public class SettingsFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
     private OnFragmentInteractionListener mListener;
 
     public SettingsFragment() {
@@ -54,17 +49,18 @@ public class SettingsFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.settings_fragment, container, false);
+
+        //terrible but let's just use local vars to set everything at first
+        View _view = inflater.inflate(R.layout.settings_fragment, container, false);
+        updateView(_view);
+        return _view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -73,6 +69,8 @@ public class SettingsFragment extends Fragment {
             mListener.onFragmentInteraction(uri);
         }
     }
+
+
 
     @Override
     public void onAttach(Context context) {
@@ -104,5 +102,39 @@ public class SettingsFragment extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+    }
+
+    // update view method
+    public void updateView(View _view) {
+        TextView usernameTextView = (TextView) _view.findViewById(R.id.userNameTextView);
+        TextView passwordTextView = (TextView) _view.findViewById(R.id.passwordTextView);
+        TextView shippingAddressLine1TextView = (TextView) _view.findViewById(R.id.shippingAddressLine1);
+        TextView shippingAddressLine2TextView = (TextView) _view.findViewById(R.id.shippingAddressLine2);
+        TextView billingAddressLine1TextView = (TextView) _view.findViewById(R.id.billingAddressLine1);
+        TextView billingAddressLine2TextView = (TextView) _view.findViewById(R.id.billingAddressLine2);
+        TextView creditCardTypeTextView = (TextView) _view.findViewById(R.id.cardType);
+        TextView cardNumberTextView = (TextView) _view.findViewById(R.id.cardNumber);
+
+        usernameTextView.setText(ProfileInfo.sharedInstance.username);
+        passwordTextView.setText(ProfileInfo.sharedInstance.password);
+        shippingAddressLine1TextView.setText(ProfileInfo.sharedInstance.shippingAddressStreet);
+        shippingAddressLine2TextView.setText(ProfileInfo.sharedInstance.shippingAddressCityState);
+        billingAddressLine1TextView.setText(ProfileInfo.sharedInstance.billingAddressStreet);
+        billingAddressLine2TextView.setText(ProfileInfo.sharedInstance.billingAddressCityState);
+        creditCardTypeTextView.setText(ProfileInfo.sharedInstance.cardType);
+        cardNumberTextView.setText(ProfileInfo.sharedInstance.cardNo);
+    }
+
+    // Button Methods
+    public void launchViewToEditShippingAddress(View view) {
+
+    }
+
+    public void launchViewToEditBillingAddress(View view) {
+
+    }
+
+    public void launchViewToEditCardInfo(View view) {
+
     }
 }
