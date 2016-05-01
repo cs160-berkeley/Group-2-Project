@@ -21,6 +21,7 @@ import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -32,8 +33,16 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
@@ -41,7 +50,9 @@ import static android.Manifest.permission.READ_CONTACTS;
  * A login screen that offers login via email/password.
  */
 public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<Cursor> {
+    /**My stuff **/
 
+    private DBContract dBHelper;
     /**
      * Id to identity READ_CONTACTS permission request.
      */
@@ -65,6 +76,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private View mProgressView;
     private View mLoginFormView;
 
+    private EditText usernameView;
+    private EditText passwordView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,7 +87,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
         populateAutoComplete();
 
-        mPasswordView = (EditText) findViewById(R.id.password);
+        mPasswordView = (EditText) findViewById(R.id.password1);
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
@@ -85,16 +99,18 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             }
         });
 
-        Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
-        mEmailSignInButton.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                attemptLogin();
-            }
-        });
+        createUsers();
 
-        mLoginFormView = findViewById(R.id.login_form);
-        mProgressView = findViewById(R.id.login_progress);
+//        Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
+//        mEmailSignInButton.setOnClickListener(new OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                attemptLogin();
+//            }
+//        });
+//
+//        mLoginFormView = findViewById(R.id.login_form);
+//        mProgressView = findViewById(R.id.login_progress);
 
         ImageButton setupButton = (ImageButton) findViewById(R.id.login_button);
         setupButton.setOnClickListener(new View.OnClickListener() {
@@ -326,7 +342,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
         @Override
         protected Boolean doInBackground(Void... params) {
-            // TODO: attempt authentication against a network service.
+            // TODO: attempt authentication against a network service. (my shittt)
 
             try {
                 // Simulate network access.
@@ -366,5 +382,97 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             showProgress(false);
         }
     }
+
+    public void createUsers() {
+        String sUsers = loadJSONFromAsset("users");
+        String serializedObject;
+        try {
+            JSONArray jUsers = new JSONArray(sUsers);
+            Random rand = new Random();
+            int value = rand.nextInt(6);
+            User u1 = new User(value, jUsers);
+
+            // ** First, serialize the user.
+            serialController controller = new serialController(u1);
+            String serialized = controller.serialize(u1);
+//            User deserial = controller.deserialize(serialized);
+
+            new addUser().execute(Integer.toString(value), serialized, false);
+
+//            try {
+//
+//                ByteArrayOutputStream use = new ByteArrayOutputStream();
+//                ObjectOutputStream conv = new ObjectOutputStream(use);
+//                conv.writeObject(u1);
+//
+//                InputStream is = new ByteArrayInputStream(use.toByteArray());
+//
+//                //This might not be right, output or input to turn into a byte array?
+//                ObjectInputStream serialObj = new ObjectInputStream(is);
+//
+//                serializedObject = serialObj.toString();
+//                //** Insert the user into our database as a serialized string, with id (i.e. random)? then give command to
+//                //* unserialize and how to access user data.
+//
+//                if (conv != null) {
+//                    addUser.execute();
+//                    conv.flush();
+//                    conv.close();
+//                }
+//            } catch (IOException ex) {
+//                Log.d("Error", ex.toString());
+//            }
+
+
+
+        } catch (JSONException e) {
+            Log.d("Error", e.toString());
+
+        }
+    }
+
+    public String loadJSONFromAsset(String fileName) {
+        StringBuilder response = null;
+        try {
+            BufferedReader r1 = new BufferedReader(new InputStreamReader(getResources().openRawResource(getResources().getIdentifier(fileName, "raw", getPackageName()))));
+            response = new StringBuilder();
+            String line;
+            while ((line = r1.readLine()) != null) {
+                response.append(line);
+            }
+            return response.toString();
+        } catch (IOException e) {
+            Log.d("Error", e.toString());
+            return response.toString();
+        }
+    }
+
+
+    private class addUser extends AsyncTask<Object, Object, Boolean> {
+        DatabaseConnector dbConnector = new DatabaseConnector(getBaseContext());
+//        SQLiteDatabase dBH;
+
+        @Override
+        protected Boolean doInBackground(Object... params) {
+            // Open the database
+            try {
+                dbConnector.open();
+                dbConnector.InsertObject(params[0].toString(), params[1].toString());
+                return true;
+            }catch (SQLException e) {
+                Log.d("Error", e.toString());
+            } return false;
+
+        }
+
+        @Override
+        protected void onPostExecute(Boolean result) {
+            // Close Database
+            dbConnector.close();
+        }
+    }
+
+
+
 }
 
