@@ -1,15 +1,27 @@
 package com.example.group2.pillpal;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.astuetz.PagerSlidingTabStrip;
+import com.github.mikephil.charting.data.Entry;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
 
 
 /**
@@ -75,7 +87,86 @@ public class StatsLaunchFragment extends Fragment {
         PagerSlidingTabStrip tabs = (PagerSlidingTabStrip) v.findViewById(R.id.tabs);
         pager.setCurrentItem(0);
         tabs.setViewPager(pager);
+
+        int estrogenDiffDaily = 0;
+        int progestinDiffDaily = 0;
+        int testosteroneDiffDaily = 0;
+
+        int estrogenDiffWeekly = 0;
+        int progestinDiffWeekly = 0;
+        int testosteroneDiffWeekly = 0;
+
+        int estrogenDiffMonthly = 0;
+        int progestinDiffMonthly = 0;
+        int testosteroneDiffMonthly = 0;
+
+        try {
+            StringBuilder response = readJSON();
+            JSONArray hormones = new JSONArray(response.toString());
+            ArrayList<Entry> estrogen = new ArrayList<>();
+            final ArrayList<Entry> progestin = new ArrayList<>();
+            final ArrayList<Entry> testosterone = new ArrayList<>();
+            ArrayList<String> labels = new ArrayList<>();
+
+            int e1 = 0;
+            int e2 = 0;
+            int p1 = 0;
+            int p2 = 0;
+            int t1 = 0;
+            int t2 = 0;
+
+            for (int i = 0; i < hormones.length(); i++) {
+                JSONObject object = hormones.getJSONObject(i);
+                String day = object.getString("day");
+                String month = object.getString("month");
+                int estrogenValue = object.getInt("estrogen");
+                int progestinValue = object.getInt("progestin");
+                int testosteroneValue = object.getInt("testosterone");
+                estrogen.add(new Entry((float) estrogenValue, i));
+                progestin.add(new Entry((float) progestinValue, i));
+                testosterone.add(new Entry((float) testosteroneValue, i));
+                if (i == 1) {
+                    estrogenDiffDaily = estrogenValue - e1;
+                    progestinDiffDaily = progestinValue - p1;
+                    testosteroneDiffDaily = testosteroneValue - t1;
+                } else if (i == 6) {
+                    estrogenDiffWeekly = estrogenValue - (e1/6);
+                    progestinDiffWeekly = progestinValue - (p1/6);
+                    testosteroneDiffWeekly = testosteroneValue - (t1/6);
+                } else if (i == hormones.length() - 1) {
+                    estrogenDiffMonthly = estrogenValue - (e1/(hormones.length() - 1));
+                    progestinDiffMonthly = progestinValue - (p1/(hormones.length() - 1));
+                    testosteroneDiffMonthly = testosteroneValue - (t1/(hormones.length() - 1)
+                    );
+                }
+                e1 += estrogenValue;
+                p1 += progestinValue;
+                t1 += testosteroneValue;
+                labels.add(month + " " + day);
+            }
+        } catch (JSONException e) {
+            Log.d("Error", e.toString());
+        }
+        Intent sendIntent = new Intent(getActivity(), PhoneToWatchService.class);
+        sendIntent.putExtra("StatsValues", estrogenDiffDaily + "|" + progestinDiffDaily + "|" + testosteroneDiffDaily + "|" + estrogenDiffWeekly + "|" + progestinDiffWeekly + "|" + testosteroneDiffWeekly + "|" + estrogenDiffMonthly + "|" + progestinDiffMonthly + "|" + testosteroneDiffMonthly);
+        getActivity().startService(sendIntent);
         return v;
+    }
+
+    public StringBuilder readJSON() {
+        StringBuilder response = null;
+        try {
+            BufferedReader r = new BufferedReader(new InputStreamReader(getResources().openRawResource(getResources().getIdentifier("hormones", "raw", getActivity().getPackageName()))));
+            response = new StringBuilder();
+            String line;
+            while ((line = r.readLine()) != null) {
+                response.append(line);
+            }
+            return response;
+        } catch (IOException e) {
+            Log.d("Error", e.toString());
+            return response;
+        }
     }
 
     // TODO: Rename method, update argument and hook method into UI event

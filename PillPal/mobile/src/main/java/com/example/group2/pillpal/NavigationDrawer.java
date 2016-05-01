@@ -13,6 +13,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.google.android.gms.games.stats.Stats;
+
 public class NavigationDrawer extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
         MonthlyStatsFragment.OnFragmentInteractionListener,
@@ -25,15 +27,12 @@ public class NavigationDrawer extends AppCompatActivity
         DailyStatsFragment.OnFragmentInteractionListener,
         WeeklyStatsFragment.OnFragmentInteractionListener {
 
-    StatsLaunchFragment statsFragment;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.nav_drawer);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        statsFragment = new StatsLaunchFragment();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -96,14 +95,15 @@ public class NavigationDrawer extends AppCompatActivity
 
         if (id == R.id.nav_stats) {
             FragmentTransaction tx = getSupportFragmentManager().beginTransaction();
-            tx.replace(R.id.main, statsFragment, "STATS_FRAGMENT");
+            StatsLaunchFragment statsFragment = new StatsLaunchFragment();
+            tx.replace(R.id.main, statsFragment);
             tx.addToBackStack(null);
             tx.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
             tx.commit();
             setTitle("Statistics");
-            Intent sendintent = new Intent(NavigationDrawer.this, PhoneToWatchService.class);
-            sendintent.putExtra("DATA", "stats");
-            startService(sendintent);
+            //Intent sendintent = new Intent(NavigationDrawer.this, PhoneToWatchService.class);
+            //sendintent.putExtra("DATA", "stats");
+            //startService(sendintent);
         } else if (id == R.id.nav_reminders) {
             FragmentTransaction tx = getSupportFragmentManager().beginTransaction();
             SetRemindersFragment remindersFragment = new SetRemindersFragment();

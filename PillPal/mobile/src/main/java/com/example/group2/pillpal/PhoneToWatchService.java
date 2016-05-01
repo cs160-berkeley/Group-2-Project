@@ -4,6 +4,7 @@ import android.app.Service;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.util.Log;
 
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.wearable.MessageApi;
@@ -45,19 +46,24 @@ public class PhoneToWatchService extends Service {
         // which was passed over when we called startService
         Bundle extras = intent.getExtras();
         final String data = extras.getString("DATA");
+        final String statsValues = extras.getString("StatsValues");
         // Send the message with the cat name
         new Thread(new Runnable() {
             @Override
             public void run() {
                 //first, connect to the apiclient
                 mApiClient.connect();
+                if (statsValues != null) {
+                    Log.d("T", "SENDING STATS: " + statsValues);
+                    sendMessage("/Stats", statsValues);
+                }
                 //now that you're connected, send a massage with the cat name
-                if (data.equals("reminder")) {
-                    sendMessage("/Reminder", data);
-                } else if (data.equals("refill")) {
-                    sendMessage("/Refill", data);
-                } else if (data.equals("stats")) {
-                    sendMessage("/Stats", data);
+                if (data != null) {
+                    if (data.equals("reminder")) {
+                        sendMessage("/Reminder", data);
+                    } else if (data.equals("refill")) {
+                        sendMessage("/Refill", data);
+                    }
                 }
             }
         }).start();

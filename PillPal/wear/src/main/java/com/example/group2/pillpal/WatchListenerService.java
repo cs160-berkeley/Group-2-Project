@@ -7,6 +7,7 @@ import com.google.android.gms.wearable.MessageEvent;
 import com.google.android.gms.wearable.WearableListenerService;
 
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 
 public class WatchListenerService extends WearableListenerService {
     // In PhoneToWatchService, we passed in a path, either "/FRED" or "/LEXY"
@@ -37,6 +38,8 @@ public class WatchListenerService extends WearableListenerService {
             String value = new String(messageEvent.getData(), StandardCharsets.UTF_8);
             Intent intent = new Intent(this, StatsDetailActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            Log.d("T","STATSVALUES: " + value);
+            intent.putExtra("StatsValues", value);
             //you need to add this flag since you're starting a new activity from a service
             startActivity(intent);
         } else {

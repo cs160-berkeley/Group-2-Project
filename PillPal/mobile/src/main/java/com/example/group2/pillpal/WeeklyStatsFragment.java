@@ -132,19 +132,20 @@ public class WeeklyStatsFragment extends Fragment {
                 estrogen.add(new Entry((float) estrogenValue, i));
                 progestin.add(new Entry((float) progestinValue, i));
                 testosterone.add(new Entry((float) testosteroneValue, i));
-                e1 += estrogenValue;
-                p1 += progestinValue;
-                t1 += testosteroneValue;
                 if (i == 6) {
                     e2 = estrogenValue;
                     p2 = progestinValue;
                     t2 = testosteroneValue;
+                } else {
+                    e1 += estrogenValue;
+                    p1 += progestinValue;
+                    t1 += testosteroneValue;
                 }
                 labels.add(month + " " + day);
             }
-            e1 = e1/7;
-            p1 = p1/7;
-            t1 = t1/7;
+            e1 = e1/6;
+            p1 = p1/6;
+            t1 = t1/6;
             final int estrogenDiff = e2 - e1;
             final int progestinDiff = p2 - p1;
             final int testosteroneDiff = t2 - t1;

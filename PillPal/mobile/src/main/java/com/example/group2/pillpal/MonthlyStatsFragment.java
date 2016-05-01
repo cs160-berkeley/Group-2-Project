@@ -131,19 +131,20 @@ public class MonthlyStatsFragment extends Fragment {
                 estrogen.add(new Entry((float) estrogenValue, i));
                 progestin.add(new Entry((float) progestinValue, i));
                 testosterone.add(new Entry((float) testosteroneValue, i));
-                e1 += estrogenValue;
-                p1 += progestinValue;
-                t1 += testosteroneValue;
                 if (i == hormones.length() - 1) {
                     e2 = estrogenValue;
                     p2 = progestinValue;
                     t2 = testosteroneValue;
+                } else {
+                    e1 += estrogenValue;
+                    p1 += progestinValue;
+                    t1 += testosteroneValue;
                 }
                 labels.add(month + " " + day);
             }
-            e1 = e1/hormones.length();
-            p1 = p1/hormones.length();
-            t1 = t1/hormones.length();
+            e1 = e1/(hormones.length() - 1);
+            p1 = p1/(hormones.length() - 1);
+            t1 = t1/(hormones.length() - 1);
             final int estrogenDiff = e2 - e1;
             final int progestinDiff = p2 - p1;
             final int testosteroneDiff = t2 - t1;
