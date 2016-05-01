@@ -6,6 +6,7 @@ import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -47,6 +48,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -57,7 +59,9 @@ import static android.Manifest.permission.READ_CONTACTS;
  * A login screen that offers login via email/password.
  */
 public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<Cursor> {
+    /**My stuff **/
 
+    private DBContract dBHelper;
     /**
      * Id to identity READ_CONTACTS permission request.
      */
@@ -352,7 +356,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
         @Override
         protected Boolean doInBackground(Void... params) {
-            // TODO: attempt authentication against a network service.
+            // TODO: attempt authentication against a network service. (my shittt)
 
             try {
                 // Simulate network access.
@@ -395,6 +399,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
     public void createUsers() {
         String sUsers = loadJSONFromAsset("users");
+        String serializedObject;
         try {
             JSONArray jUsers = new JSONArray(sUsers);
             Random rand = new Random();
@@ -403,6 +408,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             System.out.println(u1.email);
             // ** First, serialize the user.
             try {
+
                 ByteArrayOutputStream use = new ByteArrayOutputStream();
                 ObjectOutputStream conv = new ObjectOutputStream(use);
                 conv.writeObject(u1);
@@ -411,10 +417,13 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
                 //This might not be right, output or input to turn into a byte array?
                 ObjectInputStream serialObj = new ObjectInputStream(is);
+
+                serializedObject = serialObj.toString();
                 //** Insert the user into our database as a serialized string, with id (i.e. random)? then give command to
                 //* unserialize and how to access user data.
 
                 if (conv != null) {
+                    addUser.execute();
                     conv.flush();
                     conv.close();
                 }
@@ -443,6 +452,32 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         } catch (IOException e) {
             Log.d("Error", e.toString());
             return response.toString();
+        }
+    }
+
+
+    private class addUser extends AsyncTask<Object, Object, Cursor> {
+        DatabaseConnector dbConnector = new DatabaseConnector(getBaseContext());
+        SQLiteDatabase dBH;
+
+        @Override
+        protected Cursor doInBackground(Object... params) {
+            // Open the database
+            try {
+                dbConnector.open();
+                return dbConnector.ListAllObjects();
+            }catch (SQLException e) {
+                Log.d("Error", e.toString());
+            }
+
+        }
+
+        @Override
+        protected void onPostExecute(Cursor result) {
+            noteAdapter.changeCursor(result);
+
+            // Close Database
+            dbConnector.close();
         }
     }
 

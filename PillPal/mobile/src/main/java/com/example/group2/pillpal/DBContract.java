@@ -10,10 +10,13 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 /**
- * Created by Jessica.
+ * Created by Jessica. this is actually a DBhelper class! The
+ * word 'contract' sounded cooler in the moment and now I
+ * have ragrets.
  */
-public class DBContract {
+public class DBContract extends SQLiteOpenHelper {
 
+        // If you change the database schema, you must increment the database version.
         private static final String TEXT_TYPE = " TEXT";
         private static final String BLOB_TYPE = " BLOB ";
         private static final String COMMA_SEP = ",";
@@ -28,26 +31,12 @@ public class DBContract {
 
 
         // To prevent someone from accidentally instantiating the contract class,
-        // give it an empty constructor.
-        public DBContract() {}
-
-        /* Inner class that defines the table contents */
-        public static abstract class FeedEntry implements BaseColumns {
-            public static final String TABLE_NAME = "users";
-            public static final String COLUMN_NAME_ID = "entryid";
-            public static final String COLUMN_NAME_OBJ = "object";
-        }
+        // give it an empty constructor. Not anymore suckers.
+        public DBContract (Context context, String dbName, int dbVersion) {
+            super(context, dbName, null, dbVersion);
+    }
 
 
-
-    public class DbHelper extends SQLiteOpenHelper {
-        // If you change the database schema, you must increment the database version.
-        public static final int DATABASE_VERSION = 1;
-        public static final String DATABASE_NAME = "PillPal.db";
-
-        public DbHelper(Context context) {
-            super(context, DATABASE_NAME, null, DATABASE_VERSION);
-        }
         public void onCreate(SQLiteDatabase db) {
             db.execSQL(SQL_CREATE_ENTRIES);
         }
@@ -62,7 +51,14 @@ public class DBContract {
         public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
             onUpgrade(db, oldVersion, newVersion);
         }
-    }
 
-
+        /* Inner class that defines the table contents */
+        public static abstract class FeedEntry implements BaseColumns {
+            public static final String TABLE_NAME = "users";
+            public static final String COLUMN_NAME_ID = "entryid";
+            public static final String COLUMN_NAME_OBJ = "object";
+        }
 }
+
+
+
