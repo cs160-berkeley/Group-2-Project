@@ -170,10 +170,10 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:src="@drawable/ic_mode_edit_24dp"
-                    android:onClick="launchViewToEditShippingAddress"
                     android:background="@null"
                     android:tint="@color/colorAccent"
                     android:layout_alignParentRight="true"
+                    android:id="@+id/editShippingAddressBtn"
                     android:layout_centerVertical="true" />
             </RelativeLayout>
         </RelativeLayout>
@@ -255,7 +255,8 @@
                     android:background="@null"
                     android:tint="@color/colorAccent"
                     android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true" />
+                    android:layout_centerVertical="true"
+                    android:id="@+id/editBillingAddressBtn"/>
             </RelativeLayout>
 
 
@@ -314,7 +315,10 @@
                     android:background="@null"
                     android:tint="@color/colorAccent"
                     android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true" />
+                    android:layout_centerVertical="true"
+                    android:id="@+id/editCreditCardInfoBtn"/>
+
+
             </RelativeLayout>
         </RelativeLayout>
 
@@ -325,9 +329,7 @@
             android:id="@+id/refillsHistoryLayout"
             android:layout_below="@id/paymentLayout"
             android:background="#ffffff"
-            android:paddingTop="20dp"
-            >
-
+            android:paddingTop="20dp">
 
             <TextView
                 android:layout_width="match_parent"
@@ -341,8 +343,6 @@
             <ListView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-
-
             </ListView>
 
         </RelativeLayout>

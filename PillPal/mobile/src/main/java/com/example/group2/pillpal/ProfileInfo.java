@@ -19,5 +19,10 @@ public class ProfileInfo {
     //  singleton for holding/modifying info
     public static ProfileInfo sharedInstance = new ProfileInfo();
 
+    public ProfileInfo() {
+        System.out.println("Profile Info Instantiated");
+
+    }
+
 
 }
