@@ -84,21 +84,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         // Set up the login form.
-        mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
-        populateAutoComplete();
-
-        mPasswordView = (EditText) findViewById(R.id.password1);
-        mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
-                if (id == R.id.login || id == EditorInfo.IME_NULL) {
-                    attemptLogin();
-                    return true;
-                }
-                return false;
-            }
-        });
-
         createUsers();
 
 //        Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
@@ -118,9 +103,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             public void onClick(View view) {
                 Intent detailedStats = new Intent(view.getContext(), NavigationDrawer.class);
                 startActivity(detailedStats);
-                Intent sendintent = new Intent(LoginActivity.this, PhoneToWatchService.class);
-                sendintent.putExtra("DATA", "stats");
-                startService(sendintent);
+               // Intent sendintent = new Intent(LoginActivity.this, PhoneToWatchService.class);
+                //sendintent.putExtra("DATA", "stats");
+                //startService(sendintent);
             }
         });
 
