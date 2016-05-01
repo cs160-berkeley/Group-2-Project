@@ -15,12 +15,17 @@ import android.view.MenuItem;
 
 public class NavigationDrawer extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
-        StatsFragment.OnFragmentInteractionListener,
+        MonthlyStatsFragment.OnFragmentInteractionListener,
+        StatsLaunchFragment.OnFragmentInteractionListener,
         SetRemindersFragment.OnFragmentInteractionListener,
         ReminderSettingsFragment.OnFragmentInteractionListener,
         RefillsFragment.OnFragmentInteractionListener,
         RefillStatusFragment.OnFragmentInteractionListener,
-        SettingsFragment.OnFragmentInteractionListener {
+        SettingsFragment.OnFragmentInteractionListener,
+        DailyStatsFragment.OnFragmentInteractionListener,
+        WeeklyStatsFragment.OnFragmentInteractionListener {
+
+    StatsLaunchFragment statsFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +33,7 @@ public class NavigationDrawer extends AppCompatActivity
         setContentView(R.layout.nav_drawer);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        statsFragment = new StatsLaunchFragment();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -39,7 +45,7 @@ public class NavigationDrawer extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         FragmentTransaction tx = getSupportFragmentManager().beginTransaction();
-        StatsFragment frag = new StatsFragment();
+        StatsLaunchFragment frag = new StatsLaunchFragment();
         tx.replace(R.id.main, frag);
         tx.addToBackStack(null);
         tx.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
@@ -90,8 +96,7 @@ public class NavigationDrawer extends AppCompatActivity
 
         if (id == R.id.nav_stats) {
             FragmentTransaction tx = getSupportFragmentManager().beginTransaction();
-            StatsFragment statsFragment = new StatsFragment();
-            tx.replace(R.id.main, statsFragment);
+            tx.replace(R.id.main, statsFragment, "STATS_FRAGMENT");
             tx.addToBackStack(null);
             tx.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
             tx.commit();
