@@ -84,20 +84,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         // Set up the login form.
-        mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
-        populateAutoComplete();
-
-        mPasswordView = (EditText) findViewById(R.id.password1);
-        mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
-                if (id == R.id.login || id == EditorInfo.IME_NULL) {
-                    attemptLogin();
-                    return true;
-                }
-                return false;
-            }
-        });
 
         createUsers();
 
@@ -112,7 +98,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 //        mLoginFormView = findViewById(R.id.login_form);
 //        mProgressView = findViewById(R.id.login_progress);
 
-        ImageButton setupButton = (ImageButton) findViewById(R.id.login_button);
+        Button setupButton = (Button) findViewById(R.id.login_button);
         setupButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
