@@ -5,6 +5,7 @@ import android.content.Context;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
@@ -87,9 +88,9 @@ public class User implements java.io.Serializable {
             JSONArray preAlarms = targetUser.getJSONArray("alarms");
             JSONArray prefills = targetUser.getJSONArray("refill_history");
 
-            setStats(preStats);
-            setAlarms(preAlarms);
-            setRefHistory(prefills);
+            stats = setStats(preStats);
+            alarms = setAlarms(preAlarms);
+            refHistory = setRefHistory(prefills);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -98,40 +99,43 @@ public class User implements java.io.Serializable {
 
     }
 
-    public void setStats(JSONArray statsArr) {
+    public ArrayList<statHolder> setStats(JSONArray statsArr) {
         /** if empty... do something. Or not. **/
+        ArrayList<statHolder> myStats = new ArrayList<>();
 
         for(int i = 0; i < statsArr.length(); i++) {
             try {
                 JSONObject oneDay = statsArr.getJSONObject(i);
                 statHolder obj = new statHolder(oneDay.getInt("day"), oneDay.getString("month"),
                         oneDay.getInt("estrogen"),oneDay.getInt("estrogen"), oneDay.getInt("estrogen") );
-                stats.add(obj);
+                myStats.add(obj);
 
             } catch (Exception e) {
                     e.printStackTrace();
                 }
 
-        }
+        } return myStats;
 
     }
 
-    public void setAlarms(JSONArray alarmsArr) {
+    public ArrayList<alarmHolder> setAlarms(JSONArray alarmsArr) {
         /** if empty... do something. Or not. **/
+        ArrayList<alarmHolder> myAlarms = new ArrayList<>();
+
         for (int i = 0; i < alarmsArr.length(); i++) {
             try {
                 JSONObject oneAlarm = alarmsArr.getJSONObject(i);
                 alarmHolder obj = new alarmHolder(oneAlarm.getString("time"), oneAlarm.getString("ind"));
-                alarms.add(obj);
+                myAlarms.add(obj);
 
             } catch (Exception e) {
                 e.printStackTrace();
             }
 
-        }
+        } return myAlarms;
     }
 
-    public void setRefHistory(JSONArray refHistoryArr) {
+    public ArrayList<historyHolder> setRefHistory(JSONArray refHistoryArr) {
 
         /** if empty... do something. Or not.
          * also this could be implemented as an array of strings, since
@@ -139,17 +143,19 @@ public class User implements java.io.Serializable {
          * one string. However, if we want to add stuff later, we can just
          * easily add or delete from this + the class itself**/
 
+        ArrayList<historyHolder> myHist = new ArrayList<>();
+
         for (int i = 0; i < refHistoryArr.length(); i++) {
             try {
                 JSONObject oneRefill = refHistoryArr.getJSONObject(i);
                 historyHolder obj = new historyHolder(oneRefill.getString("date"));
-                refHistory.add(obj);
+                myHist.add(obj);
 
             } catch (Exception e) {
                 e.printStackTrace();
             }
 
-        }
+        } return myHist;
 
     }
 
@@ -159,7 +165,7 @@ public class User implements java.io.Serializable {
 
 
     /**inner classes to hold numbers and shit **/
-    public class statHolder {
+    public class statHolder implements Serializable{
 
         Integer day, est, pro, tes;
         String month;
@@ -178,7 +184,7 @@ public class User implements java.io.Serializable {
 
     }
 
-    public class alarmHolder {
+    public class alarmHolder implements Serializable{
         String time, indicator;
 
 
@@ -189,7 +195,7 @@ public class User implements java.io.Serializable {
         }
     }
 
-    public class historyHolder {
+    public class historyHolder implements Serializable{
         String date;
 
         public historyHolder(String d) {

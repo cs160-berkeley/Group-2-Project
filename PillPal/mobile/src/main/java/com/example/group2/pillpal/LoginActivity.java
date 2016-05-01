@@ -405,31 +405,37 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             Random rand = new Random();
             int value = rand.nextInt(6);
             User u1 = new User(value, jUsers);
-            System.out.println(u1.email);
+
             // ** First, serialize the user.
-            try {
+            serialController controller = new serialController(u1);
+            String serialized = controller.serialize(u1);
+            System.out.println(serialized);
+            User deserial = controller.deserialize(serialized);
 
-                ByteArrayOutputStream use = new ByteArrayOutputStream();
-                ObjectOutputStream conv = new ObjectOutputStream(use);
-                conv.writeObject(u1);
 
-                InputStream is = new ByteArrayInputStream(use.toByteArray());
-
-                //This might not be right, output or input to turn into a byte array?
-                ObjectInputStream serialObj = new ObjectInputStream(is);
-
-                serializedObject = serialObj.toString();
-                //** Insert the user into our database as a serialized string, with id (i.e. random)? then give command to
-                //* unserialize and how to access user data.
-
-                if (conv != null) {
-                    addUser.execute();
-                    conv.flush();
-                    conv.close();
-                }
-            } catch (IOException ex) {
-                Log.d("Error", ex.toString());
-            }
+//            try {
+//
+//                ByteArrayOutputStream use = new ByteArrayOutputStream();
+//                ObjectOutputStream conv = new ObjectOutputStream(use);
+//                conv.writeObject(u1);
+//
+//                InputStream is = new ByteArrayInputStream(use.toByteArray());
+//
+//                //This might not be right, output or input to turn into a byte array?
+//                ObjectInputStream serialObj = new ObjectInputStream(is);
+//
+//                serializedObject = serialObj.toString();
+//                //** Insert the user into our database as a serialized string, with id (i.e. random)? then give command to
+//                //* unserialize and how to access user data.
+//
+//                if (conv != null) {
+//                    addUser.execute();
+//                    conv.flush();
+//                    conv.close();
+//                }
+//            } catch (IOException ex) {
+//                Log.d("Error", ex.toString());
+//            }
 
 
 
@@ -456,30 +462,30 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     }
 
 
-    private class addUser extends AsyncTask<Object, Object, Cursor> {
-        DatabaseConnector dbConnector = new DatabaseConnector(getBaseContext());
-        SQLiteDatabase dBH;
-
-        @Override
-        protected Cursor doInBackground(Object... params) {
-            // Open the database
-            try {
-                dbConnector.open();
-                return dbConnector.ListAllObjects();
-            }catch (SQLException e) {
-                Log.d("Error", e.toString());
-            }
-
-        }
-
-        @Override
-        protected void onPostExecute(Cursor result) {
-            noteAdapter.changeCursor(result);
-
-            // Close Database
-            dbConnector.close();
-        }
-    }
+//    private class addUser extends AsyncTask<Object, Object, Cursor> {
+//        DatabaseConnector dbConnector = new DatabaseConnector(getBaseContext());
+//        SQLiteDatabase dBH;
+//
+//        @Override
+//        protected Cursor doInBackground(Object... params) {
+//            // Open the database
+//            try {
+//                dbConnector.open();
+//                return dbConnector.ListAllObjects();
+//            }catch (SQLException e) {
+//                Log.d("Error", e.toString());
+//            }
+//
+//        }
+//
+//        @Override
+//        protected void onPostExecute(Cursor result) {
+//            noteAdapter.changeCursor(result);
+//
+//            // Close Database
+//            dbConnector.close();
+//        }
+//    }
 
 
 

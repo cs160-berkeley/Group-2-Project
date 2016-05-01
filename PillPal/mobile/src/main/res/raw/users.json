@@ -838,8 +838,20 @@
       "estrogen": 30,
       "progestin": 35,
       "testosterone": 20
+    }],
+
+      "alarms": [{
+      "time": "12:30",
+      "ind": "am"
+    }],
+
+      "refill_history": [{
+      "date": "April 14th, 2016"
     }]
-  }, {
+  },
+
+
+   {
     "id": "100",
     "index": 4,
     "age": 19,
