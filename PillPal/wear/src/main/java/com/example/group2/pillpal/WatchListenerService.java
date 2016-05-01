@@ -13,7 +13,7 @@ public class WatchListenerService extends WearableListenerService {
     // These paths serve to differentiate different phone-to-watch messages
     private static final String REMINDER = "/Reminder";
     private static final String REFILL_STATUS = "/Refill/Status";
-    private static final String REFILL_REMINDER = "/Refill/Reminder";
+    private static final String REFILL_ARRIVAL = "/Refill/arrival";
     private static final String STATS = "/Stats";
 
     @Override
@@ -33,6 +33,12 @@ public class WatchListenerService extends WearableListenerService {
             Intent intent = new Intent(this, RefillStatusActivity.class );
             System.out.println(value);
             intent.putExtra("arrival_date", value);
+            intent.addFlags( Intent.FLAG_ACTIVITY_NEW_TASK );
+            //you need to add this flag since you're starting a new activity from a service
+            startActivity(intent);
+        } else if (messageEvent.getPath().equalsIgnoreCase( REFILL_ARRIVAL )) {
+            String value = new String(messageEvent.getData(), StandardCharsets.UTF_8);
+            Intent intent = new Intent(this, RefillConfirmationActivity.class );
             intent.addFlags( Intent.FLAG_ACTIVITY_NEW_TASK );
             //you need to add this flag since you're starting a new activity from a service
             startActivity(intent);

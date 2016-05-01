@@ -105,6 +105,7 @@ public class RefillsFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        System.out.println("HELLOOOO");
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
@@ -180,7 +181,7 @@ public class RefillsFragment extends Fragment implements View.OnClickListener {
                     SimpleDateFormat date_formatter = new SimpleDateFormat("MM/dd/yy");
 
                     Intent status_intent = new Intent(v.getContext(), PhoneToWatchService.class);
-                    status_intent.putExtra("DATA", "refill/status");
+                    status_intent.putExtra("DATA", "refill/arrival");
 
                     Intent arrival_intent = new Intent(v.getContext(), PhoneToWatchService.class);
                     arrival_intent.putExtra("DATA", "refill/arrival");

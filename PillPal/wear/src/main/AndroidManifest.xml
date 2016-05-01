@@ -72,6 +72,11 @@
         <uses-library
             android:name="com.google.android.wearable"
             android:required="false" />
+
+        <service
+            android:name=".WatchToPhoneService"
+            android:enabled="true"
+            android:exported="true"></service>
     </application>
 
 </manifest>

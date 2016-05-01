@@ -1,23 +1,17 @@
 package com.example.group2.pillpal;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.wearable.activity.WearableActivity;
-import android.support.wearable.view.BoxInsetLayout;
 import android.support.wearable.view.WatchViewStub;
-import android.view.View;
 import android.widget.TextView;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
-
-public class RefillStatusActivity extends WearableActivity {
+public class RefillConfirmationActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_refill_status);
+        setContentView(R.layout.activity_refill_confirmation);
 
 
         Intent intent = getIntent();
@@ -27,9 +21,13 @@ public class RefillStatusActivity extends WearableActivity {
         stub.setOnLayoutInflatedListener(new WatchViewStub.OnLayoutInflatedListener() {
             @Override
             public void onLayoutInflated(WatchViewStub stub) {
-                TextView status_text = (TextView) findViewById(R.id.status_text);
-                status_text.setText("Your package has been shipped! Expected to arrive on: " + arrival_date);
+                TextView status_text = (TextView) findViewById(R.id.confirmation_text);
+                status_text.setText("Your package has successfully been delivered!");
             }
         });
+
+        Intent confirmation_intent = new Intent(this, WatchToPhoneService.class);
+        confirmation_intent.putExtra("DATA", "refill/confirmation");
+        this.startService(confirmation_intent);
     }
 }

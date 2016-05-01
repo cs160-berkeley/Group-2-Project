@@ -26,11 +26,11 @@
                     android:textColor="@color/primary_text_light"
                     android:textSize="12sp"/>
                 <TextView
-                    android:id="@+id/status_text"
+                    android:id="@+id/confirmation_text"
                     android:fontFamily="sans-serif-light"
                     android:layout_height="wrap_content"
                     android:layout_width="match_parent"
-                    android:text="Your package has been shipped! Expected to arrive on: 4/22/16"
+                    android:text="lkadsjflkasjdflkajsdf"
                     android:textColor="@color/textPrimary"
                     android:textSize="14sp"/>
             </LinearLayout>
