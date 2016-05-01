@@ -4,6 +4,8 @@
 
     <uses-feature android:name="android.hardware.type.watch" />
 
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -38,8 +40,18 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".RefillActivity"
-            android:label="@string/title_activity_refill">
+            android:name=".RefillStatusActivity"
+            android:label="@string/title_activity_refill_status"
+            android:theme="@android:style/Theme.DeviceDefault.Light">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".RefillConfirmationActivity"
+            android:label="@string/title_activity_refill_confirmation">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -56,6 +68,10 @@
                 <action android:name="com.google.android.gms.wearable.BIND_LISTENER" />
             </intent-filter>
         </service>
+
+        <uses-library
+            android:name="com.google.android.wearable"
+            android:required="false" />
     </application>
 
 </manifest>

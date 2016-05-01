@@ -1,14 +1,18 @@
 package com.example.group2.pillpal;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.wearable.activity.WearableActivity;
+import android.support.wearable.view.BoxInsetLayout;
 import android.support.wearable.view.WatchViewStub;
-import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 
-public class RefillActivity extends Activity {
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
+public class RefillStatusActivity extends WearableActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,8 +31,5 @@ public class RefillActivity extends Activity {
                 confirmation_text.setText("Your package has been shipped! Expected to arrive on: " + arrival_date);
             }
         });
-
-
     }
-
 }

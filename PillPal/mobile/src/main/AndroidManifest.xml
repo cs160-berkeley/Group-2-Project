@@ -6,6 +6,7 @@
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <application
         android:allowBackup="true"
@@ -26,7 +27,8 @@
             android:name=".NavigationDrawer"
             android:label="@string/title_activity_stats"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".SetupActivity"></activity>
+        <activity android:name=".SetupActivity" />
+
         <service
             android:name=".PhoneToWatchService"
             android:enabled="true"

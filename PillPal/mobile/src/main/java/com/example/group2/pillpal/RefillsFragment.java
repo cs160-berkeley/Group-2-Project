@@ -1,5 +1,7 @@
 package com.example.group2.pillpal;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -17,7 +19,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -64,6 +69,7 @@ public class RefillsFragment extends Fragment implements View.OnClickListener {
     }
 
     private static Boolean refill_requested = false;
+
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -119,7 +125,7 @@ public class RefillsFragment extends Fragment implements View.OnClickListener {
         TextView last_refill = (TextView) v.findViewById(R.id.lastRefillInfo);
 
         address_line_one.setText(address.get("street_name"));
-        address_line_two.setText(address.get("city_name") + " " + address.get("state") + ", " + address.get("zip"));
+        address_line_two.setText(address.get("city") + " " + address.get("state") + ", " + address.get("zip"));
 
         pill_name.setText(current_pill.get("name"));
         pill_dosage.setText(current_pill.get("dosage"));
@@ -157,16 +163,69 @@ public class RefillsFragment extends Fragment implements View.OnClickListener {
         // implements your things
 //        ImageView imageView = (ImageView) getView().findViewById(R.id.foo);
 //        View v = inflater.inflate(R.layout.refills_fragment, container, false);
-        LinearLayout refill_status = (LinearLayout) getView().findViewById(R.id.refill_status);
-        LinearLayout refill_confirmation = (LinearLayout) getView().findViewById(R.id.refill_confirmation);
+        View view = getView();
+        LinearLayout refill_status = (LinearLayout) view.findViewById(R.id.refill_status);
+        LinearLayout refill_confirmation = (LinearLayout) view.findViewById(R.id.refill_confirmation);
+        Button refillsButton = (Button) view.findViewById(R.id.refills_button);
         int button_id = v.getId();
         switch (button_id) {
             case R.id.refills_button:
                 if (refill_requested) {
                     refill_status.setVisibility(View.VISIBLE);
+
                 } else {
                     refill_confirmation.setVisibility(View.VISIBLE);
-                    refill_requested = true;
+                    AlarmManager alarm_manager = (AlarmManager) v.getContext().getSystemService(Context.ALARM_SERVICE);
+                    Calendar calendar = Calendar.getInstance();
+                    SimpleDateFormat date_formatter = new SimpleDateFormat("MM/dd/yy");
+
+                    Intent status_intent = new Intent(v.getContext(), PhoneToWatchService.class);
+                    status_intent.putExtra("DATA", "refill/status");
+
+                    Intent arrival_intent = new Intent(v.getContext(), PhoneToWatchService.class);
+                    arrival_intent.putExtra("DATA", "refill/arrival");
+
+
+
+                    // ALARM FOR PACKAGE ARRIVAL
+//                    Date current_date = new Date();
+//                    calendar.setTime(current_date);
+//                    calendar.add(Calendar.DATE, 2);
+//                    calendar.set(Calendar.HOUR, 11);
+//                    calendar.set(Calendar.MINUTE,0);
+//                    calendar.set(Calendar.AM_PM, Calendar.AM);
+//                    String formatted_date = date_formatter.format(calendar.getTime());
+
+                    Date current_date = new Date();
+                    calendar.setTime(current_date);
+                    calendar.add(Calendar.SECOND, 30);
+                    String formatted_date = date_formatter.format(calendar.getTime());
+//                    PendingIntent arrival_pending_intent = PendingIntent.getService(v.getContext(), 0, arrival_intent, PendingIntent.FLAG_ONE_SHOT);
+//                    alarm_manager.setExact(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), arrival_pending_intent);
+
+
+                    // ALARM FOR PACKAGE STATUS
+//                    Date current_date = new Date();
+//                    calendar.setTime(current_date);
+//                    calendar.add(Calendar.DATE, 1);
+//                    calendar.set(Calendar.HOUR, 11);
+//                    calendar.set(Calendar.MINUTE,0);
+//                    calendar.set(Calendar.AM_PM, Calendar.AM);
+                    current_date = new Date();
+                    calendar.setTime(current_date);
+                    System.out.println(calendar.getTime());
+                    calendar.add(Calendar.SECOND, 3);
+                    System.out.println(calendar.getTime());
+                    status_intent.putExtra("REFILL_ARRIVAL_DATE", formatted_date);
+                    PendingIntent status_pending_intent = PendingIntent.getService(v.getContext(), 0, status_intent, PendingIntent.FLAG_ONE_SHOT);
+                    alarm_manager.setExact(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), status_pending_intent);
+
+                    TextView delivery_date = (TextView) view.findViewById(R.id.delivery_date);
+                    delivery_date.setText("Package expected to arrive on: " + formatted_date);
+
+                    // update button
+                    refillsButton.setText("View Refill Status");
+//                    refill_requested = true;
                 }
                 break;
             case R.id.confirmation_button:
@@ -176,20 +235,6 @@ public class RefillsFragment extends Fragment implements View.OnClickListener {
                 refill_status.setVisibility(View.INVISIBLE);
                 break;
         }
-
-//        FragmentTransaction tx = getFragmentManager().beginTransaction();
-//        RefillStatusFragment refillStatusFragment = new RefillStatusFragment();
-//        Bundle args = new Bundle();
-//        args.putBoolean("refill_requested", refill_requested);
-//        refillStatusFragment.setArguments(args);
-//        tx.replace(R.id.main, refillStatusFragment);
-//        tx.addToBackStack(null);
-//        tx.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-//        tx.commit();
-//
-//        Intent sendintent = new Intent(v.getContext(), PhoneToWatchService.class);
-//        sendintent.putExtra("DATA", "refill");
-//        v.getContext().startService(sendintent);
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -197,6 +242,10 @@ public class RefillsFragment extends Fragment implements View.OnClickListener {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
         }
+    }
+
+    public void updateRefillHistory() {
+        System.out.println("UPDATING REFILL");
     }
 
     @Override
