@@ -62,6 +62,8 @@ public class WatchToPhoneService extends Service {
                     if (data.equals("refill/confirmation")) {
                         System.out.println("GOINGBACKTOPHONE!!!");
                         sendMessage("/refill/confirmation", data);
+                    } else if (data.equals("snooze")) {
+                        sendMessage("/snooze", data);
                     }
                 }
             }).start();

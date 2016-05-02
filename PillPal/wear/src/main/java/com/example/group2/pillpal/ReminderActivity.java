@@ -15,11 +15,15 @@ public class ReminderActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reminder);
+        Intent intent = getIntent();
+        final String t = intent.getStringExtra("time");
         final WatchViewStub stub = (WatchViewStub) findViewById(R.id.watch_view_stub);
         stub.setOnLayoutInflatedListener(new WatchViewStub.OnLayoutInflatedListener() {
             @Override
             public void onLayoutInflated(WatchViewStub stub) {
                 mTextView = (TextView) stub.findViewById(R.id.text);
+                TextView time = (TextView) stub.findViewById(R.id.time);
+                time.setText(t);
             }
         });
     }

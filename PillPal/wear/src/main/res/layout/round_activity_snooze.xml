@@ -3,13 +3,30 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FF7043"
     tools:context="com.example.group2.pillpal.SnoozeActivity"
     tools:deviceIds="wear_round">
 
     <Button
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_width="125dp"
+        android:layout_height="50dp"
         android:id="@+id/snooze"
-        android:background="@drawable/watch_alarm_close" />
+        android:text="Snooze"
+        android:onClick="snooze"
+        android:backgroundTint="#448AFF"
+        android:layout_marginBottom="25dp"
+        android:layout_above="@+id/close"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="125dp"
+        android:layout_height="50dp"
+        android:backgroundTint="#6FCF97"
+        android:text="Close"
+        android:onClick="close"
+        android:id="@+id/close"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="40dp" />
 
 </RelativeLayout>

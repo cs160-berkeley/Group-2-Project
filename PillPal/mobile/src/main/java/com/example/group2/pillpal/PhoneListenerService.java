@@ -21,6 +21,7 @@ public class PhoneListenerService extends WearableListenerService {
     }
 
     private static final String REFILL_ARRIVAL = "/refill/confirmation";
+    private static final String SNOOZE = "/snooze";
 
     @Override
     public void onMessageReceived(MessageEvent messageEvent) {
@@ -28,7 +29,8 @@ public class PhoneListenerService extends WearableListenerService {
         Log.d("T", "in PhoneListenerService, got: " + messageEvent.getPath());
         if (messageEvent.getPath().equalsIgnoreCase( REFILL_ARRIVAL )) {
             // UPDATE USER
+        } else if (messageEvent.getPath().equalsIgnoreCase( SNOOZE )) {
+            // Snooze Alarm
         }
-
     }
 }

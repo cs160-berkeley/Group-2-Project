@@ -3,14 +3,30 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FF7043"
     tools:context="com.example.group2.pillpal.ReminderActivity"
     tools:deviceIds="wear_round">
 
+    <TextView
+        android:layout_width="100dp"
+        android:id="@+id/time"
+        android:layout_height="50dp"
+        android:textColor="#ffffff"
+        android:textStyle="bold"
+        android:textSize="25sp"
+        android:textAlignment="center"
+        android:layout_above="@+id/reminder"
+        android:layout_alignEnd="@+id/reminder"
+        android:layout_alignStart="@+id/reminder" />
+
     <Button
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_width="125dp"
+        android:layout_height="100dp"
         android:id="@+id/reminder"
-        android:background="@drawable/watch_reminder_1"
-        android:onClick="reminder"/>
+        android:background="@drawable/watch_logo"
+        android:onClick="reminder"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="24dp" />
 
 </RelativeLayout>
