@@ -25,6 +25,12 @@ public class SnoozeActivity extends Activity {
     }
 
     public void snooze(final View view) {
+        Intent i = new Intent(SnoozeActivity.this, WatchToPhoneService.class);
+        i.putExtra("DATA", "snooze");
+        this.startService(i);
+    }
+
+    public void close(final View view) {
         Intent i = new Intent(SnoozeActivity.this, StatsDetailActivity.class);
         startActivity(i);
     }

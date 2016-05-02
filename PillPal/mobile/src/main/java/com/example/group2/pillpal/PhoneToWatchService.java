@@ -45,6 +45,7 @@ public class PhoneToWatchService extends Service {
         // which was passed over when we called startService
         Bundle extras = intent.getExtras();
         final String data = extras.getString("DATA");
+        final String time = extras.getString("time");
         // Send the message with the cat name
         new Thread(new Runnable() {
             @Override
@@ -53,7 +54,7 @@ public class PhoneToWatchService extends Service {
                 mApiClient.connect();
                 //now that you're connected, send a massage with the cat name
                 if (data.equals("reminder")) {
-                    sendMessage("/Reminder", data);
+                    sendMessage("/Reminder", time);
                 } else if (data.equals("refill")) {
                     sendMessage("/Refill", data);
                 } else if (data.equals("stats")) {

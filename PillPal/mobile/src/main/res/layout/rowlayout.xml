@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:descendantFocusability="blocksDescendants">
+
+    <ImageView
+        android:id="@+id/icon"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="50dp"
+        android:tint="#448AFF"
+        android:layout_centerVertical="true"
+        android:src="@drawable/ic_alarm_on_black_36dp" >
+    </ImageView>
+
+    <TextView
+        android:id="@+id/label"
+        android:layout_toRightOf="@+id/icon"
+        android:fontFamily="Lato"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:text="@+id/label"
+        android:layout_marginTop="50dp"
+        android:textSize="30dp" >
+    </TextView>
+
+    <ImageView
+        android:id="@+id/delete"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="10dp"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="50dp"
+        android:tint="#448AFF"
+        android:src="@drawable/ic_delete_black_36dp" >
+    </ImageView>
+
+</RelativeLayout>
