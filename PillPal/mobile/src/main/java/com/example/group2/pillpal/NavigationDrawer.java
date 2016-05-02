@@ -13,14 +13,19 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.google.android.gms.games.stats.Stats;
+
 public class NavigationDrawer extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
-        StatsFragment.OnFragmentInteractionListener,
+        MonthlyStatsFragment.OnFragmentInteractionListener,
+        StatsLaunchFragment.OnFragmentInteractionListener,
         SetRemindersFragment.OnFragmentInteractionListener,
         ReminderSettingsFragment.OnFragmentInteractionListener,
         RefillsFragment.OnFragmentInteractionListener,
-        RefillStatusFragment.OnFragmentInteractionListener,
-        SettingsFragment.OnFragmentInteractionListener {
+        //RefillStatusFragment.OnFragmentInteractionListener,
+        SettingsFragment.OnFragmentInteractionListener,
+        DailyStatsFragment.OnFragmentInteractionListener,
+        WeeklyStatsFragment.OnFragmentInteractionListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +44,7 @@ public class NavigationDrawer extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         FragmentTransaction tx = getSupportFragmentManager().beginTransaction();
-        StatsFragment frag = new StatsFragment();
+        StatsLaunchFragment frag = new StatsLaunchFragment();
         tx.replace(R.id.main, frag);
         tx.addToBackStack(null);
         tx.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
@@ -90,15 +95,15 @@ public class NavigationDrawer extends AppCompatActivity
 
         if (id == R.id.nav_stats) {
             FragmentTransaction tx = getSupportFragmentManager().beginTransaction();
-            StatsFragment statsFragment = new StatsFragment();
+            StatsLaunchFragment statsFragment = new StatsLaunchFragment();
             tx.replace(R.id.main, statsFragment);
             tx.addToBackStack(null);
             tx.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
             tx.commit();
             setTitle("Statistics");
-            Intent sendintent = new Intent(NavigationDrawer.this, PhoneToWatchService.class);
-            sendintent.putExtra("DATA", "stats");
-            startService(sendintent);
+            //Intent sendintent = new Intent(NavigationDrawer.this, PhoneToWatchService.class);
+            //sendintent.putExtra("DATA", "stats");
+            //startService(sendintent);
         } else if (id == R.id.nav_reminders) {
             FragmentTransaction tx = getSupportFragmentManager().beginTransaction();
             SetRemindersFragment remindersFragment = new SetRemindersFragment();

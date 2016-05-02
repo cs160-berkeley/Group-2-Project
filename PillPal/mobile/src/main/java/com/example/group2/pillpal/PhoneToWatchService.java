@@ -4,6 +4,7 @@ import android.app.Service;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.util.Log;
 
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.wearable.MessageApi;
@@ -46,6 +47,8 @@ public class PhoneToWatchService extends Service {
         Bundle extras = intent.getExtras();
         final String data = extras.getString("DATA");
         final String time = extras.getString("time");
+        final String statsValues = extras.getString("StatsValues");
+        final String arrival_date = extras.getString("REFILL_ARRIVAL_DATE");
         // Send the message with the cat name
         new Thread(new Runnable() {
             @Override
@@ -59,10 +62,21 @@ public class PhoneToWatchService extends Service {
                     sendMessage("/Refill", data);
                 } else if (data.equals("stats")) {
                     sendMessage("/Stats", data);
+                if (statsValues != null) {
+                    sendMessage("/Stats", statsValues);
                 }
+                //now that you're connected, send a massage with the cat name
+                 if (data != null) {
+                     if (data.equals("reminder")) {
+                         sendMessage("/Reminder", data);
+                     } else if (data.equals("refill/status")) {
+                         sendMessage("/Refill/status", arrival_date);
+                     } else if (data.equals("refill/arrival")) {
+                         sendMessage("/Refill/arrival", data);
+                     }
+                 }
             }
         }).start();
-
         return START_STICKY;
     }
 

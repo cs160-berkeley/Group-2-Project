@@ -151,6 +151,9 @@ public class SetRemindersFragment extends ListFragment {
 //
 //        Toast.makeText(v.getContext(), "Alarm Set", Toast.LENGTH_LONG).show();
 //    }
+        alarmMgr.setInexactRepeating(AlarmManager.RTC, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, alarmIntent);
+
+    }
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
