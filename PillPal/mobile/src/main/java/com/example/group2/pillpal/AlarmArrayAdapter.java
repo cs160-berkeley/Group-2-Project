@@ -53,17 +53,15 @@ public class AlarmArrayAdapter extends ArrayAdapter<Alarm> {
                     alarm.isOn = true;
                     imageButton.setImageResource(R.drawable.ic_alarm_on_24dp);
 
-                    Intent sendIntent = new Intent(getContext(), AlarmReceiver.class);
-
-                    sendIntent.putExtra("DATA", alarm.timeStringFormat);
-                    PendingIntent alarmIntent = PendingIntent.getBroadcast(getContext(), position, sendIntent, 0);
-
                     AlarmManager alarmMgr = (AlarmManager)getContext().getSystemService(Context.ALARM_SERVICE);
                     Calendar calendar = Calendar.getInstance();
                     calendar.setTimeInMillis(System.currentTimeMillis());
                     calendar.set(Calendar.HOUR_OF_DAY, alarm.hours);
                     calendar.set(Calendar.MINUTE, alarm.minutes);
 
+                    Intent sendIntent = new Intent(getContext(), PhoneToWatchService.class);
+                    sendIntent.putExtra("DATA", "reminder");
+                    PendingIntent alarmIntent = PendingIntent.getService(getContext(), 0, sendIntent, PendingIntent.FLAG_ONE_SHOT);
                     alarmMgr.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, alarmIntent);
                 }
 

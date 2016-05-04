@@ -50,7 +50,7 @@ public class PhoneToWatchService extends Service {
             final String time = extras.getString("time");
             final String statsValues = extras.getString("StatsValues");
             final String arrival_date = extras.getString("REFILL_ARRIVAL_DATE");
-
+            System.out.println(data);
             // Send the message with the cat name
             new Thread(new Runnable() {
                 @Override
@@ -59,7 +59,9 @@ public class PhoneToWatchService extends Service {
                     mApiClient.connect();
                     //now that you're connected, send a massage with the cat name
                     if (data != null) {
+                        System.out.println(data);
                         if (data.equals("reminder")) {
+                            System.out.println("Here");
                             sendMessage("/Reminder", time);
                         } else if (data.equals("refill/status")) {
                             sendMessage("/Refill/status", arrival_date);
