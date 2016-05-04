@@ -68,6 +68,13 @@ public class PagerAdapter extends FragmentGridPagerAdapter {
 
     public void parseResult(String StatsValues) {
         ArrayList<String> results = new ArrayList<>();
+        ArrayList<String> fluctuations = new ArrayList<>();
+        String fluctuationString = StatsValues.substring(StatsValues.lastIndexOf("#") + 1);
+        StatsValues = StatsValues.split("#")[0];
+
+        for (String val: fluctuationString.split("\\|")) {
+            fluctuations.add(val);
+        }
         for (String word: StatsValues.split("\\|")) {
             results.add(word);
         }
@@ -80,12 +87,38 @@ public class PagerAdapter extends FragmentGridPagerAdapter {
         for (int i = 0; i < 9; i ++) {
             int val = Integer.parseInt(results.get(i));
             if (i < 3) {
-                StatsPages.add(new StatsItem(hormones[i % 3], "Daily Changes", val > 0? "+" + val + "%" : val + "%", Math.abs(val) > 20 ? "Abnormal" : "Normal"));
+                StatsPages.add(new StatsItem(hormones[i % 3], "Daily Changes", numberRepresentation(val), Math.abs(val) > 30 ? "Abnormal" : "Normal"));
             } else if (i < 6) {
-                StatsPages.add(new StatsItem(hormones[i % 3], "Weekly Changes", val > 0? "+" + val + "%" : val + "%", Math.abs(val) > 20 ? "Abnormal" : "Normal"));
+                StatsPages.add(new StatsItem(hormones[i % 3], "Weekly Changes", numberRepresentation(val), weeklyStatus(fluctuations)));
             } else if (i < 9) {
-                StatsPages.add(new StatsItem(hormones[i % 3], "Monthly Changes",  val > 0? "+" + val + "%" : val + "%", Math.abs(val) > 20 ? "Abnormal" : "Normal"));
+                StatsPages.add(new StatsItem(hormones[i % 3], "Monthly Changes",  numberRepresentation(val), monthlyStatus(fluctuations)));
             }
+        }
+    }
+
+    public String numberRepresentation(int val) {
+        return val > 0? "+" + val + "%" : val + "%";
+    }
+
+    public String weeklyStatus(ArrayList<String> fluctuations) {
+        int estFluctuation = Integer.parseInt(fluctuations.get(0));
+        int proFluctuation = Integer.parseInt(fluctuations.get(1));
+        int tesFluctuation = Integer.parseInt(fluctuations.get(2));
+        if (estFluctuation > 30 || proFluctuation > 30 || tesFluctuation > 30) {
+            return "Abnormal";
+        } else {
+            return "Normal";
+        }
+    }
+
+    public String monthlyStatus(ArrayList<String> fluctuations) {
+        int estFluctuation = Integer.parseInt(fluctuations.get(3));
+        int proFluctuation = Integer.parseInt(fluctuations.get(4));
+        int tesFluctuation = Integer.parseInt(fluctuations.get(5));
+        if (estFluctuation > 30 || proFluctuation > 30 || tesFluctuation > 30) {
+            return "Abnormal";
+        } else {
+            return "Normal";
         }
     }
 

@@ -3,6 +3,7 @@ package com.example.group2.pillpal;
 import org.json.JSONArray;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by Jessica on 5/2/16.
@@ -14,16 +15,17 @@ public class UserInstance {
     String name;
     String email;
     String phone;
-    String prescription;
+    HashMap<String, String> prescription;
     String password;
-    String lastRefill;
-    Integer card;
-    String billAdd;
-    String shipAdd;
-    Boolean refRequested;
+    Integer cardNumber;
+    String cardType;
+    HashMap<String, String> billAdd;
+    HashMap<String, String> shipAdd;
+    Boolean refillRequested;
     ArrayList<User.statHolder> stats;
     ArrayList<Alarm> alarms;
-    ArrayList<User.historyHolder> refHistory;
+    ArrayList<HashMap<String, String>> refillHistory;
+    HashMap<String, String> currentRefillRequest;
 
     private static UserInstance instance = null;
 
@@ -48,15 +50,15 @@ public class UserInstance {
         phone = u.phone;
         prescription = u.prescription;
         password = u.password;
-        lastRefill = u.lastRefill;
-        card = u.card;
+        cardNumber = u.cardNumber;
+        cardType = u.cardType;
         billAdd = u.billAdd;
         shipAdd = u.shipAdd;
-        refRequested = u.refRequested;
+        refillRequested = u.refillRequested;
         stats = u.stats;
         alarms = u.alarms;
-        refHistory = u.refHistory;
-
+        refillHistory = u.refillHistory;
+        currentRefillRequest = u.currentRefillRequest;
     }
 
     public ArrayList<User.statHolder> getStats() {
@@ -67,12 +69,6 @@ public class UserInstance {
         return alarms;
     }
 
-    public ArrayList<User.historyHolder> getHistory() {
-        return refHistory;
-    }
-
-
-
     public void deleteAlarm(Alarm alarm) {
         alarms.remove(alarm);
     }
@@ -82,14 +78,13 @@ public class UserInstance {
     }
 
     public void setBillAdd(String newAdd) {
-        billAdd = newAdd;
+
     }
 
     public void setShipAdd(String newAdd) {
-        shipAdd = newAdd;
+
     }
 
     public void setPresc (String presc) {
-        prescription = presc;
     }
 }

@@ -18,18 +18,18 @@
         android:id="@+id/alarm_time"
         android:layout_toRightOf="@+id/alarm_icon"
         android:fontFamily="Lato"
-        android:gravity="bottom"
-        android:layout_width="wrap_content"
+        android:gravity="bottom|left"
+        android:layout_width="68dp"
         android:layout_height="36dp"
         android:layout_alignParentBottom="true"
-        android:text="11:30"
+        android:text="23:55"
         android:textSize="26dp" >
     </TextView>
 
     <TextView
         android:id="@+id/day_time"
         android:layout_toRightOf="@+id/alarm_time"
-        android:gravity="bottom"
+        android:gravity="bottom|left"
         android:layout_width="wrap_content"
         android:layout_height="36dp"
         android:layout_alignParentBottom="true"

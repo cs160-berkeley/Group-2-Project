@@ -3,7 +3,6 @@
     package="com.example.group2.pillpal">
 
     <uses-feature android:name="android.hardware.type.watch" />
-    <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <uses-permission android:name="android.permission.WAKE_LOCK" />
 
@@ -69,9 +68,11 @@
                 <action android:name="com.google.android.gms.wearable.BIND_LISTENER" />
             </intent-filter>
         </service>
+
         <uses-library
             android:name="com.google.android.wearable"
             android:required="false" />
+
         <service
             android:name=".WatchToPhoneService"
             android:enabled="true"

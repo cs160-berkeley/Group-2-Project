@@ -3,21 +3,20 @@ package com.example.group2.pillpal;
 import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
+import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 
 import com.google.android.gms.wearable.MessageEvent;
 import com.google.android.gms.wearable.WearableListenerService;
 
 import java.nio.charset.StandardCharsets;
+import java.util.HashMap;
 
 public class PhoneListenerService extends WearableListenerService {
-    public PhoneListenerService() {
-    }
+    private static UserInstance currentUser;
 
-    @Override
-    public int onStartCommand(Intent intent, int flags, int startId) {
-        System.out.println("Hmmm");
-        return START_STICKY;
+    public PhoneListenerService() {
+        currentUser = UserInstance.getInstance();
     }
 
     private static final String REFILL_ARRIVAL = "/refill/confirmation";
@@ -26,8 +25,14 @@ public class PhoneListenerService extends WearableListenerService {
     @Override
     public void onMessageReceived(MessageEvent messageEvent) {
         System.out.println("UGHHHH");
-        Log.d("T", "in PhoneListenerService, got: " + messageEvent.getPath());
         if (messageEvent.getPath().equalsIgnoreCase( REFILL_ARRIVAL )) {
+
+            currentUser.refillHistory.add(currentUser.currentRefillRequest);
+            currentUser.currentRefillRequest = new HashMap<String, String>();
+            currentUser.refillRequested = false;
+            Intent intent = new Intent();
+            intent.setAction("UPDATE");
+            LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
             // UPDATE USER
         } else if (messageEvent.getPath().equalsIgnoreCase( SNOOZE )) {
             // Snooze Alarm

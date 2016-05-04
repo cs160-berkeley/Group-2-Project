@@ -10,7 +10,7 @@
         android:footerDividersEnabled="false"
         android:background="@color/white"
         android:divider="@android:color/transparent"
-        android:dividerHeight="8dp"/>
+        android:dividerHeight="16dp"/>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"

@@ -15,8 +15,10 @@ public class Alarm {
         this.minutes = minutes;
         this.isOn = is_on;
         this.timeOfDay = (hours >= 12) ? "PM" : "AM";
-        String hours_string = (hours >= 12) ? Integer.toString(hours - 12) : Integer.toString(hours);
-        timeStringFormat = hours_string + ":" + Integer.toString(minutes) + " ";
+        int hours_format = (hours >= 12) ? hours - 12 : hours;
+        String hours_string = (hours_format < 10) ? "   " + Integer.toString(hours_format) : Integer.toString(hours_format);
+        String minutes_string = (minutes < 10) ? "0" + Integer.toString(minutes) : Integer.toString(minutes);
+        timeStringFormat = hours_string + ":" + minutes_string + " ";
     }
 
 }
