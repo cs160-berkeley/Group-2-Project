@@ -73,17 +73,18 @@ public class SetRemindersFragment extends Fragment implements View.OnClickListen
                         System.out.println(minute);
                         Alarm alarm = new Alarm(hourOfDay, minute, true);
 
-                        Intent sendIntent = new Intent(getContext(), AlarmReceiver.class);
-                        sendIntent.putExtra("DATA", alarm.timeStringFormat);
-                        PendingIntent alarmIntent = PendingIntent.getBroadcast(getContext(), 1, sendIntent, 0);
-
                         AlarmManager alarmMgr = (AlarmManager)getContext().getSystemService(Context.ALARM_SERVICE);
                         Calendar calendar = Calendar.getInstance();
                         calendar.setTimeInMillis(System.currentTimeMillis());
                         calendar.set(Calendar.HOUR_OF_DAY, alarm.hours);
                         calendar.set(Calendar.MINUTE, alarm.minutes);
-
+                        Intent sendIntent = new Intent(getContext(), PhoneToWatchService.class);
+                        sendIntent.putExtra("DATA", "reminder");
+                        sendIntent.putExtra("time", alarm.timeStringFormat + alarm.timeOfDay);
+                        System.out.println(alarm.timeStringFormat + alarm.timeOfDay);
+                        PendingIntent alarmIntent = PendingIntent.getService(getContext(), 0, sendIntent, PendingIntent.FLAG_ONE_SHOT);
                         alarmMgr.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, alarmIntent);
+                        System.out.println(calendar.getTime());
                         currentUser.addAlarm(alarm);
                         mAdapter.notifyDataSetChanged();
                     }
