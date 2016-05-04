@@ -34,12 +34,10 @@
             android:name=".PhoneToWatchService"
             android:enabled="true"
             android:exported="true" />
-
         <receiver
             android:name=".AlarmReceiver"
             android:enabled="true"
             android:exported="true" />
-
         <service
             android:name=".PhoneListenerService"
             android:enabled="true"

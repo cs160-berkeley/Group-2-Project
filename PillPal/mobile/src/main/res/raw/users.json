@@ -1,217 +1,229 @@
 [{
-    "id": "000",
-    "index": 0,
-    "age": 25,
-    "name": "Angelina Jolie",
-    "refill_requested": true,
-    "prescription": "Lutera",
-    "email": "brangelina@groogle.com",
-    "password": "password",
-    "card": 4147,
-    "phone": "946-568-3066",
-    "bill_address": "528 Stuart Street, Lindisfarne, Rhode Island, 5663",
-    "ship_address": "528 Stuart Street, Lindisfarne, Rhode Island, 5663",
-
-
-    "stats": [{
-      "day": 1,
-      "month": "April",
-      "estrogen": 45,
-      "progestin": 35,
-      "testosterone": 20
-    }, {
-      "day": 2,
-      "month": "April",
-      "estrogen": 30,
-      "progestin": 40,
-      "testosterone": 20
-    }, {
-      "day": 3,
-      "month": "April",
-      "estrogen": 45,
-      "progestin": 35,
-      "testosterone": 30
-    }, {
-      "day": 4,
-      "month": "April",
-      "estrogen": 30,
-      "progestin": 35,
-      "testosterone": 20
-    }, {
-      "day": 5,
-      "month": "April",
-      "estrogen": 45,
-      "progestin": 20,
-      "testosterone": 20
-    }, {
-      "day": 6,
-      "month": "April",
-      "estrogen": 30,
-      "progestin": 20,
-      "testosterone": 35
-    }, {
-      "day": 7,
-      "month": "April",
-      "estrogen": 20,
-      "progestin": 30,
-      "testosterone": 30
-    }, {
-      "day": 8,
-      "month": "April",
-      "estrogen": 20,
-      "progestin": 20,
-      "testosterone": 25
-    }, {
-      "day": 9,
-      "month": "April",
-      "estrogen": 45,
-      "progestin": 35,
-      "testosterone": 20
-    }, {
-      "day": 10,
-      "month": "April",
-      "estrogen": 30,
-      "progestin": 40,
-      "testosterone": 30
-    }, {
-      "day": 11,
-      "month": "April",
-      "estrogen": 45,
-      "progestin": 35,
-      "testosterone": 20
-    }, {
-      "day": 12,
-      "month": "April",
-      "estrogen": 30,
-      "progestin": 35,
-      "testosterone": 20
-    }, {
-      "day": 13,
-      "month": "April",
-      "estrogen": 45,
-      "progestin": 40,
-      "testosterone": 30
-    }, {
-      "day": 14,
-      "month": "April",
-      "estrogen": 30,
-      "progestin": 30,
-      "testosterone": 20
-    }, {
-      "day": 15,
-      "month": "April",
-      "estrogen": 20,
-      "progestin": 40,
-      "testosterone": 25
-    }, {
-      "day": 16,
-      "month": "April",
-      "estrogen": 25,
-      "progestin": 35,
-      "testosterone": 20
-    }, {
-      "day": 17,
-      "month": "April",
-      "estrogen": 30,
-      "progestin": 40,
-      "testosterone": 25
-    }, {
-      "day": 18,
-      "month": "April",
-      "estrogen": 45,
-      "progestin": 45,
-      "testosterone": 35
-    }, {
-      "day": 19,
-      "month": "April",
-      "estrogen": 43,
-      "progestin": 35,
-      "testosterone": 20
-    }, {
-      "day": 20,
-      "month": "April",
-      "estrogen": 30,
-      "progestin": 40,
-      "testosterone": 15
-    }, {
-      "day": 21,
-      "month": "April",
-      "estrogen": 40,
-      "progestin": 35,
-      "testosterone": 20
-    }, {
-      "day": 22,
-      "month": "April",
-      "estrogen": 30,
-      "progestin": 20,
-      "testosterone": 15
-    }, {
-      "day": 23,
-      "month": "April",
-      "estrogen": 35,
-      "progestin": 40,
-      "testosterone": 40
-    }, {
-      "day": 24,
-      "month": "April",
-      "estrogen": 20,
-      "progestin": 30,
-      "testosterone": 25
-    }, {
-      "day": 25,
-      "month": "April",
-      "estrogen": 30,
-      "progestin": 35,
-      "testosterone": 35
-    }, {
-      "day": 26,
-      "month": "April",
-      "estrogen": 45,
-      "progestin": 35,
-      "testosterone": 20
-    }, {
-      "day": 27,
-      "month": "April",
-      "estrogen": 45,
-      "progestin": 35,
-      "testosterone": 25
-    }, {
-      "day": 28,
-      "month": "April",
-      "estrogen": 45,
-      "progestin": 35,
-      "testosterone": 15
-    }, {
-      "day": 29,
-      "month": "April",
-      "estrogen": 30,
-      "progestin": 40,
-      "testosterone": 25
-    }, {
-      "day": 30,
-      "month": "April",
-      "estrogen": 45,
-      "progestin": 20,
-      "testosterone": 30
-    }, {
-      "day": 31,
-      "month": "April",
-      "estrogen": 30,
-      "progestin": 35,
-      "testosterone": 20
-    }],
-
-    "alarms": [{
-      "time": "12:30",
-      "ind": "am"
-    }],
-
-    "refill_history": [{
-      "date": "April 14th, 2016"
-    }]
-
-
+  "id": "000",
+  "index": 0,
+  "age": 25,
+  "name": "Angelina Jolie",
+  "refill_requested": false,
+  "prescription": {
+    "name": "Lutera",
+    "dosage": "Once every day at noon."
   },
+  "email": "brangelina@groogle.com",
+  "password": "password",
+  "card_number": 4147,
+  "card_type": "Visa",
+  "phone": "946-568-3066",
+  "bill_address": {
+    "street_name": "528 Stuart Street",
+    "city": "Lindisfarne",
+    "state": "Rhode Island",
+    "zip": "5663"
+  },
+  "ship_address": {
+    "street_name": "528 Stuart Street",
+    "city": "Lindisfarne",
+    "state": "Rhode Island",
+    "zip": "5663"
+  },
+  "stats": [{
+    "day": 1,
+    "month": "April",
+    "estrogen": 45,
+    "progestin": 35,
+    "testosterone": 20
+  }, {
+    "day": 2,
+    "month": "April",
+    "estrogen": 30,
+    "progestin": 40,
+    "testosterone": 20
+  }, {
+    "day": 3,
+    "month": "April",
+    "estrogen": 45,
+    "progestin": 35,
+    "testosterone": 30
+  }, {
+    "day": 4,
+    "month": "April",
+    "estrogen": 30,
+    "progestin": 35,
+    "testosterone": 20
+  }, {
+    "day": 5,
+    "month": "April",
+    "estrogen": 45,
+    "progestin": 20,
+    "testosterone": 20
+  }, {
+    "day": 6,
+    "month": "April",
+    "estrogen": 30,
+    "progestin": 20,
+    "testosterone": 35
+  }, {
+    "day": 7,
+    "month": "April",
+    "estrogen": 20,
+    "progestin": 30,
+    "testosterone": 30
+  }, {
+    "day": 8,
+    "month": "April",
+    "estrogen": 20,
+    "progestin": 20,
+    "testosterone": 25
+  }, {
+    "day": 9,
+    "month": "April",
+    "estrogen": 45,
+    "progestin": 35,
+    "testosterone": 20
+  }, {
+    "day": 10,
+    "month": "April",
+    "estrogen": 30,
+    "progestin": 40,
+    "testosterone": 30
+  }, {
+    "day": 11,
+    "month": "April",
+    "estrogen": 45,
+    "progestin": 35,
+    "testosterone": 20
+  }, {
+    "day": 12,
+    "month": "April",
+    "estrogen": 30,
+    "progestin": 35,
+    "testosterone": 20
+  }, {
+    "day": 13,
+    "month": "April",
+    "estrogen": 45,
+    "progestin": 40,
+    "testosterone": 30
+  }, {
+    "day": 14,
+    "month": "April",
+    "estrogen": 30,
+    "progestin": 30,
+    "testosterone": 20
+  }, {
+    "day": 15,
+    "month": "April",
+    "estrogen": 20,
+    "progestin": 40,
+    "testosterone": 25
+  }, {
+    "day": 16,
+    "month": "April",
+    "estrogen": 25,
+    "progestin": 35,
+    "testosterone": 20
+  }, {
+    "day": 17,
+    "month": "April",
+    "estrogen": 30,
+    "progestin": 40,
+    "testosterone": 25
+  }, {
+    "day": 18,
+    "month": "April",
+    "estrogen": 45,
+    "progestin": 45,
+    "testosterone": 35
+  }, {
+    "day": 19,
+    "month": "April",
+    "estrogen": 43,
+    "progestin": 35,
+    "testosterone": 20
+  }, {
+    "day": 20,
+    "month": "April",
+    "estrogen": 30,
+    "progestin": 40,
+    "testosterone": 15
+  }, {
+    "day": 21,
+    "month": "April",
+    "estrogen": 40,
+    "progestin": 35,
+    "testosterone": 20
+  }, {
+    "day": 22,
+    "month": "April",
+    "estrogen": 30,
+    "progestin": 20,
+    "testosterone": 15
+  }, {
+    "day": 23,
+    "month": "April",
+    "estrogen": 35,
+    "progestin": 40,
+    "testosterone": 40
+  }, {
+    "day": 24,
+    "month": "April",
+    "estrogen": 20,
+    "progestin": 30,
+    "testosterone": 25
+  }, {
+    "day": 25,
+    "month": "April",
+    "estrogen": 30,
+    "progestin": 35,
+    "testosterone": 35
+  }, {
+    "day": 26,
+    "month": "April",
+    "estrogen": 45,
+    "progestin": 35,
+    "testosterone": 20
+  }, {
+    "day": 27,
+    "month": "April",
+    "estrogen": 45,
+    "progestin": 35,
+    "testosterone": 25
+  }, {
+    "day": 28,
+    "month": "April",
+    "estrogen": 45,
+    "progestin": 35,
+    "testosterone": 15
+  }, {
+    "day": 29,
+    "month": "April",
+    "estrogen": 30,
+    "progestin": 40,
+    "testosterone": 25
+  }, {
+    "day": 30,
+    "month": "April",
+    "estrogen": 45,
+    "progestin": 20,
+    "testosterone": 30
+  }, {
+    "day": 31,
+    "month": "April",
+    "estrogen": 30,
+    "progestin": 35,
+    "testosterone": 20
+  }],
+
+  "alarms": [{
+    "hours": 11,
+    "minutes": 30
+  }],
+  "refill_history": [{
+    "name": "Lutera",
+    "date": "04/14/16"
+  }]
+
+
+},
 
   {
     "id": "001",
@@ -221,12 +233,25 @@
     "phone": "946-568-3066",
     "email": "janedeer@gonkle.com",
     "password": "password",
-    "card": 1345,
-    "refill_requested": true,
-    "prescription": "Aranelle",
-    "bill_address": "779 Joralemon Street, Groton, Arizona, 1790",
-    "ship_address": "779 Joralemon Street, Groton, Arizona, 1790",
-
+    "card_number": 1345,
+    "card_type": "Visa",
+    "refill_requested": false,
+    "prescription": {
+      "name": "Aranelle",
+      "dosage": "Once every day at noon."
+    },
+    "bill_address": {
+      "street_name": "779 Joralemon Street",
+      "city": "Groton",
+      "state": "Arizona",
+      "zip": "1790"
+    },
+    "ship_address": {
+      "street_name": "779 Joralemon Street",
+      "city": "Groton",
+      "state": "Arizona",
+      "zip": "1790"
+    },
     "stats": [{
       "day": 1,
       "month": "April",
@@ -416,12 +441,13 @@
     }],
 
     "alarms": [{
-      "time": "12:30",
-      "ind": "am"
+      "hours": 11,
+      "minutes": 30
     }],
 
     "refill_history": [{
-      "date": "April 14th, 2016"
+      "name": "Aranelle",
+      "date": "04/14/16"
     }]
   },
 
@@ -437,10 +463,24 @@
     "email": "megan@firefox.com",
     "password": "password",
     "refill_requested" : false,
-    "prescription" : "Lutera",
-    "card": 7145,
-    "bill_address": "389 Centre Street, Watchtower, Oklahoma, 7344",
-    "ship_address": "389 Centre Street, Watchtower, Oklahoma, 7344",
+    "prescription": {
+      "name": "Lutera",
+      "dosage": "Once every day at noon."
+    },
+    "card_number": 7145,
+    "card_type": "Visa",
+    "bill_address": {
+      "street_name": "389 Centre Street",
+      "city": "Watchtower",
+      "state": "Oklahoma",
+      "zip": "7344"
+    },
+    "ship_address": {
+      "street_name": "389 Centre Street",
+      "city": "Watchtower",
+      "state": "Oklahoma",
+      "zip": "7344"
+    },
     "stats": [{
       "day": 1,
       "month": "April",
@@ -630,12 +670,13 @@
     }],
 
     "alarms": [{
-      "time": "12:30",
-      "ind": "am"
+      "hours": 11,
+      "minutes": 30
     }],
 
     "refill_history": [{
-      "date": "April 14th, 2016"
+      "name": "Lutera",
+      "date": "04/14/16"
     }]
   },
 
@@ -645,13 +686,27 @@
     "age": 21,
     "name": "Ashley Olsen",
     "email": "notmarykate@gonkle.com",
-    "prescription": "Aranelle",
+    "prescription": {
+      "name": "Aranelle",
+      "dosage": "Once every day at noon."
+    },
     "password": "password",
     "refill_requested" : false,
-    "card": 8117,
+    "card_number": 8117,
+    "card_type": "Visa",
     "phone": "+902-511-3315",
-    "bill_address": "201 Carroll Street, Orviston, Wisconsin, 6855",
-    "ship_address": "201 Carroll Street, Orviston, Wisconsin, 6855",
+    "bill_address": {
+      "street_name": "201 Carroll Street",
+      "city": "Orviston",
+      "state": "Wisconsin",
+      "zip": "6855"
+    },
+    "ship_address": {
+      "street_name": "201 Carroll Street",
+      "city": "Orviston",
+      "state": "Wisconsin",
+      "zip": "6855"
+    },
     "stats": [{
       "day": 1,
       "month": "April",
@@ -840,30 +895,45 @@
       "testosterone": 20
     }],
 
-      "alarms": [{
-      "time": "12:30",
-      "ind": "am"
+    "alarms": [{
+      "hours": 11,
+      "minutes": 30
     }],
 
-      "refill_history": [{
-      "date": "April 14th, 2016"
+    "refill_history": [{
+      "name": "Aranelle",
+      "date": "04/14/16"
     }]
   },
 
 
-   {
+  {
     "id": "100",
     "index": 4,
     "age": 19,
     "name": "Christina Hendricks",
     "email": "hendrix@splinx.com",
-    "prescription": "Lutera",
+    "prescription": {
+      "name": "Lutera",
+      "dosage": "Once every day at noon."
+    },
     "password": "password",
-    "refill_requested" : true,
-    "card": 9341,
+    "refill_requested" : false,
+    "card_number": 9341,
+    "card_type": "Visa",
     "phone": "801-517-2073",
-    "bill_address": "442 Hewes Street, Gibbsville, Montana, 3799",
-    "ship_address": "442 Hewes Street, Gibbsville, Montana, 3799",
+    "bill_address": {
+      "street_name": "442 Hewes Street",
+      "city": "Gibbsville",
+      "state": "Montana",
+      "zip": "3799"
+    },
+    "ship_address": {
+      "street_name": "442 Hewes Street",
+      "city": "Gibbsville",
+      "state": "Montana",
+      "zip": "3799"
+    },
     "stats": [{
       "day": 1,
       "month": "April",
@@ -1052,224 +1122,236 @@
       "testosterone": 20
     }],
     "alarms": [{
-      "time": "12:30",
-      "ind": "am"
+      "hours": 11,
+      "minutes": 30
     }],
 
     "refill_history": [{
-      "date": "April 14th, 2016"
+      "name": "Lutera",
+      "date": "04/14/16"
     }]
   }, {
 
-    "id": "101",
-    "index": 5,
-    "age": 26,
-    "name": "Kylie Jenner",
-    "email": "kyliejenner@gonkle.com",
-    "password": "password",
-    "card": 9856,
-    "prescription": "Lutera",
-    "refill_requested" : false,
-    "phone": "875-426-3268",
-    "bill_address": "793 Pineapple Street, Salvo, Mississippi, 306",
-    "ship_address": "793 Pineapple Street, Salvo, Mississippi, 306",
-
-
-    "stats": [{
-      "day": 1,
-      "month": "April",
-      "estrogen": 20,
-      "progestin": 35,
-      "testosterone": 45
-    }, {
-      "day": 2,
-      "month": "April",
-      "estrogen": 10,
-      "progestin": 10,
-      "testosterone": 30
-    }, {
-      "day": 3,
-      "month": "April",
-      "estrogen": 45,
-      "progestin": 35,
-      "testosterone": 30
-    }, {
-      "day": 4,
-      "month": "April",
-      "estrogen": 30,
-      "progestin": 35,
-      "testosterone": 20
-    }, {
-      "day": 5,
-      "month": "April",
-      "estrogen": 45,
-      "progestin": 10,
-      "testosterone": 20
-    }, {
-      "day": 6,
-      "month": "April",
-      "estrogen": 50,
-      "progestin": 100,
-      "testosterone": 20
-    }, {
-      "day": 7,
-      "month": "April",
-      "estrogen": 20,
-      "progestin": 30,
-      "testosterone": 30
-    }, {
-      "day": 8,
-      "month": "April",
-      "estrogen": 20,
-      "progestin": 80,
-      "testosterone": 25
-    }, {
-      "day": 9,
-      "month": "April",
-      "estrogen": 45,
-      "progestin": 35,
-      "testosterone": 20
-    }, {
-      "day": 10,
-      "month": "April",
-      "estrogen": 30,
-      "progestin": 10,
-      "testosterone": 30
-    }, {
-      "day": 11,
-      "month": "April",
-      "estrogen": 45,
-      "progestin": 70,
-      "testosterone": 20
-    }, {
-      "day": 12,
-      "month": "April",
-      "estrogen": 30,
-      "progestin": 35,
-      "testosterone": 20
-    }, {
-      "day": 13,
-      "month": "April",
-      "estrogen": 45,
-      "progestin": 50,
-      "testosterone": 30
-    }, {
-      "day": 14,
-      "month": "April",
-      "estrogen": 10,
-      "progestin": 10,
-      "testosterone": 60
-    }, {
-      "day": 15,
-      "month": "April",
-      "estrogen": 20,
-      "progestin": 60,
-      "testosterone": 25
-    }, {
-      "day": 16,
-      "month": "April",
-      "estrogen": 25,
-      "progestin": 35,
-      "testosterone": 20
-    }, {
-      "day": 17,
-      "month": "April",
-      "estrogen": 30,
-      "progestin": 80,
-      "testosterone": 25
-    }, {
-      "day": 18,
-      "month": "April",
-      "estrogen": 45,
-      "progestin": 20,
-      "testosterone": 35
-    }, {
-      "day": 19,
-      "month": "April",
-      "estrogen": 43,
-      "progestin": 60,
-      "testosterone": 20
-    }, {
-      "day": 20,
-      "month": "April",
-      "estrogen": 10,
-      "progestin": 70,
-      "testosterone": 10
-    }, {
-      "day": 21,
-      "month": "April",
-      "estrogen": 40,
-      "progestin": 35,
-      "testosterone": 20
-    }, {
-      "day": 22,
-      "month": "April",
-      "estrogen": 30,
-      "progestin": 20,
-      "testosterone": 15
-    }, {
-      "day": 23,
-      "month": "April",
-      "estrogen": 35,
-      "progestin": 50,
-      "testosterone": 40
-    }, {
-      "day": 24,
-      "month": "April",
-      "estrogen": 20,
-      "progestin": 30,
-      "testosterone": 25
-    }, {
-      "day": 25,
-      "month": "April",
-      "estrogen": 30,
-      "progestin": 50,
-      "testosterone": 10
-    }, {
-      "day": 26,
-      "month": "April",
-      "estrogen": 25,
-      "progestin": 10,
-      "testosterone": 60
-    }, {
-      "day": 27,
-      "month": "April",
-      "estrogen": 80,
-      "progestin": 10,
-      "testosterone": 25
-    }, {
-      "day": 28,
-      "month": "April",
-      "estrogen": 45,
-      "progestin": 35,
-      "testosterone": 15
-    }, {
-      "day": 29,
-      "month": "April",
-      "estrogen": 30,
-      "progestin": 40,
-      "testosterone": 25
-    }, {
-      "day": 30,
-      "month": "April",
-      "estrogen": 70,
-      "progestin": 70,
-      "testosterone": 30
-    }, {
-      "day": 31,
-      "month": "April",
-      "estrogen": 30,
-      "progestin": 10,
-      "testosterone": 20
-    }],
-    "alarms": [{
-      "time": "12:30",
-      "ind": "am"
-    }],
-
-    "refill_history": [{
-      "date": "April 14th, 2016"
-    }]
-  }
-
+  "id": "101",
+  "index": 5,
+  "age": 26,
+  "name": "Kylie Jenner",
+  "email": "kyliejenner@gonkle.com",
+  "password": "password",
+  "card_number": 9856,
+  "card_type": "Visa",
+  "prescription": {
+    "name": "Lutera",
+    "dosage": "Once every day at noon."
+  },
+  "refill_requested" : false,
+  "phone": "875-426-3268",
+  "bill_address": {
+    "street_name": "793 Pineapple Street",
+    "city": "Salvo",
+    "state": "Mississippi",
+    "zip": "306"
+  },
+  "ship_address": {
+    "street_name": "793 Pineapple Street",
+    "city": "Salvo",
+    "state": "Mississippi",
+    "zip": "306"
+  },
+  "stats": [{
+    "day": 1,
+    "month": "April",
+    "estrogen": 20,
+    "progestin": 35,
+    "testosterone": 45
+  }, {
+    "day": 2,
+    "month": "April",
+    "estrogen": 10,
+    "progestin": 10,
+    "testosterone": 30
+  }, {
+    "day": 3,
+    "month": "April",
+    "estrogen": 45,
+    "progestin": 35,
+    "testosterone": 30
+  }, {
+    "day": 4,
+    "month": "April",
+    "estrogen": 30,
+    "progestin": 35,
+    "testosterone": 20
+  }, {
+    "day": 5,
+    "month": "April",
+    "estrogen": 45,
+    "progestin": 10,
+    "testosterone": 20
+  }, {
+    "day": 6,
+    "month": "April",
+    "estrogen": 50,
+    "progestin": 100,
+    "testosterone": 20
+  }, {
+    "day": 7,
+    "month": "April",
+    "estrogen": 20,
+    "progestin": 30,
+    "testosterone": 30
+  }, {
+    "day": 8,
+    "month": "April",
+    "estrogen": 20,
+    "progestin": 80,
+    "testosterone": 25
+  }, {
+    "day": 9,
+    "month": "April",
+    "estrogen": 45,
+    "progestin": 35,
+    "testosterone": 20
+  }, {
+    "day": 10,
+    "month": "April",
+    "estrogen": 30,
+    "progestin": 10,
+    "testosterone": 30
+  }, {
+    "day": 11,
+    "month": "April",
+    "estrogen": 45,
+    "progestin": 70,
+    "testosterone": 20
+  }, {
+    "day": 12,
+    "month": "April",
+    "estrogen": 30,
+    "progestin": 35,
+    "testosterone": 20
+  }, {
+    "day": 13,
+    "month": "April",
+    "estrogen": 45,
+    "progestin": 50,
+    "testosterone": 30
+  }, {
+    "day": 14,
+    "month": "April",
+    "estrogen": 10,
+    "progestin": 10,
+    "testosterone": 60
+  }, {
+    "day": 15,
+    "month": "April",
+    "estrogen": 20,
+    "progestin": 60,
+    "testosterone": 25
+  }, {
+    "day": 16,
+    "month": "April",
+    "estrogen": 25,
+    "progestin": 35,
+    "testosterone": 20
+  }, {
+    "day": 17,
+    "month": "April",
+    "estrogen": 30,
+    "progestin": 80,
+    "testosterone": 25
+  }, {
+    "day": 18,
+    "month": "April",
+    "estrogen": 45,
+    "progestin": 20,
+    "testosterone": 35
+  }, {
+    "day": 19,
+    "month": "April",
+    "estrogen": 43,
+    "progestin": 60,
+    "testosterone": 20
+  }, {
+    "day": 20,
+    "month": "April",
+    "estrogen": 10,
+    "progestin": 70,
+    "testosterone": 10
+  }, {
+    "day": 21,
+    "month": "April",
+    "estrogen": 40,
+    "progestin": 35,
+    "testosterone": 20
+  }, {
+    "day": 22,
+    "month": "April",
+    "estrogen": 30,
+    "progestin": 20,
+    "testosterone": 15
+  }, {
+    "day": 23,
+    "month": "April",
+    "estrogen": 35,
+    "progestin": 50,
+    "testosterone": 40
+  }, {
+    "day": 24,
+    "month": "April",
+    "estrogen": 20,
+    "progestin": 30,
+    "testosterone": 25
+  }, {
+    "day": 25,
+    "month": "April",
+    "estrogen": 30,
+    "progestin": 50,
+    "testosterone": 10
+  }, {
+    "day": 26,
+    "month": "April",
+    "estrogen": 25,
+    "progestin": 10,
+    "testosterone": 60
+  }, {
+    "day": 27,
+    "month": "April",
+    "estrogen": 80,
+    "progestin": 10,
+    "testosterone": 25
+  }, {
+    "day": 28,
+    "month": "April",
+    "estrogen": 45,
+    "progestin": 35,
+    "testosterone": 15
+  }, {
+    "day": 29,
+    "month": "April",
+    "estrogen": 30,
+    "progestin": 40,
+    "testosterone": 25
+  }, {
+    "day": 30,
+    "month": "April",
+    "estrogen": 70,
+    "progestin": 70,
+    "testosterone": 30
+  }, {
+    "day": 31,
+    "month": "April",
+    "estrogen": 30,
+    "progestin": 10,
+    "testosterone": 20
+  }],
+  "alarms": [{
+    "hours": 11,
+    "minutes": 30
+  }],
+  "refill_history": [{
+    "name": "Lutera",
+    "date": "04/14/16"
+  }]
+}
 ]

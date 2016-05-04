@@ -35,6 +35,7 @@ import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -378,42 +379,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             User u1 = new User(value, jUsers);
             UserInstance user = UserInstance.getInstance();
             user.setAll(u1);
-
-
-
-            // ** First, serialize the user.
-//            serialController controller = new serialController(u1);
-//            String serialized = controller.serialize(u1);
-////            User deserial = controller.deserialize(serialized);
-//
-//            new addUser().execute(Integer.toString(value), serialized, false);
-
-//            try {
-//
-//                ByteArrayOutputStream use = new ByteArrayOutputStream();
-//                ObjectOutputStream conv = new ObjectOutputStream(use);
-//                conv.writeObject(u1);
-//
-//                InputStream is = new ByteArrayInputStream(use.toByteArray());
-//
-//                //This might not be right, output or input to turn into a byte array?
-//                ObjectInputStream serialObj = new ObjectInputStream(is);
-//
-//                serializedObject = serialObj.toString();
-//                //** Insert the user into our database as a serialized string, with id (i.e. random)? then give command to
-//                //* unserialize and how to access user data.
-//
-//                if (conv != null) {
-//                    addUser.execute();
-//                    conv.flush();
-//                    conv.close();
-//                }
-//            } catch (IOException ex) {
-//                Log.d("Error", ex.toString());
-//            }
-
-
-
         } catch (JSONException e) {
             Log.d("Error", e.toString());
 

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@color/white"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:id="@+id/set_credit_card">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="36dp"
+            android:textSize="18dp"
+            android:textColor="@color/colorAccent"
+            android:textStyle="bold"
+            android:gravity="center_vertical"
+            android:text="Credit card information" />
+        <ImageButton
+            android:id="@+id/cancelEditButton"
+            android:background="@color/white"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/ic_close_24dp" />
+    </RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="16dp"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Card number"
+            android:textColor="@color/textSecondary"/>
+        <EditText
+            android:id="@+id/cardNumberTextEdit"
+            android:layout_width="match_parent"
+            android:layout_height="46dp"
+            android:layout_marginBottom="32dp"/>
+        <Button
+            android:layout_width="152dp"
+            android:layout_height="32dp"
+            android:layout_gravity="center"
+            android:text="Okay"
+            android:id="@+id/confirmEditButton"
+            android:background="@drawable/button_style"
+            android:textColor="@drawable/button_text_style"/>
+    </LinearLayout>
+</LinearLayout>
