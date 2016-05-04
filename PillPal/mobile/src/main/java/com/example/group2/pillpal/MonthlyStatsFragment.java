@@ -114,7 +114,7 @@ public class MonthlyStatsFragment extends Fragment {
         progestinLabel.setText(progestinText);
         testosteroneLabel.setText(testosteroneText);
 
-        if (estFluctuation > 40 || proFluctuation > 40 || tesFluctuation > 40) {
+        if (estFluctuation > 30 || proFluctuation > 30 || tesFluctuation > 30) {
             status.setText(u.prescription + " doesn't seem to be a good fit for you. Consider changing your pill or visiting a doctor.");
         } else {
             status.setText("You're on track with " + u.prescription + "! Hormone levels for the week are looking great!");
