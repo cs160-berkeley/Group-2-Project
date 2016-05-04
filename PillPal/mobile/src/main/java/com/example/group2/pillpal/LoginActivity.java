@@ -370,19 +370,23 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
     public void createUsers() {
         String sUsers = loadJSONFromAsset("users");
-        String serializedObject;
+//        String serializedObject;
         try {
             JSONArray jUsers = new JSONArray(sUsers);
             Random rand = new Random();
             int value = rand.nextInt(6);
             User u1 = new User(value, jUsers);
+            UserInstance user = UserInstance.getInstance();
+            user.setAll(u1);
+
+
 
             // ** First, serialize the user.
-            serialController controller = new serialController(u1);
-            String serialized = controller.serialize(u1);
-//            User deserial = controller.deserialize(serialized);
-
-            new addUser().execute(Integer.toString(value), serialized, false);
+//            serialController controller = new serialController(u1);
+//            String serialized = controller.serialize(u1);
+////            User deserial = controller.deserialize(serialized);
+//
+//            new addUser().execute(Integer.toString(value), serialized, false);
 
 //            try {
 //
