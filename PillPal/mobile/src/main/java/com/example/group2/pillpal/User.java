@@ -107,7 +107,7 @@ public class User implements java.io.Serializable {
             try {
                 JSONObject oneDay = statsArr.getJSONObject(i);
                 statHolder obj = new statHolder(oneDay.getInt("day"), oneDay.getString("month"),
-                        oneDay.getInt("estrogen"),oneDay.getInt("estrogen"), oneDay.getInt("estrogen") );
+                        oneDay.getInt("estrogen"),oneDay.getInt("progestin"), oneDay.getInt("testosterone") );
                 myStats.add(obj);
 
             } catch (Exception e) {
