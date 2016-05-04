@@ -1,14 +1,18 @@
 package com.example.group2.pillpal;
 
+import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.LocalBroadcastManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -78,8 +82,28 @@ public class RefillsFragment extends Fragment implements View.OnClickListener {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        LocalBroadcastManager.getInstance(getActivity()).registerReceiver(broadcastReceiver, new IntentFilter("UPDATE"));
 
     }
+
+    private BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            View view = getView();
+            Button refillsButton = (Button) view.findViewById(R.id.refills_button);
+            refillsButton.setText("Request Refills");
+
+            TextView last_refill = (TextView) view.findViewById(R.id.lastRefillInfo);
+            HashMap<String, String> lastRefill = currentUser.refillHistory.get(currentUser.refillHistory.size() - 1);
+            last_refill.setText(lastRefill.get("name") + " - " + lastRefill.get("date"));
+
+            LinearLayout refill_confirmation = (LinearLayout) view.findViewById(R.id.refill_confirmation);
+            LinearLayout refill_status = (LinearLayout) view.findViewById(R.id.refill_status);
+
+            refill_confirmation.setVisibility(View.GONE);
+            refill_status.setVisibility(View.GONE);
+        }
+    };
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -148,7 +172,7 @@ public class RefillsFragment extends Fragment implements View.OnClickListener {
                     SimpleDateFormat date_formatter = new SimpleDateFormat("MM/dd/yy");
 
                     Intent status_intent = new Intent(v.getContext(), PhoneToWatchService.class);
-                    status_intent.putExtra("DATA", "refill/arrival");
+                    status_intent.putExtra("DATA", "refill/status");
 
                     Intent arrival_intent = new Intent(v.getContext(), PhoneToWatchService.class);
                     arrival_intent.putExtra("DATA", "refill/arrival");
@@ -164,11 +188,12 @@ public class RefillsFragment extends Fragment implements View.OnClickListener {
 
                     Date current_date = new Date();
                     calendar.setTime(current_date);
-                    calendar.add(Calendar.SECOND, 5);
+                    calendar.add(Calendar.SECOND, 15);
                     String formatted_date = date_formatter.format(calendar.getTime());
-//                    PendingIntent arrival_pending_intent = PendingIntent.getService(v.getContext(), 0, arrival_intent, PendingIntent.FLAG_ONE_SHOT);
-//                    alarm_manager.setExact(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), arrival_pending_intent);
-
+                    PendingIntent arrival_pending_intent = PendingIntent.getService(v.getContext(), 0, arrival_intent, PendingIntent.FLAG_ONE_SHOT);
+                    alarm_manager.setExact(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), arrival_pending_intent);
+                    System.out.println(calendar.getTime());
+                    status_intent.putExtra("REFILL_ARRIVAL_DATE", formatted_date);
                     // ALARM FOR PACKAGE STATUS
 //                    Date current_date = new Date();
 //                    calendar.setTime(current_date);
@@ -176,14 +201,13 @@ public class RefillsFragment extends Fragment implements View.OnClickListener {
 //                    calendar.set(Calendar.HOUR, 11);
 //                    calendar.set(Calendar.MINUTE,0);
 //                    calendar.set(Calendar.AM_PM, Calendar.AM);
-                    current_date = new Date();
-                    calendar.setTime(current_date);
-                    System.out.println(calendar.getTime());
-                    calendar.add(Calendar.SECOND, 1);
-                    System.out.println(calendar.getTime());
-                    status_intent.putExtra("REFILL_ARRIVAL_DATE", formatted_date);
-                    PendingIntent status_pending_intent = PendingIntent.getService(v.getContext(), 0, status_intent, PendingIntent.FLAG_ONE_SHOT);
-                    alarm_manager.setExact(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), status_pending_intent);
+//
+//                    current_date = new Date();
+//                    calendar.setTime(current_date);
+//                    calendar.add(Calendar.SECOND, 5);
+//                    PendingIntent status_pending_intent = PendingIntent.getService(v.getContext(), 0, status_intent, PendingIntent.FLAG_ONE_SHOT);
+//                    alarm_manager.setExact(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), status_pending_intent);
+//                    System.out.println(calendar.getTime());
 
                     TextView delivery_date = (TextView) view.findViewById(R.id.delivery_date);
                     delivery_date.setText("Package expected to arrive on: " + formatted_date);

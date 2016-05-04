@@ -45,7 +45,7 @@
                         <ImageView
                             android:layout_width="36dp"
                             android:layout_height="36dp"
-                            android:layout_marginLeft="8dp"
+                            android:layout_marginRight="8dp"
                             android:src="@drawable/ic_account_box_24dp"
                             android:tint="@color/colorAccent"
                             android:id="@+id/usernameIcon"
@@ -70,7 +70,7 @@
                             android:layout_alignParentLeft="true"
                             android:layout_width="36dp"
                             android:layout_height="36dp"
-                            android:layout_marginLeft="8dp"
+                            android:layout_marginRight="8dp"
                             android:src="@drawable/ic_lock_24dp"
                             android:tint="@color/colorAccent"
                             android:id="@+id/passwordIcon"
@@ -309,11 +309,13 @@
                     android:text="Refill History"
                     android:textStyle="bold" />
                 <ListView
+                    android:id="@+id/refill_history"
+                    android:layout_below="@id/refillsTitle"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:scrollbars="none">
                 </ListView>
             </RelativeLayout>
-
 
         </RelativeLayout>
 
@@ -321,6 +323,7 @@
     <include layout="@layout/set_billing_address" />
     <include layout="@layout/set_shipping_address" />
     <include layout="@layout/set_credit_card" />
+
 
 </FrameLayout>
 

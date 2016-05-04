@@ -15,12 +15,6 @@
             android:layout_marginBottom="8dp"
             android:orientation="vertical">
             <ImageView
-                android:layout_marginTop="27dp"
-                android:layout_alignParentRight="true"
-                android:layout_width="18dp"
-                android:layout_height="18dp"
-                android:src="@drawable/refills_edit_icon"/>
-            <ImageView
                 android:id="@+id/addressIcon"
                 android:layout_marginTop="16dp"
                 android:layout_marginRight="16dp"
@@ -60,12 +54,6 @@
             android:layout_height="72dp"
             android:layout_marginBottom="8dp"
             android:orientation="vertical">
-            <ImageView
-                android:layout_marginTop="27dp"
-                android:layout_alignParentRight="true"
-                android:layout_width="18dp"
-                android:layout_height="18dp"
-                android:src="@drawable/refills_edit_icon"/>
             <ImageView
                 android:id="@+id/pillIcon"
                 android:layout_marginTop="16dp"

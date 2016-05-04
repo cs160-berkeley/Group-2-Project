@@ -1,21 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:background="@color/overlay"
+    android:background="@color/white"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
     android:id="@+id/set_shipping_address">
-    <LinearLayout
-        android:layout_width="328dp"
-        android:layout_height="296dp"
-        android:orientation="vertical"
-        android:layout_gravity="center|center_horizontal"
-        android:padding="16dp"
-        android:background="@drawable/alerts_background">
-        <RelativeLayout
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="36dp"
+            android:textSize="18dp"
+            android:textColor="@color/colorAccent"
+            android:textStyle="bold"
+            android:gravity="center_vertical"
+            android:text="Shipping address" />
         <ImageButton
             android:id="@+id/cancel_edit_shipping"
             android:background="@color/white"
@@ -23,43 +26,59 @@
             android:layout_height="36dp"
             android:layout_alignParentRight="true"
             android:src="@drawable/ic_close_24dp" />
-        <EditText
-            android:id="@+id/shipping_street_name"
-            android:layout_height="42dp"
-            android:layout_width="match_parent"
-            android:layout_below="@id/cancel_edit_shipping"
-            android:hint="Street address"/>
-
-        <EditText
-            android:id="@+id/shipping_city"
-            android:layout_below="@id/shipping_street_name"
-            android:layout_width="match_parent"
-            android:layout_height="42dp"
-            android:hint="City"/>
-
-        <EditText
-            android:id="@+id/shipping_state"
-            android:layout_below="@id/shipping_city"
-            android:layout_width="match_parent"
-            android:layout_height="42dp"
-            android:hint="State" />
-
-        <EditText
-            android:id="@+id/shipping_zip"
-            android:layout_below="@id/shipping_state"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Zip code"/>
-
-        <Button
-            android:layout_width="152dp"
-            android:layout_height="32dp"
-            android:layout_centerHorizontal="true"
-            android:layout_alignParentBottom="true"
-            android:text="Okay"
-            android:id="@+id/confirm_edit_shipping"
-            android:background="@drawable/button_style"
-            android:textColor="@drawable/button_text_style"/>
         </RelativeLayout>
-    </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="16dp"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Street name"
+                android:textColor="@color/textSecondary"/>
+            <EditText
+                android:id="@+id/shipping_street_name"
+                android:layout_width="match_parent"
+                android:layout_height="46dp"
+                android:layout_marginBottom="32dp"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="City"
+                android:textColor="@color/textSecondary"/>
+            <EditText
+                android:id="@+id/shipping_city"
+                android:layout_width="match_parent"
+                android:layout_height="46dp"
+                android:layout_marginBottom="32dp" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="State"
+                android:textColor="@color/textSecondary"/>
+            <EditText
+                android:id="@+id/shipping_state"
+                android:layout_width="match_parent"
+                android:layout_height="46dp"
+                android:layout_marginBottom="32dp" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Zip code"
+                android:textColor="@color/textSecondary"/>
+            <EditText
+                android:id="@+id/shipping_zip"
+                android:layout_width="match_parent"
+                android:layout_height="46dp"
+                android:layout_marginBottom="32dp" />
+            <Button
+                android:layout_width="152dp"
+                android:layout_height="32dp"
+                android:layout_gravity="center"
+                android:text="Okay"
+                android:id="@+id/confirm_edit_shipping"
+                android:background="@drawable/button_style"
+                android:textColor="@drawable/button_text_style"/>
+        </LinearLayout>
 </LinearLayout>

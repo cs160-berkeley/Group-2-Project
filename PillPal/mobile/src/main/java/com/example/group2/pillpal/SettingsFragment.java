@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -199,7 +200,9 @@ public class SettingsFragment extends Fragment {
         ShippingStateEditText.setText(mShippingAddress.get("state"));
         ShippingZipEditText.setText(mShippingAddress.get("zip"));
 
-        EditText cardNumberTextEdit = (EditText) view.findViewById(R.id.cardNumberTextEdit);
+        ListView listView = (ListView) view.findViewById(R.id.refill_history);
+        RefillHistoryArrayAdapter adapter = new RefillHistoryArrayAdapter(getActivity(), currentUser.refillHistory);
+        listView.setAdapter(adapter);
     }
 
     // Button Methods

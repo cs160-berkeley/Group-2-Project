@@ -3,6 +3,7 @@ package com.example.group2.pillpal;
 import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
+import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 
 import com.google.android.gms.wearable.MessageEvent;
@@ -25,9 +26,13 @@ public class PhoneListenerService extends WearableListenerService {
     public void onMessageReceived(MessageEvent messageEvent) {
         System.out.println("UGHHHH");
         if (messageEvent.getPath().equalsIgnoreCase( REFILL_ARRIVAL )) {
+
             currentUser.refillHistory.add(currentUser.currentRefillRequest);
             currentUser.currentRefillRequest = new HashMap<String, String>();
             currentUser.refillRequested = false;
+            Intent intent = new Intent();
+            intent.setAction("UPDATE");
+            LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
             // UPDATE USER
         } else if (messageEvent.getPath().equalsIgnoreCase( SNOOZE )) {
             // Snooze Alarm
