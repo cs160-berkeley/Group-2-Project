@@ -20,9 +20,7 @@ public class NavigationDrawer extends AppCompatActivity
         MonthlyStatsFragment.OnFragmentInteractionListener,
         StatsLaunchFragment.OnFragmentInteractionListener,
         SetRemindersFragment.OnFragmentInteractionListener,
-        ReminderSettingsFragment.OnFragmentInteractionListener,
         RefillsFragment.OnFragmentInteractionListener,
-        //RefillStatusFragment.OnFragmentInteractionListener,
         SettingsFragment.OnFragmentInteractionListener,
         DailyStatsFragment.OnFragmentInteractionListener,
         WeeklyStatsFragment.OnFragmentInteractionListener {
