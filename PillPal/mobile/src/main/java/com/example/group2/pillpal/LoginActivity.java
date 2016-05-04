@@ -25,6 +25,8 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
 import android.view.inputmethod.EditorInfo;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -77,15 +79,14 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private View mProgressView;
     private View mLoginFormView;
 
-    private EditText usernameView;
-    private EditText passwordView;
+    private EditText usernameV;
+    private EditText passwordV;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        // Set up the login form.
-        this.createUsers();
+        // Set up the login form
 
 //        Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
 //        mEmailSignInButton.setOnClickListener(new OnClickListener() {
@@ -98,12 +99,26 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 //        mLoginFormView = findViewById(R.id.login_form);
 //        mProgressView = findViewById(R.id.login_progress);
 
+
+
         Button setupButton = (Button) findViewById(R.id.login_button);
         setupButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent detailedStats = new Intent(view.getContext(), NavigationDrawer.class);
-                startActivity(detailedStats);
+                usernameV = (EditText) findViewById(R.id.username1);
+                passwordV = (EditText) findViewById(R.id.password1);
+                String signin = usernameV.getText().toString();
+                String pass = passwordV.getText().toString();
+
+                int uID = attemptSignin(signin, pass);
+
+                Log.d("SIGNIN ", signin);
+                if(uID != 60) {
+                    createUsers(uID);
+                    startActivity(detailedStats);
+                }
+
                // Intent sendintent = new Intent(LoginActivity.this, PhoneToWatchService.class);
                 //sendintent.putExtra("DATA", "stats");
                 //startService(sendintent);
@@ -112,6 +127,56 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+    }
+
+    public int attemptSignin(String login, String password) {
+        String sUsers = loadJSONFromAsset("users");
+        try {
+            JSONArray jUsers = new JSONArray(sUsers);
+
+            for(int i = 0; i < jUsers.length(); i++) {
+
+                JSONObject obj = jUsers.getJSONObject(i);
+                String email = obj.getString("email");
+                int ind = obj.getInt("index");
+                if (email.equals(login)) {
+                    String pass = obj.getString("password");
+                    if(password.equals(pass)) {
+                        return ind;
+
+                    } else {
+                        //password is wrong show view
+                        incorrect();
+                        return 60;
+
+                    }
+                }
+            }
+
+            // no such user exists
+            incorrect();
+            return 60;
+        } catch (JSONException e) {
+            Log.d("Error", e.toString());
+
+        }
+        return 42;
+    }
+
+    public void incorrect() {
+        final TextView inc = (TextView) findViewById(R.id.incorrect);
+
+        final Animation in = new AlphaAnimation(0.0f, 1.0f);
+        in.setDuration(3000);
+
+        final Animation out = new AlphaAnimation(1.0f, 0.0f);
+        out.setDuration(3000);
+
+
+        inc.setVisibility(View.VISIBLE);
+        inc.startAnimation(out);
+        inc.setVisibility(View.INVISIBLE);
+
     }
 
     private void populateAutoComplete() {
@@ -369,13 +434,16 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         }
     }
 
-    public void createUsers() {
+    public void createUsers(int userID) {
         String sUsers = loadJSONFromAsset("users");
+        int value = userID;
 //        String serializedObject;
         try {
             JSONArray jUsers = new JSONArray(sUsers);
-            Random rand = new Random();
-            int value = rand.nextInt(6);
+            if(userID == 42) {
+                Random rand = new Random();
+                 value = rand.nextInt(5);
+            }
             User u1 = new User(value, jUsers);
             UserInstance user = UserInstance.getInstance();
             user.setAll(u1);

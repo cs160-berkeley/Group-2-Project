@@ -44,7 +44,7 @@ public class PhoneToWatchService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
         // Which cat do we want to feed? Grab this info from INTENT
         // which was passed over when we called startService
-        Bundle extras = intent.getExtras();
+        final Bundle extras = intent.getExtras();
         if (extras != null) {
             final String data = extras.getString("DATA");
             final String time = extras.getString("time");
@@ -69,7 +69,8 @@ public class PhoneToWatchService extends Service {
                             sendMessage("/Refill/arrival", data);
                         }
                     } else if (statsValues != null) {
-                        sendMessage("/Stats", statsValues);
+                        final String fluctuations = extras.getString("fluctuations");
+                        sendMessage("/Stats", statsValues + "#" + fluctuations);
                     }
                 }
             }).start();

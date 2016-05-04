@@ -12,6 +12,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
 import com.google.android.gms.games.stats.Stats;
 
@@ -32,14 +34,19 @@ public class NavigationDrawer extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        View hView =  navigationView.getHeaderView(0);
+        TextView nav_user = (TextView)hView.findViewById(R.id.nav_name);
+        UserInstance u = UserInstance.getInstance();
+        nav_user.setText(u.name);
+        navigationView.setNavigationItemSelectedListener(this);
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
 
         FragmentTransaction tx = getSupportFragmentManager().beginTransaction();
         StatsLaunchFragment frag = new StatsLaunchFragment();
@@ -77,11 +84,6 @@ public class NavigationDrawer extends AppCompatActivity
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -99,9 +101,6 @@ public class NavigationDrawer extends AppCompatActivity
             tx.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
             tx.commit();
             setTitle("Statistics");
-            //Intent sendintent = new Intent(NavigationDrawer.this, PhoneToWatchService.class);
-            //sendintent.putExtra("DATA", "stats");
-            //startService(sendintent);
         } else if (id == R.id.nav_reminders) {
             FragmentTransaction tx = getSupportFragmentManager().beginTransaction();
             SetRemindersFragment remindersFragment = new SetRemindersFragment();

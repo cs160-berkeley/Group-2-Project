@@ -19,10 +19,11 @@
         android:src="@android:drawable/sym_def_app_icon" />
 
     <TextView
+        android:id="@+id/nav_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
-        android:text="Kendall Jenner"
+        android:text="Username"
         android:textColor="#fff"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 

@@ -24,24 +24,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
-
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link StatsLaunchFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link StatsLaunchFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class StatsLaunchFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
 
     private OnFragmentInteractionListener mListener;
 
@@ -49,31 +32,9 @@ public class StatsLaunchFragment extends Fragment {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static StatsLaunchFragment newInstance(String param1, String param2) {
-        StatsLaunchFragment fragment = new StatsLaunchFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
@@ -102,73 +63,82 @@ public class StatsLaunchFragment extends Fragment {
         int progestinDiffMonthly = 0;
         int testosteroneDiffMonthly = 0;
 
-        try {
-            StringBuilder response = readJSON();
-            JSONArray hormones = new JSONArray(response.toString());
-            ArrayList<Entry> estrogen = new ArrayList<>();
-            final ArrayList<Entry> progestin = new ArrayList<>();
-            final ArrayList<Entry> testosterone = new ArrayList<>();
-            ArrayList<String> labels = new ArrayList<>();
+        UserInstance u = UserInstance.getInstance();
+        ArrayList<User.statHolder> userStats = u.getStats();
 
-            int e1 = 0;
-            int e2 = 0;
-            int p1 = 0;
-            int p2 = 0;
-            int t1 = 0;
-            int t2 = 0;
+        ArrayList<Entry> estrogen = new ArrayList<>();
+        final ArrayList<Entry> progestin = new ArrayList<>();
+        final ArrayList<Entry> testosterone = new ArrayList<>();
+        ArrayList<String> labels = new ArrayList<>();
 
-            for (int i = 0; i < hormones.length(); i++) {
-                JSONObject object = hormones.getJSONObject(i);
-                String day = object.getString("day");
-                String month = object.getString("month");
-                int estrogenValue = object.getInt("estrogen");
-                int progestinValue = object.getInt("progestin");
-                int testosteroneValue = object.getInt("testosterone");
-                estrogen.add(new Entry((float) estrogenValue, i));
-                progestin.add(new Entry((float) progestinValue, i));
-                testosterone.add(new Entry((float) testosteroneValue, i));
-                if (i == 1) {
-                    estrogenDiffDaily = estrogenValue - e1;
-                    progestinDiffDaily = progestinValue - p1;
-                    testosteroneDiffDaily = testosteroneValue - t1;
-                } else if (i == 6) {
-                    estrogenDiffWeekly = estrogenValue - (e1/6);
-                    progestinDiffWeekly = progestinValue - (p1/6);
-                    testosteroneDiffWeekly = testosteroneValue - (t1/6);
-                } else if (i == hormones.length() - 1) {
-                    estrogenDiffMonthly = estrogenValue - (e1/(hormones.length() - 1));
-                    progestinDiffMonthly = progestinValue - (p1/(hormones.length() - 1));
-                    testosteroneDiffMonthly = testosteroneValue - (t1/(hormones.length() - 1)
-                    );
-                }
-                e1 += estrogenValue;
-                p1 += progestinValue;
-                t1 += testosteroneValue;
-                labels.add(month + " " + day);
+        int e1, p1, t1, e2, p2, t2;
+        int estFluctuationWeekly, estFluctuationMonthly;
+        int proFluctuationWeekly, proFluctuationMonthly;
+        int tesFluctuationWeekly, tesFluctuationMonthly;
+        e1 = p1 = t1 = e2 = p2 = t2 = 0;
+        estFluctuationWeekly = estFluctuationMonthly = 0;
+        proFluctuationWeekly = proFluctuationMonthly = 0;
+        tesFluctuationWeekly = tesFluctuationMonthly = 0;
+
+        int num_stats = userStats.size();
+        for (int i = 0; i < num_stats; i++) {
+            User.statHolder stat = userStats.get(i);
+            int day = stat.day;
+            String month = stat.month;
+            int estrogenValue = stat.est;
+            int progestinValue = stat.pro;
+            int testosteroneValue = stat.tes;
+            estrogen.add(new Entry((float) estrogenValue, i));
+            progestin.add(new Entry((float) progestinValue, i));
+            testosterone.add(new Entry((float) testosteroneValue, i));
+
+            if (i > 0 && i < 7) {
+                estFluctuationWeekly += Math.abs(estrogenValue - e2);
+                proFluctuationWeekly += Math.abs(progestinValue - p2);
+                tesFluctuationWeekly += Math.abs(testosteroneValue - t2);
+                estFluctuationMonthly += Math.abs(estrogenValue - e2);
+                proFluctuationMonthly += Math.abs(progestinValue - p2);
+                tesFluctuationMonthly += Math.abs(testosteroneValue - t2);
+            } else if (i > 0) {
+                estFluctuationMonthly += Math.abs(estrogenValue - e2);
+                proFluctuationMonthly += Math.abs(progestinValue - p2);
+                tesFluctuationMonthly += Math.abs(testosteroneValue - t2);
             }
-        } catch (JSONException e) {
-            Log.d("Error", e.toString());
+
+            if (i == 1) {
+                estrogenDiffDaily = estrogenValue - e1;
+                progestinDiffDaily = progestinValue - p1;
+                testosteroneDiffDaily = testosteroneValue - t1;
+            } else if (i == 6) {
+                estrogenDiffWeekly = estrogenValue - (e1/6);
+                progestinDiffWeekly = progestinValue - (p1/6);
+                testosteroneDiffWeekly = testosteroneValue - (t1/6);
+            } else if (i == num_stats - 1) {
+                estrogenDiffMonthly = estrogenValue - (e1/(num_stats - 1));
+                progestinDiffMonthly = progestinValue - (p1/(num_stats - 1));
+                testosteroneDiffMonthly = testosteroneValue - (t1/(num_stats - 1)
+                );
+            }
+            e1 += estrogenValue;
+            p1 += progestinValue;
+            t1 += testosteroneValue;
+            e2 = estrogenValue;
+            p2 = progestinValue;
+            t2 = testosteroneValue;
+            labels.add(month + " " + day);
         }
+        estFluctuationWeekly = estFluctuationWeekly/(6);
+        proFluctuationWeekly = proFluctuationWeekly/(6);
+        tesFluctuationWeekly = tesFluctuationWeekly/(6);
+        estFluctuationMonthly = estFluctuationMonthly/(num_stats - 1);
+        proFluctuationMonthly = proFluctuationMonthly/(num_stats - 1);
+        tesFluctuationMonthly = tesFluctuationMonthly/(num_stats - 1);
+
         Intent sendIntent = new Intent(getActivity(), PhoneToWatchService.class);
         sendIntent.putExtra("StatsValues", estrogenDiffDaily + "|" + progestinDiffDaily + "|" + testosteroneDiffDaily + "|" + estrogenDiffWeekly + "|" + progestinDiffWeekly + "|" + testosteroneDiffWeekly + "|" + estrogenDiffMonthly + "|" + progestinDiffMonthly + "|" + testosteroneDiffMonthly);
+        sendIntent.putExtra("fluctuations", estFluctuationWeekly + "|" + proFluctuationWeekly + "|" + tesFluctuationWeekly + "|" + estFluctuationMonthly + "|" + proFluctuationMonthly + "|" + tesFluctuationMonthly);
         getActivity().startService(sendIntent);
         return v;
-    }
-
-    public StringBuilder readJSON() {
-        StringBuilder response = null;
-        try {
-            BufferedReader r = new BufferedReader(new InputStreamReader(getResources().openRawResource(getResources().getIdentifier("hormones", "raw", getActivity().getPackageName()))));
-            response = new StringBuilder();
-            String line;
-            while ((line = r.readLine()) != null) {
-                response.append(line);
-            }
-            return response;
-        } catch (IOException e) {
-            Log.d("Error", e.toString());
-            return response;
-        }
     }
 
     // TODO: Rename method, update argument and hook method into UI event
