@@ -35,14 +35,13 @@ public class User implements java.io.Serializable {
     String shipAdd;
     Boolean refRequested;
     ArrayList<statHolder> stats;
-    ArrayList<alarmHolder> alarms;
+    ArrayList<Alarm> alarms;
     ArrayList<historyHolder> refHistory;
 
 
     public User(int idNum, JSONArray data) {
         index = idNum;
         setupUser(data);
-
     }
 
     /** Get methods **/
@@ -55,7 +54,7 @@ public class User implements java.io.Serializable {
         return stats;
     }
 
-    public ArrayList<alarmHolder> getAlarms() {
+    public ArrayList<Alarm> getAlarms() {
         return alarms;
     }
 
@@ -118,15 +117,15 @@ public class User implements java.io.Serializable {
 
     }
 
-    public ArrayList<alarmHolder> setAlarms(JSONArray alarmsArr) {
+    public ArrayList<Alarm> setAlarms(JSONArray alarmsArr) {
         /** if empty... do something. Or not. **/
-        ArrayList<alarmHolder> myAlarms = new ArrayList<>();
+        ArrayList<Alarm> myAlarms = new ArrayList<>();
 
         for (int i = 0; i < alarmsArr.length(); i++) {
             try {
-                JSONObject oneAlarm = alarmsArr.getJSONObject(i);
-                alarmHolder obj = new alarmHolder(oneAlarm.getString("time"), oneAlarm.getString("ind"));
-                myAlarms.add(obj);
+                JSONObject alarm_json = alarmsArr.getJSONObject(i);
+                Alarm alarm = new Alarm(alarm_json.getInt("hours"), alarm_json.getInt("minutes"), true);
+                myAlarms.add(alarm);
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -184,17 +183,6 @@ public class User implements java.io.Serializable {
 
     }
 
-    public class alarmHolder implements Serializable{
-        String time, indicator;
-
-
-        public alarmHolder(String t, String i) {
-            time = t;
-            indicator = i;
-
-        }
-    }
-
     public class historyHolder implements Serializable{
         String date;
 
@@ -204,7 +192,5 @@ public class User implements java.io.Serializable {
 
 
     }
-
-
 
 }

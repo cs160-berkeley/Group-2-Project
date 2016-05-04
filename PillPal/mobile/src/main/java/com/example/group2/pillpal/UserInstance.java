@@ -22,7 +22,7 @@ public class UserInstance {
     String shipAdd;
     Boolean refRequested;
     ArrayList<User.statHolder> stats;
-    ArrayList<User.alarmHolder> alarms;
+    ArrayList<Alarm> alarms;
     ArrayList<User.historyHolder> refHistory;
 
     private static UserInstance instance = null;
@@ -63,7 +63,7 @@ public class UserInstance {
         return stats;
     }
 
-    public ArrayList<User.alarmHolder> getAlarms() {
+    public ArrayList<Alarm> getAlarms() {
         return alarms;
     }
 
@@ -72,4 +72,12 @@ public class UserInstance {
     }
 
 
+
+    public void deleteAlarm(Alarm alarm) {
+        alarms.remove(alarm);
+    }
+
+    public void addAlarm(Alarm alarm) {
+        alarms.add(alarm);
+    }
 }

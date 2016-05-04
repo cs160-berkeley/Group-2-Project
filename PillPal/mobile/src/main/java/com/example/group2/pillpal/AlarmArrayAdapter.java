@@ -22,8 +22,11 @@ import java.util.Calendar;
  */
 public class AlarmArrayAdapter extends ArrayAdapter<Alarm> {
 
+    private static UserInstance currentUser;
+
     public AlarmArrayAdapter(Context context, ArrayList<Alarm> alarms) {
         super(context, R.layout.rowlayout, alarms);
+        currentUser = UserInstance.getInstance();
     }
 
     @Override
@@ -84,7 +87,8 @@ public class AlarmArrayAdapter extends ArrayAdapter<Alarm> {
         }
         @Override
         public void onClick(View v) {
-            mAdapter.remove(getItem(position));
+            Alarm alarm = getItem(position);
+            currentUser.deleteAlarm(alarm);
             mAdapter.notifyDataSetChanged();
         }
     }
