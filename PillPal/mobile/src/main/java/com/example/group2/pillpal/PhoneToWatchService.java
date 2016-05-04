@@ -44,7 +44,7 @@ public class PhoneToWatchService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
         // Which cat do we want to feed? Grab this info from INTENT
         // which was passed over when we called startService
-        Bundle extras = intent.getExtras();
+        final Bundle extras = intent.getExtras();
         if (extras != null) {
             final String data = extras.getString("DATA");
             final String time = extras.getString("time");
@@ -61,24 +61,14 @@ public class PhoneToWatchService extends Service {
                     if (data != null) {
                         if (data.equals("reminder")) {
                             sendMessage("/Reminder", time);
-                        } else if (data.equals("refill")) {
-                            sendMessage("/Refill", data);
-                        } else if (data.equals("stats")) {
-                            sendMessage("/Stats", data);
-                            if (statsValues != null) {
-                                sendMessage("/Stats", statsValues);
-                            }
-                            //now that you're connected, send a massage with the cat name
-                            if (data != null) {
-                                if (data.equals("reminder")) {
-                                    sendMessage("/Reminder", data);
-                                } else if (data.equals("refill/status")) {
-                                    sendMessage("/Refill/status", arrival_date);
-                                } else if (data.equals("refill/arrival")) {
-                                    sendMessage("/Refill/arrival", data);
-                                }
-                            }
+                        } else if (data.equals("refill/status")) {
+                            sendMessage("/Refill/status", arrival_date);
+                        } else if (data.equals("refill/arrival")) {
+                            sendMessage("/Refill/arrival", data);
                         }
+                    } else if (statsValues != null) {
+                        final String fluctuations = extras.getString("fluctuations");
+                        sendMessage("/Stats", statsValues + "#" + fluctuations);
                     }
                 }
             }).start();
