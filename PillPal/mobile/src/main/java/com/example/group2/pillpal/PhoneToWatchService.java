@@ -20,8 +20,8 @@ public class PhoneToWatchService extends Service {
     public void onCreate() {
         super.onCreate();
         //initialize the googleAPIClient for message passing
-        mApiClient = new GoogleApiClient.Builder( this )
-                .addApi( Wearable.API )
+        mApiClient = new GoogleApiClient.Builder(this)
+                .addApi(Wearable.API)
                 .addConnectionCallbacks(new GoogleApiClient.ConnectionCallbacks() {
                     @Override
                     public void onConnected(Bundle connectionHint) {
@@ -45,40 +45,47 @@ public class PhoneToWatchService extends Service {
         // Which cat do we want to feed? Grab this info from INTENT
         // which was passed over when we called startService
         Bundle extras = intent.getExtras();
-        final String data = extras.getString("DATA");
-        final String time = extras.getString("time");
-        final String statsValues = extras.getString("StatsValues");
-        final String arrival_date = extras.getString("REFILL_ARRIVAL_DATE");
-        // Send the message with the cat name
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                //first, connect to the apiclient
-                mApiClient.connect();
-                //now that you're connected, send a massage with the cat name
-                if (data.equals("reminder")) {
-                    sendMessage("/Reminder", time);
-                } else if (data.equals("refill")) {
-                    sendMessage("/Refill", data);
-                } else if (data.equals("stats")) {
-                    sendMessage("/Stats", data);
-                if (statsValues != null) {
-                    sendMessage("/Stats", statsValues);
+        if (extras != null) {
+            final String data = extras.getString("DATA");
+            final String time = extras.getString("time");
+            final String statsValues = extras.getString("StatsValues");
+            final String arrival_date = extras.getString("REFILL_ARRIVAL_DATE");
+
+            // Send the message with the cat name
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    //first, connect to the apiclient
+                    mApiClient.connect();
+                    //now that you're connected, send a massage with the cat name
+                    if (data != null) {
+                        if (data.equals("reminder")) {
+                            sendMessage("/Reminder", time);
+                        } else if (data.equals("refill")) {
+                            sendMessage("/Refill", data);
+                        } else if (data.equals("stats")) {
+                            sendMessage("/Stats", data);
+                            if (statsValues != null) {
+                                sendMessage("/Stats", statsValues);
+                            }
+                            //now that you're connected, send a massage with the cat name
+                            if (data != null) {
+                                if (data.equals("reminder")) {
+                                    sendMessage("/Reminder", data);
+                                } else if (data.equals("refill/status")) {
+                                    sendMessage("/Refill/status", arrival_date);
+                                } else if (data.equals("refill/arrival")) {
+                                    sendMessage("/Refill/arrival", data);
+                                }
+                            }
+                        }
+                    }
                 }
-                //now that you're connected, send a massage with the cat name
-                 if (data != null) {
-                     if (data.equals("reminder")) {
-                         sendMessage("/Reminder", data);
-                     } else if (data.equals("refill/status")) {
-                         sendMessage("/Refill/status", arrival_date);
-                     } else if (data.equals("refill/arrival")) {
-                         sendMessage("/Refill/arrival", data);
-                     }
-                 }
-            }
-        }).start();
+            }).start();
+        }
         return START_STICKY;
     }
+
 
     @Override //remember, all services need to implement an IBiner
     public IBinder onBind(Intent intent) {
