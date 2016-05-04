@@ -10,7 +10,8 @@
   },
   "email": "brangelina@groogle.com",
   "password": "password",
-  "card": 4147,
+  "card_number": 4147,
+  "card_type": "Visa",
   "phone": "946-568-3066",
   "bill_address": {
     "street_name": "528 Stuart Street",
@@ -232,7 +233,8 @@
     "phone": "946-568-3066",
     "email": "janedeer@gonkle.com",
     "password": "password",
-    "card": 1345,
+    "card_number": 1345,
+    "card_type": "Visa",
     "refill_requested": false,
     "prescription": {
       "name": "Aranelle",
@@ -465,7 +467,8 @@
       "name": "Lutera",
       "dosage": "Once every day at noon."
     },
-    "card": 7145,
+    "card_number": 7145,
+    "card_type": "Visa",
     "bill_address": {
       "street_name": "389 Centre Street",
       "city": "Watchtower",
@@ -689,7 +692,8 @@
     },
     "password": "password",
     "refill_requested" : false,
-    "card": 8117,
+    "card_number": 8117,
+    "card_type": "Visa",
     "phone": "+902-511-3315",
     "bill_address": {
       "street_name": "201 Carroll Street",
@@ -915,7 +919,8 @@
     },
     "password": "password",
     "refill_requested" : false,
-    "card": 9341,
+    "card_number": 9341,
+    "card_type": "Visa",
     "phone": "801-517-2073",
     "bill_address": {
       "street_name": "442 Hewes Street",
@@ -1134,7 +1139,8 @@
   "name": "Kylie Jenner",
   "email": "kyliejenner@gonkle.com",
   "password": "password",
-  "card": 9856,
+  "card_number": 9856,
+  "card_type": "Visa",
   "prescription": {
     "name": "Lutera",
     "dosage": "Once every day at noon."

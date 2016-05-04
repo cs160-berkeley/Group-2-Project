@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@color/overlay"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:id="@+id/set_credit_card">
+
+    <LinearLayout
+        android:layout_width="328dp"
+        android:layout_height="132dp"
+        android:orientation="vertical"
+        android:layout_gravity="center|center_horizontal"
+        android:padding="16dp"
+        android:background="@drawable/alerts_background">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+
+            <EditText
+                android:id="@+id/cardNumberTextEdit"
+                android:layout_height="42dp"
+                android:layout_width="match_parent"
+                android:hint="Credit card number"/>
+
+            <ImageButton
+                    android:id="@+id/cancelEditButton"
+                    android:background="@color/white"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:layout_alignParentRight="true"
+                    android:src="@drawable/ic_close_24dp" />
+
+            <Button
+                android:layout_width="152dp"
+                android:layout_height="32dp"
+                android:layout_centerHorizontal="true"
+                android:layout_alignParentBottom="true"
+                android:text="Okay"
+                android:id="@+id/confirmEditButton"
+                android:background="@drawable/button_style"
+                android:textColor="@drawable/button_text_style"/>
+
+        </RelativeLayout>
+    </LinearLayout>
+</LinearLayout>

@@ -17,7 +17,8 @@ public class UserInstance {
     String phone;
     HashMap<String, String> prescription;
     String password;
-    Integer card;
+    Integer cardNumber;
+    String cardType;
     HashMap<String, String> billAdd;
     HashMap<String, String> shipAdd;
     Boolean refillRequested;
@@ -49,7 +50,8 @@ public class UserInstance {
         phone = u.phone;
         prescription = u.prescription;
         password = u.password;
-        card = u.card;
+        cardNumber = u.cardNumber;
+        cardType = u.cardType;
         billAdd = u.billAdd;
         shipAdd = u.shipAdd;
         refillRequested = u.refillRequested;

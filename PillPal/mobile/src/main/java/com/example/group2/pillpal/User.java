@@ -31,7 +31,8 @@ public class User implements java.io.Serializable {
     HashMap<String, String> prescription;
     String password;
     ArrayList<HashMap<String, String>> refillHistory;
-    Integer card;
+    Integer cardNumber;
+    String cardType;
     HashMap<String, String> billAdd;
     HashMap<String, String> shipAdd;
     HashMap<String, String> currentRefillRequest;
@@ -102,7 +103,9 @@ public class User implements java.io.Serializable {
             shipAdd.put("zip", shipping_address_json.getString("zip"));
 
             phone = targetUser.getString("phone");
-            card = targetUser.getInt("card");
+            cardNumber = targetUser.getInt("card_number");
+            cardType = targetUser.getString("card_type");
+
             refillRequested = targetUser.getBoolean("refill_requested");
             currentRefillRequest = new HashMap<String, String>();
             JSONArray preStats = targetUser.getJSONArray("stats");

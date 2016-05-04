@@ -11,7 +11,12 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import java.util.HashMap;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -28,8 +33,11 @@ public class SettingsFragment extends Fragment {
     private static final String ARG_PARAM2 = "param2";
 
     private View view;
+    private HashMap<String, String> mBillingAddress;
+    private HashMap<String, String> mShippingAddress;
 
     private OnFragmentInteractionListener mListener;
+    private UserInstance currentUser;
 
     public SettingsFragment() {
         // Required empty public constructor
@@ -55,6 +63,7 @@ public class SettingsFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        currentUser = UserInstance.getInstance();
     }
 
     @Override
@@ -65,11 +74,18 @@ public class SettingsFragment extends Fragment {
         //terrible but let's just use local vars to set everything at first
         this.view = inflater.inflate(R.layout.settings_fragment, container, false);
 
+        final LinearLayout set_billing_address = (LinearLayout) this.view.findViewById(R.id.set_billing_address);
+        final LinearLayout set_shipping_address = (LinearLayout) this.view.findViewById(R.id.set_shipping_address);
+        final LinearLayout set_credit_card = (LinearLayout) this.view.findViewById(R.id.set_credit_card);
+        set_billing_address.setVisibility(View.GONE);
+        set_shipping_address.setVisibility(View.GONE);
+        set_credit_card.setVisibility(View.GONE);
 
         ImageButton editShippingInfoBtn = (ImageButton) this.view.findViewById(R.id.editShippingAddressBtn);
         editShippingInfoBtn.setOnClickListener(
                 new View.OnClickListener() {
                     public void onClick(View v) {
+                        set_shipping_address.setVisibility(View.VISIBLE);
                         launchViewToEditShippingAddress();
                     }
                 }
@@ -78,6 +94,7 @@ public class SettingsFragment extends Fragment {
         editBillingAddressBtn.setOnClickListener(
                 new View.OnClickListener() {
                     public void onClick(View v) {
+                        set_billing_address.setVisibility(View.VISIBLE);
                         launchViewToEditBillingAddress();
                     }
                 }
@@ -87,6 +104,7 @@ public class SettingsFragment extends Fragment {
         editCreditCardInfo.setOnClickListener(
                 new View.OnClickListener() {
                     public void onClick(View v) {
+                        set_credit_card.setVisibility(View.VISIBLE);
                         launchViewToEditCreditCardInfo();
                     }
                 }
@@ -148,122 +166,140 @@ public class SettingsFragment extends Fragment {
         TextView creditCardTypeTextView = (TextView) this.view.findViewById(R.id.cardType);
         TextView cardNumberTextView = (TextView) this.view.findViewById(R.id.cardNumber);
 
-        usernameTextView.setText(ProfileInfo.sharedInstance.username);
-        passwordTextView.setText(ProfileInfo.sharedInstance.password);
-        shippingAddressLine1TextView.setText(ProfileInfo.sharedInstance.shippingAddressStreet);
-        shippingAddressLine2TextView.setText(ProfileInfo.sharedInstance.shippingAddressCityState);
-        billingAddressLine1TextView.setText(ProfileInfo.sharedInstance.billingAddressStreet);
-        billingAddressLine2TextView.setText(ProfileInfo.sharedInstance.billingAddressCityState);
-        creditCardTypeTextView.setText(ProfileInfo.sharedInstance.cardType);
-        cardNumberTextView.setText(ProfileInfo.sharedInstance.cardNo);
+        usernameTextView.setText(currentUser.email);
+        passwordTextView.setText("********");
+
+        mShippingAddress = currentUser.shipAdd;
+        mBillingAddress = currentUser.billAdd;
+
+        shippingAddressLine1TextView.setText(mShippingAddress.get("street_name"));
+        shippingAddressLine2TextView.setText(mShippingAddress.get("city") + " " + mShippingAddress.get("state") + ", " + mShippingAddress.get("zip"));
+        billingAddressLine1TextView.setText(mBillingAddress.get("street_name"));
+        billingAddressLine2TextView.setText(mBillingAddress.get("city") + " " + mBillingAddress.get("state") + ", " + mBillingAddress.get("zip"));
+        creditCardTypeTextView.setText(currentUser.cardType);
+
+        String string_card_number = currentUser.cardNumber.toString();
+        cardNumberTextView.setText("**** **** **** " + string_card_number);
+
+        EditText BillingStreetAddrEditText = (EditText) view.findViewById(R.id.billing_street_name);
+        EditText BillingCityEditText = (EditText) view.findViewById(R.id.billing_city);
+        EditText BillingStateEditText = (EditText) view.findViewById(R.id.billing_state);
+        EditText BillingZipEditText = (EditText) view.findViewById(R.id.billing_zip);
+        BillingStreetAddrEditText.setText(mBillingAddress.get("street_name"));
+        BillingCityEditText.setText(mBillingAddress.get("city"));
+        BillingStateEditText.setText(mBillingAddress.get("state"));
+        BillingZipEditText.setText(mBillingAddress.get("zip"));
+
+        EditText ShippingStreetAddrEditText = (EditText) view.findViewById(R.id.shipping_street_name);
+        EditText ShippingCityEditText = (EditText) view.findViewById(R.id.shipping_city);
+        EditText ShippingStateEditText = (EditText) view.findViewById(R.id.shipping_state);
+        EditText ShippingZipEditText = (EditText) view.findViewById(R.id.shipping_zip);
+        ShippingStreetAddrEditText.setText(mShippingAddress.get("street_name"));
+        ShippingCityEditText.setText(mShippingAddress.get("city"));
+        ShippingStateEditText.setText(mShippingAddress.get("state"));
+        ShippingZipEditText.setText(mShippingAddress.get("zip"));
+
+        EditText cardNumberTextEdit = (EditText) view.findViewById(R.id.cardNumberTextEdit);
     }
 
     // Button Methods
     public void launchViewToEditShippingAddress( ) {
-        LayoutInflater inflater = getActivity().getLayoutInflater();
-        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        View view = getView();
+        final EditText streetAddrEditText = (EditText) view.findViewById(R.id.shipping_street_name);
+        final EditText cityStateEditText = (EditText) view.findViewById(R.id.shipping_city);
+        final EditText stateEditText = (EditText) view.findViewById(R.id.shipping_state);
+        final EditText zipEditText = (EditText) view.findViewById(R.id.shipping_zip);
+        final LinearLayout set_shipping_address = (LinearLayout) this.view.findViewById(R.id.set_shipping_address);
 
-
-        View funView = inflater.inflate(R.layout.alert_dialog_set_address, null);
-        final EditText streetAddrEditText = (EditText) funView.findViewById(R.id.streetAddressEditText);
-        final EditText cityStateEditText = (EditText) funView.findViewById(R.id.cityStateAddressEditText);
-
-        builder.setView(funView);
-        final AlertDialog dialog = builder.create();
-
-        Button saveButton = (Button) funView.findViewById(R.id.confirmEditButton);
+        Button saveButton = (Button) view.findViewById(R.id.confirm_edit_shipping);
         saveButton.setOnClickListener(
                 new View.OnClickListener() {
                     public void onClick(View v) {
-                        ProfileInfo.sharedInstance.shippingAddressStreet = streetAddrEditText.getText().toString();
-                        ProfileInfo.sharedInstance.shippingAddressCityState = cityStateEditText.getText().toString();
+                        mShippingAddress.put("street_name", streetAddrEditText.getText().toString());
+                        mShippingAddress.put("city", cityStateEditText.getText().toString());
+                        mShippingAddress.put("state", stateEditText.getText().toString());
+                        mShippingAddress.put("zip", zipEditText.getText().toString());
+                        currentUser.shipAdd = mShippingAddress;
                         updateView();
-                        dialog.dismiss();
+                        set_shipping_address.setVisibility(View.GONE);
                     }
                 }
         );
 
 
-        Button cancelButton = (Button) funView.findViewById(R.id.cancelEditButton);
+        ImageButton cancelButton = (ImageButton) view.findViewById(R.id.cancel_edit_shipping);
         cancelButton.setOnClickListener(
                 new View.OnClickListener() {
                     public void onClick(View v) {
-                        dialog.dismiss();
+                        set_shipping_address.setVisibility(View.GONE);
                     }
                 }
         );
-
-        dialog.show();
     }
 
     public void launchViewToEditBillingAddress( ) {
-        LayoutInflater inflater = getActivity().getLayoutInflater();
-        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
 
+        View view = getView();
+        final EditText streetAddrEditText = (EditText) view.findViewById(R.id.billing_street_name);
+        final EditText cityStateEditText = (EditText) view.findViewById(R.id.billing_city);
+        final EditText stateEditText = (EditText) view.findViewById(R.id.billing_state);
+        final EditText zipEditText = (EditText) view.findViewById(R.id.billing_zip);
+        final LinearLayout set_billing_address = (LinearLayout) this.view.findViewById(R.id.set_billing_address);
 
-        View funView = inflater.inflate(R.layout.alert_dialog_set_address, null);
-        final EditText streetAddrEditText = (EditText) funView.findViewById(R.id.streetAddressEditText);
-        final EditText cityStateEditText = (EditText) funView.findViewById(R.id.cityStateAddressEditText);
-
-        builder.setView(funView);
-        final AlertDialog dialog = builder.create();
-
-        Button saveButton = (Button) funView.findViewById(R.id.confirmEditButton);
+        Button saveButton = (Button) view.findViewById(R.id.confirm_edit_billing);
         saveButton.setOnClickListener(
                 new View.OnClickListener() {
                     public void onClick(View v) {
-                        ProfileInfo.sharedInstance.billingAddressStreet = streetAddrEditText.getText().toString();
-                        ProfileInfo.sharedInstance.billingAddressCityState = cityStateEditText.getText().toString();
+                        mBillingAddress.put("street_name", streetAddrEditText.getText().toString());
+                        mBillingAddress.put("city", cityStateEditText.getText().toString());
+                        mBillingAddress.put("state", stateEditText.getText().toString());
+                        mBillingAddress.put("zip", zipEditText.getText().toString());
+                        currentUser.shipAdd = mShippingAddress;
                         updateView();
-                        dialog.dismiss();
+                        set_billing_address.setVisibility(View.GONE);
                     }
                 }
         );
 
-
-        Button cancelButton = (Button) funView.findViewById(R.id.cancelEditButton);
+        ImageButton cancelButton = (ImageButton) view.findViewById(R.id.cancel_edit_billing);
         cancelButton.setOnClickListener(
                 new View.OnClickListener() {
                     public void onClick(View v) {
-                        dialog.dismiss();
+                        set_billing_address.setVisibility(View.GONE);
                     }
                 }
         );
 
-        dialog.show();
     }
 
     public void launchViewToEditCreditCardInfo( ) {
-        LayoutInflater inflater = getActivity().getLayoutInflater();
-        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
 
-        View funView = inflater.inflate(R.layout.alert_dialog_set_credit_card, null);
-        final EditText cardNumberTextEdit = (EditText) funView.findViewById(R.id.cardNumberTextEdit);
-
-        builder.setView(funView);
-        final AlertDialog dialog = builder.create();
-
-        Button saveButton = (Button) funView.findViewById(R.id.confirmEditButton);
+        View view = getView();
+        final EditText cardNumberTextEdit = (EditText) view.findViewById(R.id.cardNumberTextEdit);
+        final LinearLayout set_credit_card = (LinearLayout) this.view.findViewById(R.id.set_credit_card);
+        Button saveButton = (Button) view.findViewById(R.id.confirmEditButton);
         saveButton.setOnClickListener(
                 new View.OnClickListener() {
 
                     public void onClick(View v) {
-                        ProfileInfo.sharedInstance.cardNo = cardNumberTextEdit.getText().toString();
-                        updateView();
-                        dialog.dismiss();
+                        String input = cardNumberTextEdit.getText().toString();
+                        if (input.length() >= 4) {
+                            String card_number_partial = input.substring(input.length() - 4, input.length());
+                            currentUser.cardNumber = Integer.parseInt(card_number_partial);
+                            updateView();
+                        }
+                        set_credit_card.setVisibility(View.GONE);
                     }
                 }
         );
 
-        Button cancelButton = (Button) funView.findViewById(R.id.cancelEditButton);
+        ImageButton cancelButton = (ImageButton) view.findViewById(R.id.cancelEditButton);
         cancelButton.setOnClickListener(
                 new View.OnClickListener() {
                     public void onClick(View v) {
-                        dialog.dismiss();
+                        set_credit_card.setVisibility(View.GONE);
                     }
                 }
         );
-
-        dialog.show();
     }
 }
