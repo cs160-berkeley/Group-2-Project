@@ -37,39 +37,7 @@ import java.util.Map;
 public class RefillsFragment extends Fragment implements View.OnClickListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-
-    private static Map<String, String> address;
-    static
-    {
-        address = new HashMap<String, String>();
-        address.put("street_name", "2000 Bancroft Way");
-        address.put("city", "Berkeley");
-        address.put("state", "California");
-        address.put("zip", "94704");
-    }
-    private static Map<String, String> current_pill;
-    static
-    {
-        current_pill = new HashMap<String, String>();
-        current_pill.put("name", "Aranelle");
-        current_pill.put("dosage", "Once every day at noon.");
-    }
-    private static ArrayList<HashMap<String, String>> refill_history;
-    static
-    {
-        refill_history = new ArrayList<HashMap<String, String>>();
-        HashMap<String, String> first_refill = new HashMap<String, String>();
-        HashMap<String, String> second_refill = new HashMap<String, String>();
-        first_refill.put("name", "Aranelle");
-        first_refill.put("date", "March 10, 2016");
-        second_refill.put("name", "Aranelle");
-        second_refill.put("date", "April 8, 2016");
-        refill_history.add(first_refill);
-        refill_history.add(second_refill);
-    }
-
-    private static Boolean refill_requested = false;
-
+    private static UserInstance currentUser;
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -105,7 +73,7 @@ public class RefillsFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        System.out.println("HELLOOOO");
+        currentUser = UserInstance.getInstance();
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
@@ -125,15 +93,21 @@ public class RefillsFragment extends Fragment implements View.OnClickListener {
         TextView pill_dosage = (TextView) v.findViewById(R.id.pillDosage);
         TextView last_refill = (TextView) v.findViewById(R.id.lastRefillInfo);
 
-        address_line_one.setText(address.get("street_name"));
-        address_line_two.setText(address.get("city") + " " + address.get("state") + ", " + address.get("zip"));
+        HashMap<String, String> shipping_address = currentUser.shipAdd;
+        String street_name = shipping_address.get("street_name");
+        String second_line = shipping_address.get("city") + " " + shipping_address.get("state") + shipping_address.get("zip");
+        address_line_one.setText(street_name);
+        address_line_two.setText(second_line);
 
-        pill_name.setText(current_pill.get("name"));
-        pill_dosage.setText(current_pill.get("dosage"));
+        pill_name.setText(currentUser.prescription.get("name"));
+        pill_dosage.setText(currentUser.prescription.get("dosage"));
 
-        HashMap<String, String> lastRefill = refill_history.get(refill_history.size() - 1);
-        last_refill.setText(lastRefill.get("name") + " - " + lastRefill.get("date"));
-
+        if (currentUser.refillHistory != null) {
+            HashMap<String, String> lastRefill = currentUser.refillHistory.get(currentUser.refillHistory.size() - 1);
+            last_refill.setText(lastRefill.get("name") + " - " + lastRefill.get("date"));
+        } else {
+            last_refill.setText("None");
+        }
         Button refillsButton = (Button) v.findViewById(R.id.refills_button);
         Button confirmationButton = (Button) v.findViewById(R.id.confirmation_button);
         Button statusButton = (Button) v.findViewById(R.id.status_button);
@@ -145,13 +119,10 @@ public class RefillsFragment extends Fragment implements View.OnClickListener {
         LinearLayout refill_confirmation = (LinearLayout) v.findViewById(R.id.refill_confirmation);
         LinearLayout refill_status = (LinearLayout) v.findViewById(R.id.refill_status);
 
-
         refill_confirmation.setVisibility(View.GONE);
         refill_status.setVisibility(View.GONE);
 
-
-
-        if (!refill_requested) {
+        if (!currentUser.refillRequested) {
             refillsButton.setText("Request Refills");
         } else {
             refillsButton.setText("View Refill Status");
@@ -161,9 +132,6 @@ public class RefillsFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        // implements your things
-//        ImageView imageView = (ImageView) getView().findViewById(R.id.foo);
-//        View v = inflater.inflate(R.layout.refills_fragment, container, false);
         View view = getView();
         LinearLayout refill_status = (LinearLayout) view.findViewById(R.id.refill_status);
         LinearLayout refill_confirmation = (LinearLayout) view.findViewById(R.id.refill_confirmation);
@@ -171,9 +139,8 @@ public class RefillsFragment extends Fragment implements View.OnClickListener {
         int button_id = v.getId();
         switch (button_id) {
             case R.id.refills_button:
-                if (refill_requested) {
+                if (currentUser.refillRequested) {
                     refill_status.setVisibility(View.VISIBLE);
-
                 } else {
                     refill_confirmation.setVisibility(View.VISIBLE);
                     AlarmManager alarm_manager = (AlarmManager) v.getContext().getSystemService(Context.ALARM_SERVICE);
@@ -186,8 +153,6 @@ public class RefillsFragment extends Fragment implements View.OnClickListener {
                     Intent arrival_intent = new Intent(v.getContext(), PhoneToWatchService.class);
                     arrival_intent.putExtra("DATA", "refill/arrival");
 
-
-
                     // ALARM FOR PACKAGE ARRIVAL
 //                    Date current_date = new Date();
 //                    calendar.setTime(current_date);
@@ -199,11 +164,10 @@ public class RefillsFragment extends Fragment implements View.OnClickListener {
 
                     Date current_date = new Date();
                     calendar.setTime(current_date);
-                    calendar.add(Calendar.SECOND, 30);
+                    calendar.add(Calendar.SECOND, 5);
                     String formatted_date = date_formatter.format(calendar.getTime());
 //                    PendingIntent arrival_pending_intent = PendingIntent.getService(v.getContext(), 0, arrival_intent, PendingIntent.FLAG_ONE_SHOT);
 //                    alarm_manager.setExact(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), arrival_pending_intent);
-
 
                     // ALARM FOR PACKAGE STATUS
 //                    Date current_date = new Date();
@@ -215,7 +179,7 @@ public class RefillsFragment extends Fragment implements View.OnClickListener {
                     current_date = new Date();
                     calendar.setTime(current_date);
                     System.out.println(calendar.getTime());
-                    calendar.add(Calendar.SECOND, 3);
+                    calendar.add(Calendar.SECOND, 1);
                     System.out.println(calendar.getTime());
                     status_intent.putExtra("REFILL_ARRIVAL_DATE", formatted_date);
                     PendingIntent status_pending_intent = PendingIntent.getService(v.getContext(), 0, status_intent, PendingIntent.FLAG_ONE_SHOT);
@@ -226,7 +190,9 @@ public class RefillsFragment extends Fragment implements View.OnClickListener {
 
                     // update button
                     refillsButton.setText("View Refill Status");
-//                    refill_requested = true;
+                    currentUser.refillRequested = true;
+                    currentUser.currentRefillRequest.put("name", currentUser.prescription.get("name"));
+                    currentUser.currentRefillRequest.put("date", formatted_date);
                 }
                 break;
             case R.id.confirmation_button:

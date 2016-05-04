@@ -3,16 +3,27 @@
   "index": 0,
   "age": 25,
   "name": "Angelina Jolie",
-  "refill_requested": true,
-  "prescription": "Lutera",
+  "refill_requested": false,
+  "prescription": {
+    "name": "Lutera",
+    "dosage": "Once every day at noon."
+  },
   "email": "brangelina@groogle.com",
   "password": "password",
   "card": 4147,
   "phone": "946-568-3066",
-  "bill_address": "528 Stuart Street, Lindisfarne, Rhode Island, 5663",
-  "ship_address": "528 Stuart Street, Lindisfarne, Rhode Island, 5663",
-
-
+  "bill_address": {
+    "street_name": "528 Stuart Street",
+    "city": "Lindisfarne",
+    "state": "Rhode Island",
+    "zip": "5663"
+  },
+  "ship_address": {
+    "street_name": "528 Stuart Street",
+    "city": "Lindisfarne",
+    "state": "Rhode Island",
+    "zip": "5663"
+  },
   "stats": [{
     "day": 1,
     "month": "April",
@@ -205,9 +216,9 @@
     "hours": 11,
     "minutes": 30
   }],
-
   "refill_history": [{
-    "date": "April 14th, 2016"
+    "name": "Lutera",
+    "date": "04/14/16"
   }]
 
 
@@ -222,11 +233,23 @@
     "email": "janedeer@gonkle.com",
     "password": "password",
     "card": 1345,
-    "refill_requested": true,
-    "prescription": "Aranelle",
-    "bill_address": "779 Joralemon Street, Groton, Arizona, 1790",
-    "ship_address": "779 Joralemon Street, Groton, Arizona, 1790",
-
+    "refill_requested": false,
+    "prescription": {
+      "name": "Aranelle",
+      "dosage": "Once every day at noon."
+    },
+    "bill_address": {
+      "street_name": "779 Joralemon Street",
+      "city": "Groton",
+      "state": "Arizona",
+      "zip": "1790"
+    },
+    "ship_address": {
+      "street_name": "779 Joralemon Street",
+      "city": "Groton",
+      "state": "Arizona",
+      "zip": "1790"
+    },
     "stats": [{
       "day": 1,
       "month": "April",
@@ -421,7 +444,8 @@
     }],
 
     "refill_history": [{
-      "date": "April 14th, 2016"
+      "name": "Aranelle",
+      "date": "04/14/16"
     }]
   },
 
@@ -437,10 +461,23 @@
     "email": "megan@firefox.com",
     "password": "password",
     "refill_requested" : false,
-    "prescription" : "Lutera",
+    "prescription": {
+      "name": "Lutera",
+      "dosage": "Once every day at noon."
+    },
     "card": 7145,
-    "bill_address": "389 Centre Street, Watchtower, Oklahoma, 7344",
-    "ship_address": "389 Centre Street, Watchtower, Oklahoma, 7344",
+    "bill_address": {
+      "street_name": "389 Centre Street",
+      "city": "Watchtower",
+      "state": "Oklahoma",
+      "zip": "7344"
+    },
+    "ship_address": {
+      "street_name": "389 Centre Street",
+      "city": "Watchtower",
+      "state": "Oklahoma",
+      "zip": "7344"
+    },
     "stats": [{
       "day": 1,
       "month": "April",
@@ -635,7 +672,8 @@
     }],
 
     "refill_history": [{
-      "date": "April 14th, 2016"
+      "name": "Lutera",
+      "date": "04/14/16"
     }]
   },
 
@@ -645,13 +683,26 @@
     "age": 21,
     "name": "Ashley Olsen",
     "email": "notmarykate@gonkle.com",
-    "prescription": "Aranelle",
+    "prescription": {
+      "name": "Aranelle",
+      "dosage": "Once every day at noon."
+    },
     "password": "password",
     "refill_requested" : false,
     "card": 8117,
     "phone": "+902-511-3315",
-    "bill_address": "201 Carroll Street, Orviston, Wisconsin, 6855",
-    "ship_address": "201 Carroll Street, Orviston, Wisconsin, 6855",
+    "bill_address": {
+      "street_name": "201 Carroll Street",
+      "city": "Orviston",
+      "state": "Wisconsin",
+      "zip": "6855"
+    },
+    "ship_address": {
+      "street_name": "201 Carroll Street",
+      "city": "Orviston",
+      "state": "Wisconsin",
+      "zip": "6855"
+    },
     "stats": [{
       "day": 1,
       "month": "April",
@@ -846,7 +897,8 @@
     }],
 
     "refill_history": [{
-      "date": "April 14th, 2016"
+      "name": "Aranelle",
+      "date": "04/14/16"
     }]
   },
 
@@ -857,13 +909,26 @@
     "age": 19,
     "name": "Christina Hendricks",
     "email": "hendrix@splinx.com",
-    "prescription": "Lutera",
+    "prescription": {
+      "name": "Lutera",
+      "dosage": "Once every day at noon."
+    },
     "password": "password",
-    "refill_requested" : true,
+    "refill_requested" : false,
     "card": 9341,
     "phone": "801-517-2073",
-    "bill_address": "442 Hewes Street, Gibbsville, Montana, 3799",
-    "ship_address": "442 Hewes Street, Gibbsville, Montana, 3799",
+    "bill_address": {
+      "street_name": "442 Hewes Street",
+      "city": "Gibbsville",
+      "state": "Montana",
+      "zip": "3799"
+    },
+    "ship_address": {
+      "street_name": "442 Hewes Street",
+      "city": "Gibbsville",
+      "state": "Montana",
+      "zip": "3799"
+    },
     "stats": [{
       "day": 1,
       "month": "April",
@@ -1057,7 +1122,8 @@
     }],
 
     "refill_history": [{
-      "date": "April 14th, 2016"
+      "name": "Lutera",
+      "date": "04/14/16"
     }]
   }, {
 
@@ -1069,13 +1135,24 @@
   "email": "kyliejenner@gonkle.com",
   "password": "password",
   "card": 9856,
-  "prescription": "Lutera",
+  "prescription": {
+    "name": "Lutera",
+    "dosage": "Once every day at noon."
+  },
   "refill_requested" : false,
   "phone": "875-426-3268",
-  "bill_address": "793 Pineapple Street, Salvo, Mississippi, 306",
-  "ship_address": "793 Pineapple Street, Salvo, Mississippi, 306",
-
-
+  "bill_address": {
+    "street_name": "793 Pineapple Street",
+    "city": "Salvo",
+    "state": "Mississippi",
+    "zip": "306"
+  },
+  "ship_address": {
+    "street_name": "793 Pineapple Street",
+    "city": "Salvo",
+    "state": "Mississippi",
+    "zip": "306"
+  },
   "stats": [{
     "day": 1,
     "month": "April",
@@ -1269,8 +1346,8 @@
   }],
 
   "refill_history": [{
-    "date": "April 14th, 2016"
+    "name": "Lutera",
+    "date": "04/14/16"
   }]
 }
-
 ]
