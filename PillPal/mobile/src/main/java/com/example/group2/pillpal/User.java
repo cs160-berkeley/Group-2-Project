@@ -7,6 +7,7 @@ import org.json.JSONObject;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by Jessica on 4/29/16.
@@ -27,17 +28,17 @@ public class User implements java.io.Serializable {
     String name;
     String email;
     String phone;
-    String prescription;
+    HashMap<String, String> prescription;
     String password;
-    String lastRefill;
-    Integer card;
-    String billAdd;
-    String shipAdd;
-    Boolean refRequested;
+    ArrayList<HashMap<String, String>> refillHistory;
+    Integer cardNumber;
+    String cardType;
+    HashMap<String, String> billAdd;
+    HashMap<String, String> shipAdd;
+    HashMap<String, String> currentRefillRequest;
+    Boolean refillRequested;
     ArrayList<statHolder> stats;
     ArrayList<Alarm> alarms;
-    ArrayList<historyHolder> refHistory;
-
 
     public User(int idNum, JSONArray data) {
         index = idNum;
@@ -58,10 +59,6 @@ public class User implements java.io.Serializable {
         return alarms;
     }
 
-    public ArrayList<historyHolder> getHistory() {
-        return refHistory;
-    }
-
 
     public void setupUser(JSONArray arr) {
         /** get the id-th user from the entire JSON array, then uses info from the id-th user in the methods below to set up
@@ -73,30 +70,56 @@ public class User implements java.io.Serializable {
             JSONObject targetUser = arr.getJSONObject(index);
             id = targetUser.getString("id");
             name = targetUser.getString("name");
-            lastRefill = targetUser.getString("prescription"); //** Just same as prescription, for convenience sake
-            prescription = targetUser.getString("prescription");
+            JSONArray refill_history_json = (JSONArray) targetUser.get("refill_history");
+            refillHistory = new ArrayList<HashMap<String, String>>();
+            if (refill_history_json != null) {
+                for (int i = 0; i < refill_history_json.length(); i++){
+                    JSONObject entry = (JSONObject) refill_history_json.get(i);
+                    HashMap<String, String> first_refill = new HashMap<String, String>();
+                    first_refill.put("name", entry.getString("name"));
+                    first_refill.put("date", entry.getString("date"));
+                    refillHistory.add(first_refill);
+                }
+            }
+            JSONObject json_prescription = (JSONObject) targetUser.get("prescription");
+            prescription = new HashMap<String, String>();
+            prescription.put("name", json_prescription.getString("name"));
+            prescription.put("dosage", json_prescription.getString("dosage"));
             email = targetUser.getString("email");
             password = targetUser.getString("password");
-            billAdd = targetUser.getString("bill_address");
-            shipAdd = targetUser.getString("ship_address");
-            phone = targetUser.getString("phone");
-            card = targetUser.getInt("card");
-            refRequested = targetUser.getBoolean("refill_requested");
 
+            JSONObject billing_address_json = (JSONObject) targetUser.get("bill_address");
+            JSONObject shipping_address_json = (JSONObject) targetUser.get("ship_address");
+            billAdd = new HashMap<String, String>();
+            shipAdd = new HashMap<String, String>();
+            billAdd.put("street_name", billing_address_json.getString("street_name"));
+            billAdd.put("city", billing_address_json.getString("city"));
+            billAdd.put("state", billing_address_json.getString("state"));
+            billAdd.put("zip", billing_address_json.getString("zip"));
+
+            shipAdd.put("street_name", shipping_address_json.getString("street_name"));
+            shipAdd.put("city", shipping_address_json.getString("city"));
+            shipAdd.put("state", shipping_address_json.getString("state"));
+            shipAdd.put("zip", shipping_address_json.getString("zip"));
+
+            phone = targetUser.getString("phone");
+            cardNumber = targetUser.getInt("card_number");
+            cardType = targetUser.getString("card_type");
+
+            refillRequested = targetUser.getBoolean("refill_requested");
+            currentRefillRequest = new HashMap<String, String>();
             JSONArray preStats = targetUser.getJSONArray("stats");
             JSONArray preAlarms = targetUser.getJSONArray("alarms");
-            JSONArray prefills = targetUser.getJSONArray("refill_history");
 
             stats = setStats(preStats);
             alarms = setAlarms(preAlarms);
-            refHistory = setRefHistory(prefills);
 
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-
     }
+
+
 
     public ArrayList<statHolder> setStats(JSONArray statsArr) {
         /** if empty... do something. Or not. **/
@@ -131,33 +154,9 @@ public class User implements java.io.Serializable {
                 e.printStackTrace();
             }
 
-        } return myAlarms;
+        }
+        return myAlarms;
     }
-
-    public ArrayList<historyHolder> setRefHistory(JSONArray refHistoryArr) {
-
-        /** if empty... do something. Or not.
-         * also this could be implemented as an array of strings, since
-         * the only data the refill history object currently holds is just
-         * one string. However, if we want to add stuff later, we can just
-         * easily add or delete from this + the class itself**/
-
-        ArrayList<historyHolder> myHist = new ArrayList<>();
-
-        for (int i = 0; i < refHistoryArr.length(); i++) {
-            try {
-                JSONObject oneRefill = refHistoryArr.getJSONObject(i);
-                historyHolder obj = new historyHolder(oneRefill.getString("date"));
-                myHist.add(obj);
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-        } return myHist;
-
-    }
-
     /** Edit methods **/
 
     /** update database?**/

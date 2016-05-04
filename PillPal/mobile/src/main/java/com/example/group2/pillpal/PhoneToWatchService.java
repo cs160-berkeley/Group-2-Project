@@ -61,24 +61,13 @@ public class PhoneToWatchService extends Service {
                     if (data != null) {
                         if (data.equals("reminder")) {
                             sendMessage("/Reminder", time);
-                        } else if (data.equals("refill")) {
-                            sendMessage("/Refill", data);
-                        } else if (data.equals("stats")) {
-                            sendMessage("/Stats", data);
-                            if (statsValues != null) {
-                                sendMessage("/Stats", statsValues);
-                            }
-                            //now that you're connected, send a massage with the cat name
-                            if (data != null) {
-                                if (data.equals("reminder")) {
-                                    sendMessage("/Reminder", data);
-                                } else if (data.equals("refill/status")) {
-                                    sendMessage("/Refill/status", arrival_date);
-                                } else if (data.equals("refill/arrival")) {
-                                    sendMessage("/Refill/arrival", data);
-                                }
-                            }
+                        } else if (data.equals("refill/status")) {
+                            sendMessage("/Refill/status", arrival_date);
+                        } else if (data.equals("refill/arrival")) {
+                            sendMessage("/Refill/arrival", data);
                         }
+                    } else if (statsValues != null) {
+                        sendMessage("/Stats", statsValues);
                     }
                 }
             }).start();
