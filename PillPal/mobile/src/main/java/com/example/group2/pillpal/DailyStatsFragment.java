@@ -33,6 +33,9 @@ import java.util.ArrayList;
 public class DailyStatsFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
+    int[] mColors = new int[] {
+            Color.rgb(68,138,255), Color.rgb(255, 112, 67), Color.rgb(0, 230, 118)
+    };
 
     public DailyStatsFragment() {
         // Required empty public constructor
@@ -48,7 +51,6 @@ public class DailyStatsFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.stats_fragment, container, false);
-
         TextView changesTitle = (TextView) v.findViewById(R.id.changesTitle);
         final TextView estrogenLabel = (TextView) v.findViewById(R.id.estrogenValue);
         TextView progestinLabel = (TextView) v.findViewById(R.id.progestinValue);
@@ -57,7 +59,6 @@ public class DailyStatsFragment extends Fragment {
 
         changesTitle.setText("Daily Changes");
         UserInstance u = UserInstance.getInstance();
-        Log.d("T", "NAME: " + u.name);
         ArrayList<User.statHolder> userStats = u.getStats();
 
         ArrayList<Entry> estrogen = new ArrayList<>();
@@ -65,17 +66,13 @@ public class DailyStatsFragment extends Fragment {
         final ArrayList<Entry> testosterone = new ArrayList<>();
         ArrayList<String> labels = new ArrayList<>();
 
-        int e1 = 0;
-        int e2 = 0;
-        int p1 = 0;
-        int p2 = 0;
-        int t1 = 0;
-        int t2 = 0;
+        int e1, p1, t1, e2, p2, t2;
+        e1 = p1 = t1 = e2 = p2 = t2 = 0;
 
-        for (int i = 0; i < 2; i++) {
+        int num_stats = 2;
+        for (int i = 0; i < num_stats; i++) {
             User.statHolder stat = userStats.get(i);
             int day = stat.day;
-            Log.d("T", "month: " + stat.month + " day: " + stat.day + " est: " + stat.est + " pro: " + stat.pro + " tes: " + stat.tes);
             String month = stat.month;
             int estrogenValue = stat.est;
             int progestinValue = stat.pro;
@@ -98,22 +95,30 @@ public class DailyStatsFragment extends Fragment {
         final int estrogenDiff = e2 - e1;
         final int progestinDiff = p2 - p1;
         final int testosteroneDiff = t2 - t1;
-        String estrogenText = estrogenDiff > 0 ? "+" + estrogenDiff + "%" : estrogenDiff+ "%";
-        String progestinText = progestinDiff > 0 ? "+" + progestinDiff + "%" : progestinDiff+ "%";
-        String testosteroneText = testosteroneDiff > 0 ? "+" + testosteroneDiff + "%" : testosteroneDiff+ "%";
+
+        String estrogenText = hormoneText(estrogenDiff);
+        String progestinText = hormoneText(progestinDiff);
+        String testosteroneText = hormoneText(testosteroneDiff);
         estrogenLabel.setText(estrogenText);
         progestinLabel.setText(progestinText);
         testosteroneLabel.setText(testosteroneText);
-        if (Math.abs(estrogenDiff) > 20 || Math.abs(progestinDiff) > 20 || Math.abs(testosteroneDiff) > 20) {
-            status.setText("Your hormone levels are abnormal. Consider visiting a doctor or changing your pill.");
+
+        if (Math.abs(estrogenDiff) > 30 || Math.abs(progestinDiff) > 30 || Math.abs(testosteroneDiff) > 30) {
+            status.setText("Today's hormonal fluctuations are abnormal. Please visit a doctor to get checked.");
+        } else if (Math.abs(estrogenDiff) > 15 || Math.abs(progestinDiff) > 15 || Math.abs(testosteroneDiff) > 15) {
+            status.setText("Today's hormonal fluctuations are high.");
         } else {
-            status.setText("Your hormone levels are normal.");
+            status.setText("Today's hormonal fluctuations are normal.");
         }
+        setupChart(estrogen, progestin, testosterone, labels, v);
+        return v;
+    }
 
-        int[] mColors = new int[] {
-                Color.rgb(68,138,255), Color.rgb(255, 112, 67), Color.rgb(0, 230, 118)
-        };
+    public String hormoneText(int hormone) {
+        return hormone > 0 ? "+" + hormone + "%" : hormone + "%";
+    }
 
+    public void setupChart(ArrayList<Entry> estrogen, ArrayList<Entry> progestin, ArrayList<Entry> testosterone, ArrayList<String> labels, View v) {
         LineDataSet estrogenDataset = new LineDataSet(estrogen, "Estrogen");
         estrogenDataset.setLineWidth(1.5f);
         estrogenDataset.setDrawValues(false);
@@ -162,7 +167,6 @@ public class DailyStatsFragment extends Fragment {
         YAxis yAxis = lineChart.getAxisLeft();
         yAxis.setDrawAxisLine(true);
         lineChart.invalidate();
-        return v;
     }
 
     // TODO: Rename method, update argument and hook method into UI event

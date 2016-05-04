@@ -35,6 +35,9 @@ import java.util.ArrayList;
 public class MonthlyStatsFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
+    int[] mColors = new int[] {
+            Color.rgb(68,138,255), Color.rgb(255, 112, 67), Color.rgb(0, 230, 118)
+    };
 
     public MonthlyStatsFragment() {
         // Required empty public constructor
@@ -57,26 +60,20 @@ public class MonthlyStatsFragment extends Fragment {
         final TextView status = (TextView) v.findViewById(R.id.status);
         changesTitle.setText("Monthly Changes");
         UserInstance u = UserInstance.getInstance();
-        Log.d("T", "NAME: " + u.name);
         ArrayList<User.statHolder> userStats = u.getStats();
+
         ArrayList<Entry> estrogen = new ArrayList<>();
         ArrayList<Entry> progestin = new ArrayList<>();
         ArrayList<Entry> testosterone = new ArrayList<>();
         ArrayList<String> labels = new ArrayList<>();
 
-        int e1 = 0;
-        int e2 = 0;
-        int p1 = 0;
-        int p2 = 0;
-        int t1 = 0;
-        int t2 = 0;
+        int e1, p1, t1, e2, p2, t2, estFluctuation, proFluctuation, tesFluctuation;
+        e1 = p1 = t1 = e2 = p2 = t2 = estFluctuation = proFluctuation = tesFluctuation = 0;
 
         int num_stats = userStats.size();
-
         for (int i = 0; i < num_stats; i++) {
             User.statHolder stat = userStats.get(i);
             int day = stat.day;
-            Log.d("T", "month: " + stat.month + " day: " + stat.day + " est: " + stat.est + " pro: " + stat.pro + " tes: " + stat.tes);
             String month = stat.month;
             int estrogenValue = stat.est;
             int progestinValue = stat.pro;
@@ -84,11 +81,15 @@ public class MonthlyStatsFragment extends Fragment {
             estrogen.add(new Entry((float) estrogenValue, i));
             progestin.add(new Entry((float) progestinValue, i));
             testosterone.add(new Entry((float) testosteroneValue, i));
-            if (i == num_stats - 1) {
-                e2 = estrogenValue;
-                p2 = progestinValue;
-                t2 = testosteroneValue;
-            } else {
+            if (i > 0) {
+                estFluctuation += Math.abs(estrogenValue - e2);
+                proFluctuation += Math.abs(progestinValue - p2);
+                tesFluctuation += Math.abs(testosteroneValue - t2);
+            }
+            e2 = estrogenValue;
+            p2 = progestinValue;
+            t2 = testosteroneValue;
+            if (i != num_stats - 1) {
                 e1 += estrogenValue;
                 p1 += progestinValue;
                 t1 += testosteroneValue;
@@ -98,25 +99,35 @@ public class MonthlyStatsFragment extends Fragment {
         e1 = e1/(num_stats - 1);
         p1 = p1/(num_stats - 1);
         t1 = t1/(num_stats - 1);
+        estFluctuation = estFluctuation/(num_stats - 1);
+        proFluctuation = proFluctuation/(num_stats - 1);
+        tesFluctuation = tesFluctuation/(num_stats - 1);
+
         final int estrogenDiff = e2 - e1;
         final int progestinDiff = p2 - p1;
         final int testosteroneDiff = t2 - t1;
-        String estrogenText = estrogenDiff > 0 ? "+" + estrogenDiff + "%" : estrogenDiff+ "%";
-        String progestinText = progestinDiff > 0 ? "+" + progestinDiff + "%" : progestinDiff+ "%";
-        String testosteroneText = testosteroneDiff > 0 ? "+" + testosteroneDiff + "%" : testosteroneDiff+ "%";
+
+        String estrogenText = hormoneText(estrogenDiff);
+        String progestinText = hormoneText(progestinDiff);
+        String testosteroneText = hormoneText(testosteroneDiff);
         estrogenLabel.setText(estrogenText);
         progestinLabel.setText(progestinText);
         testosteroneLabel.setText(testosteroneText);
-        if (Math.abs(estrogenDiff) > 20 || Math.abs(progestinDiff) > 20 || Math.abs(testosteroneDiff) > 20) {
-            status.setText("Your hormone levels are abnormal. Consider visiting a doctor or changing your pill.");
+
+        if (estFluctuation > 40 || proFluctuation > 40 || tesFluctuation > 40) {
+            status.setText(u.prescription + " doesn't seem to be a good fit for you. Consider changing your pill or visiting a doctor.");
         } else {
-            status.setText("Your hormone levels are normal.");
+            status.setText("You're on track with " + u.prescription + "! Hormone levels for the week are looking great!");
         }
+        setupChart(estrogen, progestin, testosterone, labels, v);
+        return v;
+    }
 
-        int[] mColors = new int[] {
-                Color.rgb(68,138,255), Color.rgb(255, 112, 67), Color.rgb(0, 230, 118)
-        };
+    public String hormoneText(int hormone) {
+        return hormone > 0 ? "+" + hormone + "%" : hormone + "%";
+    }
 
+    public void setupChart(ArrayList<Entry> estrogen, ArrayList<Entry> progestin, ArrayList<Entry> testosterone, ArrayList<String> labels, View v) {
         LineDataSet estrogenDataset = new LineDataSet(estrogen, "Estrogen");
         estrogenDataset.setLineWidth(1.5f);
         estrogenDataset.setDrawValues(false);
@@ -165,7 +176,6 @@ public class MonthlyStatsFragment extends Fragment {
         YAxis yAxis = lineChart.getAxisLeft();
         yAxis.setDrawAxisLine(true);
         lineChart.invalidate();
-        return v;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
