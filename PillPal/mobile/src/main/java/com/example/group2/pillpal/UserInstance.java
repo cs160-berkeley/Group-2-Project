@@ -76,4 +76,15 @@ public class UserInstance {
     public void addAlarm(Alarm alarm) {
         alarms.add(alarm);
     }
+
+    public void setBillAdd(String newAdd) {
+
+    }
+
+    public void setShipAdd(String newAdd) {
+
+    }
+
+    public void setPresc (String presc) {
+    }
 }
