@@ -80,4 +80,16 @@ public class UserInstance {
     public void addAlarm(Alarm alarm) {
         alarms.add(alarm);
     }
+
+    public void setBillAdd(String newAdd) {
+        billAdd = newAdd;
+    }
+
+    public void setShipAdd(String newAdd) {
+        shipAdd = newAdd;
+    }
+
+    public void setPresc (String presc) {
+        prescription = presc;
+    }
 }
