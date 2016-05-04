@@ -31,7 +31,8 @@ public class SetRemindersFragment extends Fragment implements View.OnClickListen
 
     private OnFragmentInteractionListener mListener;
 
-    private static ArrayList<Alarm> alarm_values;
+//    private static ArrayList<Alarm> alarm_values;
+    private static UserInstance currentUser;
     private static ArrayAdapter<Alarm> mAdapter;
 
     public SetRemindersFragment() {
@@ -51,19 +52,14 @@ public class SetRemindersFragment extends Fragment implements View.OnClickListen
         SetRemindersFragment fragment = new SetRemindersFragment();
         Bundle args = new Bundle();
         fragment.setArguments(args);
+        currentUser = UserInstance.getInstance();
         return fragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        alarm_values = new ArrayList<Alarm>();
-        Alarm sample_alarm_1 = new Alarm(10, 30, true);
-        Alarm sample_alarm_2 = new Alarm(11, 30, true);
-        Alarm sample_alarm_3 = new Alarm(11, 20, true);
-        alarm_values.add(sample_alarm_1);
-        alarm_values.add(sample_alarm_2);
-        alarm_values.add(sample_alarm_3);
+        currentUser = UserInstance.getInstance();
     }
 
     @Override
@@ -88,8 +84,7 @@ public class SetRemindersFragment extends Fragment implements View.OnClickListen
                         calendar.set(Calendar.MINUTE, alarm.minutes);
 
                         alarmMgr.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, alarmIntent);
-
-                        mAdapter.add(alarm);
+                        currentUser.addAlarm(alarm);
                         mAdapter.notifyDataSetChanged();
                     }
                 };
@@ -109,7 +104,7 @@ public class SetRemindersFragment extends Fragment implements View.OnClickListen
         newAlarmButton.setOnClickListener(this);
 
         ListView listView = (ListView) v.findViewById(android.R.id.list);
-        mAdapter = new AlarmArrayAdapter(getActivity(), alarm_values);
+        mAdapter = new AlarmArrayAdapter(getActivity(), currentUser.getAlarms());
         listView.setAdapter(mAdapter);
 
         return v;
