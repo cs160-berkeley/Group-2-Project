@@ -1,18 +1,21 @@
 package com.example.group2.pillpal;
 
 import android.app.AlarmManager;
+import android.app.DialogFragment;
 import android.app.PendingIntent;
+import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 
 
@@ -25,16 +28,11 @@ import java.util.Calendar;
  * create an instance of this fragment.
  */
 public class SetRemindersFragment extends Fragment implements View.OnClickListener {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
 
     private OnFragmentInteractionListener mListener;
+
+    private static ArrayList<Alarm> alarm_values;
+    private static ArrayAdapter<Alarm> mAdapter;
 
     public SetRemindersFragment() {
         // Required empty public constructor
@@ -52,8 +50,6 @@ public class SetRemindersFragment extends Fragment implements View.OnClickListen
     public static SetRemindersFragment newInstance(String param1, String param2) {
         SetRemindersFragment fragment = new SetRemindersFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
@@ -61,52 +57,64 @@ public class SetRemindersFragment extends Fragment implements View.OnClickListen
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View v = inflater.inflate(R.layout.fragment_set_reminders, container, false);
-        ImageButton setupButton = (ImageButton) v.findViewById(R.id.set_reminders_button);
-        setupButton.setOnClickListener(this);
-        return v;
+        alarm_values = new ArrayList<Alarm>();
+        Alarm sample_alarm_1 = new Alarm(10, 30, true);
+        Alarm sample_alarm_2 = new Alarm(11, 30, true);
+        Alarm sample_alarm_3 = new Alarm(11, 20, true);
+        alarm_values.add(sample_alarm_1);
+        alarm_values.add(sample_alarm_2);
+        alarm_values.add(sample_alarm_3);
     }
 
     @Override
     public void onClick(View v) {
-        // implements your things
-        FragmentTransaction tx = getFragmentManager().beginTransaction();
-        ReminderSettingsFragment reminderSettingsFragment = new ReminderSettingsFragment();
-        tx.replace(R.id.main, reminderSettingsFragment);
-        tx.addToBackStack(null);
-        tx.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-        tx.commit();
+        TimePickerDialog.OnTimeSetListener mTimeSetListener =
+                new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(android.widget.TimePicker view,
+                                          int hourOfDay, int minute) {
+                        System.out.println(hourOfDay);
+                        System.out.println(minute);
+                        Alarm alarm = new Alarm(hourOfDay, minute, true);
 
-        Intent sendIntent = new Intent(v.getContext(), PhoneToWatchService.class);
-        sendIntent.putExtra("DATA", "reminder");
-        PendingIntent alarmIntent = PendingIntent.getActivity(v.getContext(), 1, sendIntent, PendingIntent.FLAG_ONE_SHOT);
+                        Intent sendIntent = new Intent(getContext(), AlarmReceiver.class);
+                        sendIntent.putExtra("DATA", alarm.timeStringFormat);
+                        PendingIntent alarmIntent = PendingIntent.getBroadcast(getContext(), 1, sendIntent, 0);
 
-        AlarmManager alarmMgr = (AlarmManager)v.getContext().getSystemService(Context.ALARM_SERVICE);
-        // Set the alarm to start at approximately 2:00 p.m.
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(System.currentTimeMillis() + 10000);
+                        AlarmManager alarmMgr = (AlarmManager)getContext().getSystemService(Context.ALARM_SERVICE);
+                        Calendar calendar = Calendar.getInstance();
+                        calendar.setTimeInMillis(System.currentTimeMillis());
+                        calendar.set(Calendar.HOUR_OF_DAY, alarm.hours);
+                        calendar.set(Calendar.MINUTE, alarm.minutes);
 
-        // With setInexactRepeating(), you have to use one of the AlarmManager interval
-        // constants--in this case, AlarmManager.INTERVAL_DAY.
-        alarmMgr.setInexactRepeating(AlarmManager.RTC, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, alarmIntent);
+                        alarmMgr.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, alarmIntent);
+
+                        mAdapter.add(alarm);
+                        mAdapter.notifyDataSetChanged();
+                    }
+                };
+        TimePickerFragment newFragment = new TimePickerFragment(mTimeSetListener);
+        newFragment.show(getActivity().getFragmentManager(), "timePicker");
+        Alarm new_alarm = newFragment.alarm;
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
+    @Override
+    public View onCreateView(final LayoutInflater inflater, final ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        super.onActivityCreated(savedInstanceState);
+        View v = inflater.inflate(R.layout.alarm_layout, container, false);
+
+        View newAlarmButton = v.findViewById(R.id.fab);
+        newAlarmButton.setOnClickListener(this);
+
+        ListView listView = (ListView) v.findViewById(android.R.id.list);
+        mAdapter = new AlarmArrayAdapter(getActivity(), alarm_values);
+        listView.setAdapter(mAdapter);
+
+        return v;
     }
+
 
     @Override
     public void onAttach(Context context) {
@@ -122,7 +130,6 @@ public class SetRemindersFragment extends Fragment implements View.OnClickListen
     @Override
     public void onDetach() {
         super.onDetach();
-        mListener = null;
     }
 
     /**

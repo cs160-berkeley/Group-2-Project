@@ -3,18 +3,352 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.group2.pillpal.SettingsFragment">
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-        <ImageButton
-            android:id="@+id/settings_button"
-            android:src="@drawable/settings_page"
+
+        <RelativeLayout
+            android:layout_marginTop="20dp"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="wrap_content"
+            android:id="@+id/photoUsernamePasswordLayout"
+            android:background="#ffffff">
+
+            <!-- place photo on left -->
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/profile_image"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/profile_placeholder"
+                app:civ_border_width="2dp"
+                app:civ_border_color="#19B5FE"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="30dp"/>
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/UsernamePasswordLayout"
+                android:layout_toRightOf="@id/profile_image">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/relLayoutUsername"
+                    android:padding="10dp">
+
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:src="@drawable/ic_account_box_24dp"
+                        android:tint="@color/colorAccent"
+                        android:id="@+id/usernameIcon"
+                        android:layout_centerVertical="true"
+                        android:paddingRight ="5dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/userNameTextView"
+                        android:text="janesmith@gmail.com"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@id/usernameIcon"/>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/relLayoutUsername"
+                    android:padding="10dp">
+
+                    <ImageView
+                        android:layout_alignParentLeft="true"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:src="@drawable/ic_lock_24dp"
+                        android:tint="@color/colorAccent"
+                        android:id="@+id/passwordIcon"
+                        android:layout_centerVertical="true"
+                        android:paddingRight="5dp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/passwordTextView"
+                        android:text="*******"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@id/passwordIcon" />
+
+                    <ImageButton
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:src="@drawable/ic_mode_edit_24dp"
+                        android:background="@null"
+                        android:tint="@color/colorAccent"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true" />
+
+                </RelativeLayout>
+            </RelativeLayout>
+        </RelativeLayout>
+
+        <!-- Address Cell -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/addressLayout"
+            android:layout_below="@id/photoUsernamePasswordLayout"
+            android:background="#ffffff"
+            android:paddingTop="20dp"
+            >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/addressTitle"
+                android:text="Address"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:layout_marginLeft="20dp"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/addressTitle"
+                android:padding="10dp">
+
+                <ImageView
+                    android:layout_alignParentLeft="true"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/ic_location_on_24dp"
+                    android:tint="@color/colorAccent"
+                    android:id="@+id/locationIcon"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"/>
+
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/locationIcon"
+                    android:layout_marginLeft="20dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Shipping Address"
+                        android:textSize="18dp"
+                        android:textColor="@color/colorAccent"
+                        android:textStyle="bold"
+                        android:id="@+id/shippingAddressTitle"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/shippingAddressLine1"
+                        android:layout_below="@id/shippingAddressTitle"
+                        android:text="2338 Dwight Way #98"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/shippingAddressLine2"
+                        android:layout_below="@id/shippingAddressLine1"
+                        android:text="Berkeley, CA, 94704"/>
+                </RelativeLayout>
+
+                <ImageButton
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/ic_mode_edit_24dp"
+                    android:background="@null"
+                    android:tint="@color/colorAccent"
+                    android:layout_alignParentRight="true"
+                    android:id="@+id/editShippingAddressBtn"
+                    android:layout_centerVertical="true" />
+            </RelativeLayout>
+        </RelativeLayout>
+
+
+        <!-- Payment Cell -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/paymentLayout"
+            android:layout_below="@id/addressLayout"
+            android:background="#ffffff"
+            android:paddingTop="20dp"
+            >
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/paymentTitle"
+                android:text="Payment"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:layout_marginLeft="20dp"/>
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/billingAddressLayout"
+                android:layout_below="@id/paymentTitle"
+                android:padding="10dp">
+
+                <ImageView
+                    android:layout_alignParentLeft="true"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/ic_location_on_24dp"
+                    android:tint="@color/colorAccent"
+                    android:id="@+id/locationIcon2"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"/>
+
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/locationIcon2"
+                    android:layout_marginLeft="20dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Billing Address"
+                        android:textSize="18dp"
+                        android:textColor="@color/colorAccent"
+                        android:textStyle="bold"
+                        android:id="@+id/billingAddressTitle"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/billingAddressLine1"
+                        android:layout_below="@id/billingAddressTitle"
+                        android:text="2338 Dwight Way #98"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/billingAddressLine2"
+                        android:layout_below="@id/billingAddressLine1"
+                        android:text="Berkeley, CA, 94704"/>
+                </RelativeLayout>
+
+                <ImageButton
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/ic_mode_edit_24dp"
+                    android:background="@null"
+                    android:tint="@color/colorAccent"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:id="@+id/editBillingAddressBtn"/>
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/creditCardInfoLayout"
+                android:layout_below="@id/billingAddressLayout"
+                android:padding="10dp">
+
+                <ImageView
+                    android:layout_alignParentLeft="true"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/ic_credit_card_24dp"
+                    android:tint="@color/colorAccent"
+                    android:id="@+id/cardIcon"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"/>
+
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/cardIcon"
+                    android:layout_marginLeft="20dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Card"
+                        android:textSize="18dp"
+                        android:textColor="@color/colorAccent"
+                        android:textStyle="bold"
+                        android:id="@+id/cardTitle"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/cardType"
+                        android:layout_below="@id/cardTitle"
+                        android:text="Visa"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/cardNumber"
+                        android:layout_below="@id/cardType"
+                        android:text="XXXX-XXXX-XXXX-4998"/>
+                </RelativeLayout>
+
+                <ImageButton
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/ic_mode_edit_24dp"
+                    android:background="@null"
+                    android:tint="@color/colorAccent"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:id="@+id/editCreditCardInfoBtn"/>
+
+
+            </RelativeLayout>
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/refillsHistoryLayout"
+            android:layout_below="@id/paymentLayout"
+            android:background="#ffffff"
+            android:paddingTop="20dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/refillsTitle"
+                android:text="Refill History"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:layout_marginLeft="20dp"/>
+
+            <ListView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            </ListView>
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
 
     </ScrollView>
-
-
 </FrameLayout>
