@@ -1,5 +1,5 @@
 # Pillpal
-PillPal is an app that allows women who are new to birth control track their body's response to the pills, as well as manage daily reminders and delivery services.
+PillPal is an app that allows women who are new to birth control track their body's response to the pills, as well as manage daily reminders and refill delivery services.
 
 ## Group 2 Members
 
@@ -25,10 +25,10 @@ See [our demo video] (https://www.youtube.com/watch?v=1u4881PX78M&list=PLbok9t2U
 <img src="screenshots/settings_final.png" height="400" alt="Screenshot"/>
 
 ## Wear Screenshots
-<img src="screenshots/stats_wear_final.png" height="400" alt="Screenshot"/>
-<img src="screenshots/reminder_wear_final.png" height="400" alt="Screenshot"/>
-<img src="screenshots/snooze_wear_final.png" height="400" alt="Screenshot"/>
-<img src="screenshots/delivery_wear_final.png" height="400" alt="Screenshot"/>
+<img src="screenshots/stats_wear_final.png" height="320" alt="Screenshot"/>
+<img src="screenshots/reminder_wear_final.png" height="320" alt="Screenshot"/>
+<img src="screenshots/snooze_wear_final.png" height="320" alt="Screenshot"/>
+<img src="screenshots/delivery_wear_final.png" height="320" alt="Screenshot"/>
 
 ## Acknowledgments
 * MPChart
